@@ -207,7 +207,7 @@ in with lib; {
       bind = ${modifier}SHIFT,O,exec,hyprpicker -a -f hex
       bind = ${modifier}SHIFT,A,exec,wshow
       bind = ${modifier}SHIFT,N,exec,brave https://search.nixos.org/
-      bind = ${modifier}SHIFT,ESC,exe,wlogout
+      bind = ${modifier}SHIFT,ESC,exec,wlogout
     '' ];
   };
 }
