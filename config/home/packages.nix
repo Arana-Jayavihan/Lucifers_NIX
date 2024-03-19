@@ -25,6 +25,7 @@ in {
     (import ./../scripts/screenshootin.nix { inherit pkgs; })
     (import ./../scripts/list-hypr-bindings.nix { inherit pkgs; })
     (import ./../scripts/wallchanger.nix { inherit pkgs; inherit wallpaperDir; })
+    (import ./../scripts/noproxyrun.nix { inherit pkgs; })
   ];
 
   programs.gh.enable = true;
