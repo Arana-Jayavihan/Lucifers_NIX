@@ -6,5 +6,5 @@ pkgs.writeShellScriptBin "noproxyrun" ''
   export https_proxy= &&
   export rsync_proxy= &&
   export ftp_proxy= &&
-  "$1"
+  $1
 ''

@@ -34,6 +34,16 @@ in {
     userEmail = "${gitEmail}";
   };
 
+  programs.firefox = {
+    enable = true;
+    package = pkgs.wrapFirefox pkgs.firefox-unwrapped {
+      forceWayland = true;
+      extraPolicies = {
+        ExtensionSettings = {};
+      };
+    };
+  };
+
   # Create XDG Dirs
   xdg = {
     userDirs = {

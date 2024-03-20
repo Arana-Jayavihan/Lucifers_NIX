@@ -6,23 +6,27 @@
   services.fstrim.enable = true;
   xdg.portal = {
     enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-gtk
+    extraPortals = [ 
+      pkgs.xdg-desktop-portal-gtk
       pkgs.xdg-desktop-portal
+      pkgs.xdg-desktop-portal-wlr 
     ];
-    configPackages = [ pkgs.xdg-desktop-portal-gtk
+    configPackages = [ 
+      #pkgs.xdg-desktop-portal-wlr 
+      pkgs.xdg-desktop-portal-gtk
       pkgs.xdg-desktop-portal-hyprland
       pkgs.xdg-desktop-portal
     ];
   };
   services.pipewire = {
-    enable = true;
+    enable = false;
     alsa.enable = true;
     alsa.support32Bit = true;
     audio.enable = true;
     pulse.enable = true;
-#    socketActivation = true;
+    socketActivation = true;
     jack.enable = true;
-#    wireplumber.enable = true;
+    wireplumber.enable = true;
 #    extraConfig.pipewire = {
 #	"92-low-latency" = {
 #		context.properties = {
@@ -69,7 +73,8 @@
   programs.thunar.enable = true;
   services.gvfs.enable = true;
   services.tumbler.enable = true;
-  services.gnome.gnome-keyring.enable=true;
+  services.gnome.gnome-keyring.enable = true;
+  #services.gnome.gnome-remote-desktop.enable = true;
   hardware.bluetooth.enable = true; # enables support for Bluetooth
   hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
   hardware.bluetooth.settings = {
