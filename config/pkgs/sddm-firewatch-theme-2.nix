@@ -10,7 +10,7 @@
     '';
     src = fetchzip {
       url = "https://github.com/Arana-Jayavihan/firewatch-sddm-theme/archive/refs/tags/V2.zip";
-      hash = "sha256-x2cNcDIGjgQ7DXvsQAWFoPZ+oVMTvanvH3pjcsyjSOk=";
+      hash = "sha256-A3c0rBr+XEtqvyF/Jp1LU69wPd0/ZyoBj5+NqmX6HVs=";
     };
   };
 }
