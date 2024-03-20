@@ -2,6 +2,7 @@
   description = "Lucifer's NIX";
 
   inputs = {
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-23.11";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -18,12 +19,19 @@
     impermanence.url = "github:nix-community/impermanence";
   };
 
-  outputs = inputs@{ nixpkgs, home-manager, impermanence, ... }:
+  outputs = inputs@{ nixpkgs-stable, nixpkgs, home-manager, impermanence, ... }:
   let
     system = "x86_64-linux";
     inherit (import ./options.nix) username hostname;
 
     pkgs = import nixpkgs {
+      inherit system;
+      config = {
+	    allowUnfree = true;
+      };
+    };
+
+    pkgs-stable = import nixpkgs-stable {
       inherit system;
       config = {
 	    allowUnfree = true;
@@ -43,6 +51,7 @@
 	    home-manager.extraSpecialArgs = {
 	      inherit username; inherit inputs;
               inherit (inputs.nix-colors.lib-contrib {inherit pkgs;}) gtkThemeFromScheme;
+              inherit pkgs-stable;
             };
 	    home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;

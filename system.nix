@@ -146,7 +146,8 @@ in {
 	pkgs.hyprpicker
 	pkgs.libxcrypt
 	pkgs.john
-	pkgs.cava
+        pkgs.cava
+        pkgs.firefox
   ];
 
   environment.etc."ppp/options".text = "ipcp-accept-remote";

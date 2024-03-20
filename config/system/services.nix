@@ -12,14 +12,14 @@
       pkgs.xdg-desktop-portal-wlr 
     ];
     configPackages = [ 
-      #pkgs.xdg-desktop-portal-wlr 
+      pkgs.xdg-desktop-portal-wlr 
       pkgs.xdg-desktop-portal-gtk
       pkgs.xdg-desktop-portal-hyprland
       pkgs.xdg-desktop-portal
     ];
   };
   services.pipewire = {
-    enable = false;
+    enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
     audio.enable = true;
@@ -27,6 +27,7 @@
     socketActivation = true;
     jack.enable = true;
     wireplumber.enable = true;
+#    wireplumber.package = pkgs.wireplumber;
 #    extraConfig.pipewire = {
 #	"92-low-latency" = {
 #		context.properties = {
@@ -74,7 +75,7 @@
   services.gvfs.enable = true;
   services.tumbler.enable = true;
   services.gnome.gnome-keyring.enable = true;
-  #services.gnome.gnome-remote-desktop.enable = true;
+  services.gnome.gnome-remote-desktop.enable = true;
   hardware.bluetooth.enable = true; # enables support for Bluetooth
   hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
   hardware.bluetooth.settings = {

@@ -1,4 +1,4 @@
-{ pkgs, config, lib, ... }:
+{ pkgs-stable, config, lib, ... }:
 
 let
   palette = config.colorScheme.palette;
@@ -8,7 +8,7 @@ in with lib; {
   # Configure & Theme Waybar
   programs.waybar = {
     enable = true;
-    package = pkgs.waybar;
+    package = pkgs-stable.waybar;
     settings = [{
       layer = "top";
       position = "top";
