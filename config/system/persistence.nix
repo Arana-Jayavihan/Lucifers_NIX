@@ -23,7 +23,6 @@ in
 	"Documents"
 	"Pictures"
         "Videos"
-        "zaneyos"
 	".local/share/sddm"
 	".mozilla"
 	".cache"
