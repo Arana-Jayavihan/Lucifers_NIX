@@ -1,16 +1,16 @@
 { stdenv, fetchzip }:
 {
-  sddm-firewatch-theme-6 = stdenv.mkDerivation rec {
-    pname = "firewatch-sddm-theme-6";
-    version = "V6";
+  sddm-firewatch = stdenv.mkDerivation rec {
+    pname = "firewatch-sddm";
+    version = "V1";
     dontBuild = true;
     installPhase = ''
       mkdir -p $out/share/sddm/themes
-      cp -aR $src $out/share/sddm/themes/firewatch6
+      cp -aR $src $out/share/sddm/themes/sddm-firewatch
     '';
     src = fetchzip {
       url = "https://github.com/Arana-Jayavihan/firewatch-sddm-theme/archive/refs/tags/V6.zip";
-      hash = "sha256-A3c0rBr+XEtqvyF/Jp1LU69wPd0/ZyoBj5+NqmX6HVs=";
+      #hash = "sha256-x2cNcDIGjgQ7DXvsQAWFoPZ+oVMTvanvH3pjcsyjSOk=";
     };
   };
 }
