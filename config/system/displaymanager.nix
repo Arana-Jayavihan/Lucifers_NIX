@@ -14,7 +14,7 @@ theKBDLayout theSecondKBDLayout; in
       enable = true;
       autoNumlock = true;
       wayland.enable = true;
-      theme = "firewatch4";
+      theme = "firewatch5";
     };
   };
 
@@ -23,12 +23,12 @@ let
     sugar = pkgs.callPackage ../pkgs/sddm-sugar-dark.nix {};
     tokyo-night = pkgs.libsForQt5.callPackage ../pkgs/sddm-tokyo-night.nix {};
     firewatch = pkgs.callPackage ../pkgs/sddm-firewatch-theme.nix {};
-    firewatch4 = pkgs.callPackage ../pkgs/sddm-firewatch-theme-4.nix {};
+    firewatch5 = pkgs.callPackage ../pkgs/sddm-firewatch-theme-5.nix {};
 in [ 
     sugar.sddm-sugar-dark # Name: sugar-dark
     tokyo-night # Name: tokyo-night-sddm
     firewatch.sddm-firewatch-theme # Name firewatch
-    firewatch4.sddm-firewatch-theme-4
+    firewatch5.sddm-firewatch-theme-5
     pkgs.libsForQt5.qt5.qtgraphicaleffects
   ];
 }
