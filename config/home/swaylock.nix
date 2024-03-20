@@ -13,7 +13,7 @@ in {
     hide-keyboard-layout
     image=~/.config/swaylock-bg.jpg
     ring-color=${palette.base0D}
-    key-hl-color=${palette.base0F}
+    key-hl-color=06292FFF
     line-color=00000000
     inside-color=00000088
     inside-clear-color=00000088
