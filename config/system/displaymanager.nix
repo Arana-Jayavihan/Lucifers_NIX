@@ -22,13 +22,11 @@ theKBDLayout theSecondKBDLayout; in
 let
     sugar = pkgs.callPackage ../pkgs/sddm-sugar-dark.nix {};
     tokyo-night = pkgs.libsForQt5.callPackage ../pkgs/sddm-tokyo-night.nix {};
-    firewatch = pkgs.callPackage ../pkgs/sddm-firewatch-theme.nix {};
     firewatch-dark = pkgs.callPackage ../pkgs/sddm-firewatch.nix {};
 in [ 
     sugar.sddm-sugar-dark # Name: sugar-dark
     tokyo-night # Name: tokyo-night-sddm
-    firewatch.sddm-firewatch-theme # Name firewatch
-    firewatch-dark.sddm-firewatch
+    firewatch-dark.sddm-firewatch # Name sddm-firewatch
     pkgs.libsForQt5.qt5.qtgraphicaleffects
   ];
 }
