@@ -205,7 +205,7 @@ in with lib; {
       bind = ,XF86MonBrightnessUp,exec,brightnessctl set +5%
       bind = ${modifier}SHIFT,L,exec,swaylock --config ~/.config/swaylock/config     
       bind = ${modifier}SHIFT,O,exec,hyprpicker -a -f hex
-      bind = ${modifier}SHIFT,A,exec,wshow
+      bind = ${modifier}SHIFT,A,exec,waydroid show-full-ui
       bind = ${modifier}SHIFT,N,exec,brave https://search.nixos.org/
       bind = ${modifier}SHIFT,X,exec,wlogout
     '' ];

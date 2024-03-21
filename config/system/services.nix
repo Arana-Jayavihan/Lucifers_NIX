@@ -27,48 +27,8 @@
     socketActivation = true;
     jack.enable = true;
     wireplumber.enable = true;
-#    wireplumber.package = pkgs.wireplumber;
-#    extraConfig.pipewire = {
-#	"92-low-latency" = {
-#		context.properties = {
-#    		default.clock.rate = 96000;
-#		default.clock.allowed-rates = [ 44100 48000 88200 96000 192000 ];
-#	    	default.clock.quantum = 1024;
-#    		default.clock.min-quantum = 1024;
-#  		default.clock.max-quantum = 1024;
-#  		};
-#	};
-#    };
-#    extraConfig.pipewire = {
-#	"10-clock-rate" = {
-#    		"context.properties" = {
-#      			"default.clock.rate" = 96000;
-#    			};
-#  		};	
-#  	};
-#    extraConfig.pipewire-pulse."92-low-latency" = {
-#  	context.modules = [
-#    		{
-#      			name = "libpipewire-module-protocol-pulse";
-#      			args = {
-#        			pulse.min.req = "1024/96000";
-#			        pulse.default.req = "1024/96000";
-#			        pulse.max.req = "1024/96000";
-#			        pulse.min.quantum = "1024/96000";
-#			        pulse.max.quantum = "1024/96000";
-#				audio.channels = 2;
-#				audio.position = "[ FL FR ]";
-#		       };
-#    		}
-#  	];
-#  	stream.properties = {
-#	    node.latency = "1024/96000";
-#	    resample.quality = 10;
-#	    resample-method = "speex-float-10";
-# 	};
-#     };
   };
-#  hardware.pulseaudio.enable = false;
+
   sound.enable = true;
   security.rtkit.enable = true;
   programs.thunar.enable = true;

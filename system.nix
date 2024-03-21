@@ -40,25 +40,6 @@ in {
     LC_TELEPHONE = "${theLCVariables}";
     LC_TIME = "${theLCVariables}";
   };
-
-  #sound.enable = true;
-  #hardware.pulseaudio.package = pkgs.pulseaudioFull;
-  #hardware.pulseaudio.enable = true;
-  #hardware.pulseaudio.support32Bit = true; 
-  #hardware.pulseaudio.extraConfig = "load-module module-combine channels=6 channel_map=front-left,front-right,rear-left,rear-right,front-center,lfe";
-  #hardware.pulseaudio.configFile = pkgs.runCommand "default.pa" {} ''
-#	load-module module-switch-on-connect
-#	load-module module-bluetooth-policy
-#	load-module module-bluetooth-discover
-#  hardware.pulseaudio.daemon.config = { 
-#	remixing-produce-lfe = "yes";
-#	remixing-consume-lfe = "yes";
-#	lfe-crossover-freq = 80;
-#  };
-  #sed 's/module-udev-detect$/module-udev-detect tsched=0/' \
-  #  ${pkgs.pulseaudio}/etc/pulse/default.pa > $out
-  #'';
-
   console.keyMap = "${theKBDLayout}";
 
   # Define a user account.

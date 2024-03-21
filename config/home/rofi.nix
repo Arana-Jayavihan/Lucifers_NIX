@@ -28,7 +28,7 @@ in {
       transparency: "real";
       orientation: vertical;
       border: 2px ;
-      border-color: #${palette.base0F};
+      border-color: #5DA478;
       border-radius: 10px;
     }
 
@@ -111,7 +111,7 @@ in {
 
     button selected {
       background-color: @bg;
-      text-color: #${palette.base0F};
+      text-color: #C8E690;
     }
 
     message {
