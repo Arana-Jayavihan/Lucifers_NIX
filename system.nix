@@ -65,7 +65,6 @@ in {
   environment.systemPackages = with pkgs; [
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
 	pkgs.networkmanager-fortisslvpn
-	pkgs.python310
 	pkgs.wl-clipboard
 	pkgs.bun
 	pkgs.go-ethereum
@@ -94,7 +93,6 @@ in {
 	pkgs.file
 	pkgs.xz
 	pkgs.tshark
-	pkgs.anydesk
 	pkgs.sshpass
 	pkgs.motrix
 	pkgs.inetutils
@@ -123,7 +121,6 @@ in {
 	pkgs.winetricks
 	pkgs.wineWowPackages.stable
 	pkgs.tcptraceroute
-	pkgs.brave
 	pkgs.hyprpicker
 	pkgs.libxcrypt
 	pkgs.john
