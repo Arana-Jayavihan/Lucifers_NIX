@@ -25,7 +25,7 @@ lib.mkIf (theShell == "zsh") {
       bindkey '^[[1;3C' forward-word                  # Key Alt + Right
       bindkey '^[[H' beginning-of-line                # Key Home
       bindkey '^[[F' end-of-line                      # Key End
-      neofetch
+      neofetch --ascii ~/.config/ascii-neofetch
       if [ -f $HOME/.zshrc-personal ]; then
         source $HOME/.zshrc-personal
       fi
@@ -55,6 +55,21 @@ lib.mkIf (theShell == "zsh") {
       lal="lsd -al";
       ".."="cd ..";
       neofetch="neofetch --ascii ~/.config/ascii-neofetch";
+      tunnel="~/Projects/sni-injector/start.sh";
+      pyserver="python -m http.server";
+      pyvenv="~/Projects/Scripts/pyvenv.sh";
+      fuff="./usr/share/ffuf/ffuf";
+      burp="cd /home/lucifer/Projects/burpsuite_pro_v2022.9; java -jar burploader.jar";
+      jdgui="java -jar /usr/share/jdgui/jd-gui-1.6.6.jar";	
+      ciao="killall5 -9 && shutdown -h now";
+      wshow="waydroid show-full-ui";
+      mitvpn="sudo openfortivpn --config /etc/openfortivpn/config";
+      code="flatpak run com.visualstudio.code";
+      reboot="killall5 -9 && shutdown -r now";
+      config="cd ~/Lucifers_NIX/";	
+      nixsearch="brave https://search.nixos.org/";
+      lock="swaylock --config ~/.config/swaylock/config";
+      rebuild="config && sudo nixos-rebuild switch --flake .";
     };
   };
 }
