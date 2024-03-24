@@ -2,6 +2,10 @@
 Hello folks, Welcome to my flake repository for NixOS, I've been loving NixOS since the day I installed it on my system. So here is my current configuration, I'll be updating this pretty often with new feature, bug fixes, and improvements. Enjoy 🍃
 
 ## Preview
+### Demo
+[preview](https://github.com/Arana-Jayavihan/Lucifers_NIX/raw/master/assets/demo.mkv "Demo")
+
+### Screenshots
 ![preview1](https://github.com/Arana-Jayavihan/Lucifers_NIX/blob/master/assets/swappy-20240325-010510.png?raw=true)
 ![preview2](https://github.com/Arana-Jayavihan/Lucifers_NIX/blob/master/assets/swappy-20240325-010424.png?raw=true)
 ![preview3](https://github.com/Arana-Jayavihan/Lucifers_NIX/blob/master/assets/swappy-20240325-011229.png?raw=true)
