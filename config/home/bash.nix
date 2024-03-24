@@ -49,6 +49,7 @@ lib.mkIf (theShell == "bash") {
       nixsearch="brave https://search.nixos.org/";
       lock="swaylock --config ~/.config/swaylock/config";
       rebuild="config && sudo nixos-rebuild switch --flake .";
+      try="nix-shell -p ";
     };
   };
 }

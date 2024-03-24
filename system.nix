@@ -53,7 +53,9 @@ in {
       extraGroups = [ "networkmanager" "wheel" "libvirtd" "docker" "audio" "pulse-access" ];
       shell = pkgs.${theShell};
       ignoreShellProgramCheck = true;
-      packages = with pkgs; [];
+      packages = with pkgs; [
+        #USER_PKG
+      ];
     };
   };
 
@@ -65,14 +67,9 @@ in {
   environment.systemPackages = with pkgs; [
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
 	pkgs.networkmanager-fortisslvpn
-	pkgs.wl-clipboard
 	pkgs.bun
 	pkgs.go-ethereum
-	pkgs.nodejs_20
-	pkgs.git
-	pkgs.wget
 	pkgs.gcc
-	pkgs.unrar
 	pkgs.openssl
 	pkgs.netcat
 	pkgs.pavucontrol
@@ -80,12 +77,10 @@ in {
 	pkgs.pulseeffects-legacy
 	pkgs.plocate
 	pkgs.gnupg
-	pkgs.unzip
 	pkgs.railway
 	pkgs.ghidra
 	pkgs.jdk
 	pkgs.nmap
-	pkgs.go
 	pkgs.gobuster
 	pkgs.metasploit
 	pkgs.dex2jar
@@ -102,7 +97,6 @@ in {
 	pkgs.binwalk
 	pkgs.thc-hydra
 	pkgs.openfortivpn
-	pkgs.socat
 	pkgs.dig
 	pkgs.stunnel
 	pkgs.tcpdump
@@ -112,7 +106,6 @@ in {
 	pkgs.wireshark
 	pkgs.zip
 	pkgs.steghide
-	pkgs.appimage-run
 	pkgs.mangohud
 	pkgs.lutris
 	pkgs.protonup-qt
@@ -126,6 +119,8 @@ in {
 	pkgs.john
         pkgs.cava
         pkgs.firefox
+        pkgs.dbeaver
+        #SYSTEM_PKG
   ];
 
   environment.etc."ppp/options".text = "ipcp-accept-remote";
