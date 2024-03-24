@@ -5,7 +5,7 @@ let
   userHome = "/home/${username}";
   flakeDir = "${userHome}/Lucifers_NIX";
   waybarStyle = "slickbar"; # simplebar, slickbar, or default
-  useProxy = true;
+  proxy = true;
   socks = 1080;
   http = 1090;
 in {
@@ -44,8 +44,11 @@ in {
   # Should Be Used As gpuType
   cpuType = "intel";
   gpuType = "intel";
-  socksProxy = if useProxy == true then "socks5://127.0.0.1:${socks}" else "";
-  httpProxy = if useProxy == true then "http://127.0.0.1:${http}" else "";
+
+  #Proxy Settings
+  useProxy = "${proxy}";
+  socksProxy = if "${proxy}" == true then "socks5://127.0.0.1:${socks}" else "";
+  httpProxy = if "${proxy}" == true then "http://127.0.0.1:${http}" else "";
 
   # Nvidia Hybrid Devices
   # ONLY NEEDED FOR HYBRID
