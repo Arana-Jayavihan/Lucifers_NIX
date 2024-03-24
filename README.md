@@ -3,7 +3,7 @@ Hello folks, Welcome to my flake repository for NixOS, I've been loving NixOS si
 
 ## Preview
 ### Demo
-![preview](https://github.com/Arana-Jayavihan/Lucifers_NIX/blob/master/assets/demo.mkv "Demo")
+https://github.com/Arana-Jayavihan/Lucifers_NIX/assets/87359147/b7b1bf79-cb66-41b8-ab3d-eee305cedce8
 
 ### Screenshots
 ![preview1](https://github.com/Arana-Jayavihan/Lucifers_NIX/blob/master/assets/swappy-20240325-010510.png?raw=true)
