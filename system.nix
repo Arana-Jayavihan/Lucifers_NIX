@@ -1,11 +1,11 @@
-{ inputs, config, pkgs, username, hostname, useProxy, ... }:
+{ inputs, config, pkgs, username, hostname, ... }:
 
 let 
   inherit (import ./options.nix) 
     theLocale theTimezone gitUsername
     theShell wallpaperDir wallpaperGit
     theLCVariables theKBDLayout flakeDir
-    theme httpProxy socksProxy;
+    theme httpProxy socksProxy firewallPorts useFirewall;
 in {
   imports =
     [
@@ -16,14 +16,16 @@ in {
   # Enable networking
   networking.hostName = "${hostname}"; # Define your hostname
   networking.networkmanager.enable = true;
-  networking.proxy.default = if useProxy == true then socksProxy else "";
-  networking.proxy.allProxy = if useProxy == true then socksProxy else "";
-  networking.proxy.rsyncProxy = if useProxy == true then socksProxy else "";
-  networking.proxy.httpProxy = if useProxy == true then httpProxy else "";
-  networking.proxy.httpsProxy = if useProxy == true then httpProxy else "";
-  networking.proxy.ftpProxy = if useProxy == true then httpProxy else "";
-  
-  networking.firewall.allowedTCPPorts = [ 1090 5000 9000 ];
+  networking.proxy.default = "${socksProxy}";
+  networking.proxy.allProxy = "${socksProxy}";
+  networking.proxy.rsyncProxy = "${socksProxy}";
+  networking.proxy.httpProxy = "${httpProxy}";
+  networking.proxy.httpsProxy = "${httpProxy}";
+  networking.proxy.ftpProxy = "${httpProxy}";
+
+  #Firewall
+  networking.firewall.enable = useFirewall;
+  networking.firewall.allowedTCPPorts = firewallPorts;
 
   # Set your time zone
   time.timeZone = "${theTimezone}";
@@ -132,8 +134,6 @@ in {
   virtualisation.vmware.host.enable = true;
 
   services.openssh.enable = true;
-
-  networking.firewall.enable = false;
 
   # Optimization settings and garbage collection automation
   nix = {

@@ -6,8 +6,8 @@ let
   flakeDir = "${userHome}/Lucifers_NIX";
   waybarStyle = "slickbar"; # simplebar, slickbar, or default
   proxy = true;
-  socks = 1080;
-  http = 1090;
+  socks = "1080";
+  http = "1090";
 in {
   # User Variables
   username = "lucifer";
@@ -46,9 +46,13 @@ in {
   gpuType = "intel";
 
   #Proxy Settings
-  useProxy = "${proxy}";
-  socksProxy = if "${proxy}" == true then "socks5://127.0.0.1:${socks}" else "";
-  httpProxy = if "${proxy}" == true then "http://127.0.0.1:${http}" else "";
+  useProxy = proxy;
+  socksProxy = if proxy == true then "socks5://127.0.0.1:${socks}" else "";
+  httpProxy = if proxy == true then "http://127.0.0.1:${http}" else "";
+
+  #Firewall Allowed TCP Ports
+  useFirewall = true;
+  firewallPorts = [ 1090 5000 9000 ];
 
   # Nvidia Hybrid Devices
   # ONLY NEEDED FOR HYBRID

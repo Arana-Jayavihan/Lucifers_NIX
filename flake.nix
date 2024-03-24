@@ -22,7 +22,7 @@
   outputs = inputs@{ nixpkgs-stable, nixpkgs, home-manager, impermanence, ... }:
   let
     system = "x86_64-linux";
-    inherit (import ./options.nix) username hostname useProxy;
+    inherit (import ./options.nix) username hostname;
 
     pkgs = import nixpkgs {
       inherit system;
@@ -43,7 +43,6 @@
 	specialArgs = { 
           inherit system; inherit inputs; 
           inherit username; inherit hostname;
-          inherit useProxy;
         };
 	modules = [ 
 	  ./system.nix
