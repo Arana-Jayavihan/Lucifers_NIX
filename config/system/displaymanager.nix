@@ -16,6 +16,7 @@ theKBDLayout theSecondKBDLayout; in
       wayland.enable = true;
       theme = "sddm-firewatch";
     };
+    desktopManager.gnome.enable = true;
   };
 
   environment.systemPackages =
