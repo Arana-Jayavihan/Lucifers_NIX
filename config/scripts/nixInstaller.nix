@@ -24,7 +24,7 @@ Usage
 addPkgs () {
   if [ "$2" != "user" ] && [ "$2" != "system" ];
   then
-    sed -i "s/"$1"/"pkgs.$pkg\\n\\t$1"/" test.nix 
+    sed -i "s/"$1"/"pkgs.$pkg\\n\\t$1"/" ${flakeDir}/system.nix 
   else
     return
   fi
@@ -38,6 +38,7 @@ then
 elif [ "$1" == "restore" ]
 then
   cp ${flakeDir}/system.nix.bak ${flakeDir}/system.nix
+  sudo nixos-rebuild switch --flake ${flakeDir}
   exit 0
 else
   if [ "$2" == 0 ];
@@ -53,14 +54,14 @@ else
       do
 	addPkgs "#USER_PKG" "$pkg"
       done
-      #sudo nixos-rebuild switch --flake ${flakeDir}
+      sudo nixos-rebuild switch --flake ${flakeDir}
     elif [ "$1" == "system" ];
     then
       for pkg in "$@";
       do
 	addPkgs "#SYSTEM_PKG" "$pkg"
       done 
-      #sudo nixos-rebuild switch --flake ${flakeDir}
+      sudo nixos-rebuild switch --flake ${flakeDir}
     elif [ "$1" == "--help" ] || [ "$1" == "-h" ];
     then
       printHelp

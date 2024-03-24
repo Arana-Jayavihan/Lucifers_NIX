@@ -27,6 +27,7 @@ in {
     (import ./../scripts/wallchanger.nix { inherit pkgs; inherit wallpaperDir; })
     (import ./../scripts/noproxyrun.nix { inherit pkgs; })
     (import ./../scripts/nixInstaller.nix { inherit pkgs; inherit flakeDir; })
+    (import ./../scripts/gituplink.nix { inherit pkgs; inherit flakeDir; })  
   ];
 
   programs.gh.enable = true;
