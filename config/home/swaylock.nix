@@ -5,6 +5,11 @@ let
 in {
   home.file.".config/swaylock/config".text = ''
     daemonize
+    clock
+    indicator
+    datestr=%a, %B %e
+    timestr=%I:%M %p
+    effect-blur=5x5
     indicator-caps-lock
     show-failed-attempts
     ignore-empty-password
@@ -20,7 +25,8 @@ in {
     separator-color=00000000
     text-color=${palette.base05}
     text-clear-color=${palette.base05}
-    ring-clear-color=${palette.base0D}
+    bs-hl-color=${palette.base0F}
+    ring-clear-color=${palette.base0F}
     font=Ubuntu
   '';
 }
