@@ -152,18 +152,10 @@ in with lib; {
       bind = ${modifier}SHIFT,right,movewindow,r
       bind = ${modifier}SHIFT,up,movewindow,u
       bind = ${modifier}SHIFT,down,movewindow,d
-      bind = ${modifier}SHIFT,h,movewindow,l
-      bind = ${modifier}SHIFT,l,movewindow,r
-      bind = ${modifier}SHIFT,k,movewindow,u
-      bind = ${modifier}SHIFT,j,movewindow,d
       bind = ${modifier},left,movefocus,l
       bind = ${modifier},right,movefocus,r
       bind = ${modifier},up,movefocus,u
       bind = ${modifier},down,movefocus,d
-      bind = ${modifier},h,movefocus,l
-      bind = ${modifier},l,movefocus,r
-      bind = ${modifier},k,movefocus,u
-      bind = ${modifier},j,movefocus,d
       bind = ${modifier},1,workspace,1
       bind = ${modifier},2,workspace,2
       bind = ${modifier},3,workspace,3
@@ -208,6 +200,7 @@ in with lib; {
       bind = ${modifier}SHIFT,A,exec,waydroid show-full-ui
       bind = ${modifier}SHIFT,N,exec,brave https://search.nixos.org/
       bind = ${modifier}SHIFT,X,exec,wlogout
+      bind = ${modifier}SHIFT,T,exec,noproxyrun "flatpak run com.github.IsmaelMartinez.teams_for_linux"
     '' ];
   };
 }
