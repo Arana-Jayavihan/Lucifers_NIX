@@ -1,12 +1,11 @@
-{ inputs, config, pkgs,
-  username, hostname, ... }:
+{ inputs, config, pkgs, username, hostname, useProxy, ... }:
 
 let 
   inherit (import ./options.nix) 
     theLocale theTimezone gitUsername
     theShell wallpaperDir wallpaperGit
     theLCVariables theKBDLayout flakeDir
-    theme;
+    theme httpProxy socksProxy;
 in {
   imports =
     [
@@ -17,10 +16,12 @@ in {
   # Enable networking
   networking.hostName = "${hostname}"; # Define your hostname
   networking.networkmanager.enable = true;
-  networking.proxy.allProxy = "socks5://127.0.0.1:1080";
-  networking.proxy.httpProxy = "http://127.0.0.1:1090";
-  networking.proxy.httpsProxy = "http://127.0.0.1:1090";
-  networking.proxy.rsyncProxy = "socks5://127.0.0.1:1080";
+  networking.proxy.default = if useProxy == true then socksProxy else "";
+  networking.proxy.allProxy = if useProxy == true then socksProxy else "";
+  networking.proxy.rsyncProxy = if useProxy == true then socksProxy else "";
+  networking.proxy.httpProxy = if useProxy == true then httpProxy else "";
+  networking.proxy.httpsProxy = if useProxy == true then httpProxy else "";
+  networking.proxy.ftpProxy = if useProxy == true then httpProxy else "";
   
   networking.firewall.allowedTCPPorts = [ 1090 5000 9000 ];
 
