@@ -1,5 +1,5 @@
 # Lucifer's NIX Flake ❄️
-Hello folks, Welcome to my flake repository for NixOS, I've been loving NixOS since the day I installed it on my system. So here is my current configuration, I'll be updating this pretty often with new feature, bug fixes, and improvements. Enjoy 🍃
+Hello folks, Welcome to my flake repository for NixOS, I've been loving NixOS since the day I installed it on my system. So here is my current configuration, I'll be updating this pretty often with new features, bug fixes, and improvements. Enjoy 🍃
 
 ## Preview ✨
 ### Demo
