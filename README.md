@@ -71,5 +71,6 @@ sudo nixos-rebuild switch --flake ~/Lucifers_NIX/
 Then reboot the system to enjoy 🍃
 
 ## Credits 💫
-Huge appreciation for Tyler Kelley for building such an amazing flake. Learned a lot from your configuration. 
+Huge appreciation for Tyler Kelley for building such an amazing flake. Learned a lot from your configuration.
+
 [![credits](https://gitlab.com/uploads/-/system/project/avatar/53038185/Gitlab_Nix_Picture.png?width=48 "Credits to Zaney")](https://gitlab.com/Zaney/zaneyos/-/tree/8e643956f0abf8011101771b956d994a2d052ae7)
