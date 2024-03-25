@@ -12,7 +12,7 @@
     pkg-config meson gnumake ninja go nodejs 
     noto-fonts-color-emoji material-icons brightnessctl
     toybox virt-viewer swappy ripgrep appimage-run 
-    networkmanagerapplet yad playerctl nh
+    networkmanagerapplet yad playerctl nh fastfetch
   ];
 
   programs = {

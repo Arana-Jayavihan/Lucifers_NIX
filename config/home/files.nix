@@ -10,6 +10,7 @@
   home.file.".config/starship.toml".source = ./files/starship.toml;
   home.file.".config/swaylock-bg.jpg".source = ./files/media/swaylock-bg.jpg;
   home.file.".config/ascii-neofetch".source = ./files/ascii-neofetch;
+  home.file.".config/ascii-fastfetch".source = ./files/ascii-fastfetch;
   home.file.".local/share/fonts" = {
     source = ./files/fonts;
     recursive = true;

@@ -25,7 +25,7 @@ lib.mkIf (theShell == "zsh") {
       bindkey '^[[1;3C' forward-word                  # Key Alt + Right
       bindkey '^[[H' beginning-of-line                # Key Home
       bindkey '^[[F' end-of-line                      # Key End
-      neofetch --ascii ~/.config/ascii-neofetch
+      fastfetch
       if [ -f $HOME/.zshrc-personal ]; then
         source $HOME/.zshrc-personal
       fi
@@ -55,6 +55,7 @@ lib.mkIf (theShell == "zsh") {
       lal="lsd -al";
       ".."="cd ..";
       neofetch="neofetch --ascii ~/.config/ascii-neofetch";
+      fastfetch="fastfetch -c ~/.config/fastfetch/config.jsonc";
       tunnel="~/Projects/sni-injector/start.sh";
       pyserver="python -m http.server";
       pyvenv="~/Projects/Scripts/pyvenv.sh";

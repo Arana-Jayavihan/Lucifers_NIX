@@ -21,6 +21,7 @@
     ./swaync.nix
     ./wezterm.nix
     ./zsh.nix
+    ./fastfetch.nix
 
     # Place Home Files Like Pictures
     ./files.nix

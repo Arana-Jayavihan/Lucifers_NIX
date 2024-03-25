@@ -13,7 +13,7 @@ lib.mkIf (theShell == "bash") {
       #fi
     '';
     initExtra = ''
-      neofetch
+      fastfetch
       if [ -f $HOME/.bashrc-personal ]; then
         source $HOME/.bashrc-personal
       fi
@@ -37,6 +37,7 @@ lib.mkIf (theShell == "bash") {
       pyserver="python -m http.server";
       pyvenv="~/Projects/Scripts/pyvenv.sh";
       neofetch="neofetch --ascii ~/.config/ascii-neofetch";
+      fastfetch="fastfetch -c ~/.config/fastfetch/config.jsonc";
       fuff="./usr/share/ffuf/ffuf";
       burp="cd /home/lucifer/Projects/burpsuite_pro_v2022.9; java -jar burploader.jar";
       jdgui="java -jar /usr/share/jdgui/jd-gui-1.6.6.jar";	
