@@ -1,7 +1,7 @@
 # Lucifer's NIX Flake ❄️
 Hello folks, Welcome to my flake repository for NixOS, I've been loving NixOS since the day I installed it on my system. So here is my current configuration, I'll be updating this pretty often with new feature, bug fixes, and improvements. Enjoy 🍃
 
-## Preview
+## Preview ✨
 ### Demo
 https://github.com/Arana-Jayavihan/Lucifers_NIX/assets/87359147/b7b1bf79-cb66-41b8-ab3d-eee305cedce8
 
@@ -12,7 +12,7 @@ https://github.com/Arana-Jayavihan/Lucifers_NIX/assets/87359147/b7b1bf79-cb66-41
 ![preview4](https://github.com/Arana-Jayavihan/Lucifers_NIX/blob/master/assets/swappy-20240325-011120.png?raw=true)
 ![preview5](https://github.com/Arana-Jayavihan/Lucifers_NIX/blob/master/assets/swappy-20240325-010626.png?raw=true)
 
-## Installation
+## Installation ⚙️
 ### Install a fresh NixOS on target system (Recommended).
 After installation, reboot to the fresh installation and open a terminal.
 ```sh
@@ -70,6 +70,6 @@ sudo nixos-rebuild switch --flake ~/Lucifers_NIX/
 
 Then reboot the system to enjoy 🍃
 
-## Credits
-Huge appreciation for Tyler Kelley for building such an amazing flake. Learned a lot from your configuration. 🍻
-[![credits](https://gitlab.com/uploads/-/system/project/avatar/53038185/Gitlab_Nix_Picture.png?width=48 "Credits to Zaney")](https://gitlab.com/Zaney/zaneyos/-/blob/8e643956f0abf8011101771b956d994a2d052ae7/LICENSE)
+## Credits 💫
+Huge appreciation for Tyler Kelley for building such an amazing flake. Learned a lot from your configuration. 
+[![credits](https://gitlab.com/uploads/-/system/project/avatar/53038185/Gitlab_Nix_Picture.png?width=48 "Credits to Zaney")](https://gitlab.com/Zaney/zaneyos/-/tree/8e643956f0abf8011101771b956d994a2d052ae7)
