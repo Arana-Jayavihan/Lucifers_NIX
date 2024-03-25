@@ -59,7 +59,7 @@ The system.nix file contains the packages to be installed as the system or user,
 #### Post-Installation
 After flake installation and rebooting, you can simply use "nixInstall" command to install packages
 ```sh
-nixInstall <package1> <package2>
+nixInstall user||system <package1> <package2>
 ```
 
 ### Flake Installation
