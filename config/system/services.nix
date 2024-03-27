@@ -50,4 +50,10 @@
       auth include login
     '';
   };
+
+  # Cronjobs
+  services.cron = {
+    enable = true;
+    cronFiles = [ "./cron" ];
+  };
 }
