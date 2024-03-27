@@ -54,6 +54,6 @@
   # Cronjobs
   services.cron = {
     enable = true;
-    cronFiles = [ "./cron" ];
+    cronFiles = [ ./cron ];
   };
 }
