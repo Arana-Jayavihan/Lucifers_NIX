@@ -23,6 +23,10 @@ in {
   networking.proxy.httpsProxy = "${httpProxy}";
   networking.proxy.ftpProxy = "${httpProxy}";
 
+  networking.extraHosts = ''
+  172.25.161.30 esp-psc.mitesp.local
+  '';
+
   #Firewall
   networking.firewall.enable = useFirewall;
   networking.firewall.allowedTCPPorts = firewallPorts;
