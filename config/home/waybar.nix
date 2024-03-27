@@ -130,15 +130,15 @@ in with lib; {
       };
       "battery" = {
         states = {
-          warning = 30;
-          critical = 15;
+          warning = 25;
+          critical = 10;
         };
         format = "{icon} {capacity}%";
         format-charging = "󰂄 {capacity}%";
         format-plugged = "󱘖 {capacity}%";
         format-icons = ["󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹"];
         on-click = "";
-        tooltip = false;
+        tooltip = true;
       };
    }];
     style = concatStrings [''
@@ -418,6 +418,45 @@ in with lib; {
 	  border-radius: 10px;
 	''}
       }
+      #battery.critical {
+        color: #${palette.base07};
+	${if slickbar == true then ''
+	  background: #${palette.base08};
+	  border-radius: 15px 50px 15px 50px;
+	  margin: 5px;
+	  padding: 2px 20px;
+	'' else if simplebar == true then ''
+	  background: #${palette.base08};
+	  margin: 6px 4px;
+	  padding: 0px 10px;
+	  border-radius: 15px;
+	'' else ''
+	  background: #${palette.base08};
+	  margin: 4px;
+	  padding: 2px 10px;
+	  border-radius: 10px;
+	''}
+      }
+      #battery.warning {
+        color: #${palette.base07};
+	${if slickbar == true then ''
+	  background: #${palette.base0F};
+	  border-radius: 15px 50px 15px 50px;
+	  margin: 5px;
+	  padding: 2px 20px;
+	'' else if simplebar == true then ''
+	  background: #${palette.base0F};
+	  margin: 6px 4px;
+	  padding: 0px 10px;
+	  border-radius: 15px;
+	'' else ''
+	  background: #${palette.base0F};
+	  margin: 4px;
+	  padding: 2px 10px;
+	  border-radius: 10px;
+	''}
+      }
+
       #network {
     	color: #${palette.base09};
 	${if slickbar == true then ''
