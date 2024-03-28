@@ -43,6 +43,7 @@
 	specialArgs = { 
           inherit system; inherit inputs; 
           inherit username; inherit hostname;
+          inherit pkgs-stable;
         };
 	modules = [ 
 	  ./system.nix

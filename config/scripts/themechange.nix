@@ -9,6 +9,6 @@ pkgs.writeShellScriptBin "themechange" ''
   else
     replacement="$1"
     sed -i "/^\s*theme[[:space:]]*=[[:space:]]*\"/s/\"\(.*\)\"/\"$replacement\"/" ${flakeDir}/options.nix
-    kitty -e pkexec nixos-rebuild switch --flake ${flakeDir}
+    export SHELL=/run/current-system/sw/bin/bash && kitty -e pkexec nixos-rebuild switch --flake ${flakeDir}
   fi
 ''

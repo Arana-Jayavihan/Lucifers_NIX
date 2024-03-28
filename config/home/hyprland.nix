@@ -138,7 +138,6 @@ in with lib; {
       bind = ${modifier},S,exec,screenshootin
       bind = ${modifier},D,exec,discord
       bind = ${modifier},O,exec,obs
-      bind = ${modifier},G,exec,gimp
       bind = ${modifier}SHIFT,G,exec,godot4
       bind = ${modifier},T,exec,thunar
       bind = ${modifier},M,exec,spotify
@@ -202,6 +201,7 @@ in with lib; {
       bind = ${modifier}SHIFT,X,exec,wlogout
       bind = ${modifier}SHIFT,T,exec,noproxyrun "flatpak run com.github.IsmaelMartinez.teams_for_linux"
       bind = ${modifier}SHIFT,G,exec,brave https://github.com/Arana-Jayavihan/
+      bind = ${modifier},G,exec,brave https://chat.openai.com/
     '' ];
   };
 }
