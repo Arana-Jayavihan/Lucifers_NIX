@@ -37,7 +37,7 @@ in with lib; {
       input {
         kb_layout = ${theKBDLayout}, ${theSecondKBDLayout}
 	kb_options = grp:alt_shift_toggle
-        kb_options=caps:super
+        #kb_options=caps:super
         follow_mouse = 1
         touchpad {
           natural_scroll = true
@@ -201,6 +201,7 @@ in with lib; {
       bind = ${modifier}SHIFT,N,exec,brave https://search.nixos.org/
       bind = ${modifier}SHIFT,X,exec,wlogout
       bind = ${modifier}SHIFT,T,exec,noproxyrun "flatpak run com.github.IsmaelMartinez.teams_for_linux"
+      bind = ${modifier}SHIFT,G,exec,brave https://github.com/Arana-Jayavihan/
     '' ];
   };
 }

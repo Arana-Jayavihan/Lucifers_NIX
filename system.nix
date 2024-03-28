@@ -1,4 +1,4 @@
-{ inputs, config, pkgs, username, hostname, ... }:
+{ inputs, config, pkgs, username, hostname, pkgs-stable, ... }:
 
 let 
   inherit (import ./options.nix) 
@@ -60,9 +60,13 @@ in {
       extraGroups = [ "networkmanager" "wheel" "libvirtd" "docker" "audio" "pulse-access" ];
       shell = pkgs.${theShell};
       ignoreShellProgramCheck = true;
-      packages = with pkgs; [
+      packages = (with pkgs; [
         #USER_PKG
-      ];
+      ])
+      ++
+      (with pkgs-stable; [
+        #USER_PKG_STABLE
+      ]);
     };
   };
 
@@ -71,8 +75,7 @@ in {
     POLKIT_BIN = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
   };
 
-  environment.systemPackages = with pkgs; [
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+  environment.systemPackages = (with pkgs; [
 	pkgs.networkmanager-fortisslvpn
 	pkgs.bun
 	pkgs.go-ethereum
@@ -128,8 +131,13 @@ in {
         pkgs.firefox
         pkgs.dbeaver
         #SYSTEM_PKG
-  ];
-
+      ])
+      ++
+      (with pkgs-stable; [
+        anydesk
+        #SYSTEM_PKG_STABLE
+      ]);
+ 
   environment.etc."ppp/options".text = "ipcp-accept-remote";
 
   virtualisation.docker.enable = true;
