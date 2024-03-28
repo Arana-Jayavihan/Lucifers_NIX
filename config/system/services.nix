@@ -51,8 +51,25 @@
     '';
   };
 
-  # Cronjobs
-  services.cron = {
-    enable = true;
+  # Systemd Timers
+  systemd.timers."batteryNotify" = {
+  wantedBy = [ "timers.target" ];
+    timerConfig = {
+      OnBootSec = "5m";
+      OnUnitActiveSec = "5m";
+      Unit = "batteryNotify.service";
+    };
+  };
+
+  # Battery Notify Service
+  systemd.services."batteryNotify" = {
+    script = ''
+      set -eu
+      /etc/profiles/per-user/lucifer/bin/batteryNotify     
+    '';   
+    serviceConfig = {
+      Type = "oneshot";
+      User = "lucifer";
+    };
   };
 }

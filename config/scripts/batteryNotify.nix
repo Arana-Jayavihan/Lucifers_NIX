@@ -7,7 +7,7 @@ pkgs.writeShellScriptBin "batteryNotify" ''
   then
     if [[ $capacity -lt 15 ]];
     then
-      notify-send -u critical "Low Battery 🪫" "$capacity% remaining, please plugin to the charger.";
+      export XDG_RUNTIME_DIR=/run/user/$(id -u) && export DISPLAY=:0 && /run/current-system/sw/bin/notify-send -u critical "Low Battery 🪫" "$capacity% remaining, please plugin to the charger.";
     fi
   fi
 ''
