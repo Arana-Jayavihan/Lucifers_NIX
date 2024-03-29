@@ -45,8 +45,7 @@ in {
     (import ./../scripts/wallChangeEnhanced.nix { 
       inherit pkgs; 
       inherit wallpaperDir; 
-      inherit flakeDir; 
-      inherit useWallColors; 
+      inherit flakeDir;  
     })
   ];
 

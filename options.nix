@@ -23,7 +23,7 @@ in {
   wallpaperGit = "https://github.com/Arana-Jayavihan/nix-wallpapers.git";
   # ^ (use as is or replace with your own repo - removing will break the wallsetter script) 
   wallpaperDir = "${userHome}/Projects/nix-wallpapers";
-  useWallColors = false;
+  useWallColors = true;
   curWallPaper = /home/lucifer/Projects/nix-wallpapers/wall3.jpg;
   screenshotDir = "${userHome}/Pictures/Screenshots";
   flakeDir = "${flakeDir}";

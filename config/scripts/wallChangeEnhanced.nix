@@ -1,16 +1,15 @@
-{ pkgs, wallpaperDir, flakeDir, useWallColors, ... }:
+{ pkgs, wallpaperDir, flakeDir, ... }:
 
 pkgs.writeShellScriptBin "wallchange" ''
 THEME="false"
 
 wallpaperDir=${wallpaperDir} 
 flakeDir=${flakeDir}
-useWallColors=${useWallColors}
 
 function changeTheme { 
   sed -i "s#curWallPaper = .*;#curWallPaper = $1;#g" $flakeDir/options.nix
   sed -i "s/useWallColors = false;/useWallColors = $THEME;/g" $flakeDir/options.nix
-  #sudo nixos-rebuild switch --flake "$flakeDir"
+  sudo nixos-rebuild switch --flake "$flakeDir"
 }
 
 while [[ $# -gt 0 ]]; do
@@ -49,7 +48,7 @@ if [ "$THEME" = "false" ]; then
     #if [ "$useWallColors" = "true" ]
     #then
     sed -i "s/useWallColors = true;/useWallColors = $THEME;/g" $flakeDir/options.nix;
-    #sudo nixos-rebuild switch --flake "$flakeDir";
+    sudo nixos-rebuild switch --flake "$flakeDir";
     
 fi
 
