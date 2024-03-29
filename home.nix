@@ -1,10 +1,9 @@
-{ config, pkgs, inputs, username,
-  gtkThemeFromScheme, ... }:
+{ config, pkgs, inputs, username, nixColors, ... }:
 let 
   inherit (import ./options.nix)
     gitUsername gitEmail theme browser 
     wallpaperDir wallpaperGit flakeDir 
-    waybarStyle;
+    curWallPaper waybarStyle useWallColors;
 in {
   # Home Manager Settings
   home.username = "${username}";
@@ -12,11 +11,19 @@ in {
   home.stateVersion = "23.11";
 
   # Set The Colorscheme
-  colorScheme = inputs.nix-colors.colorSchemes."${theme}";
-  colorScheme2 = gtkThemeFromScheme.colorSchemeFromPicture {
-    path = /home/lucifer/Projects/nix-wallpapers/wall7.jpg;
+  colorScheme = if useWallColors == false 
+  then inputs.nix-colors.colorSchemes."${theme}"
+  else nixColors.colorSchemeFromPicture {
+    path = "${curWallPaper}";
     variant = "dark";
   };
+
+  #colorScheme = inputs.nix-colors.colorSchemes."${theme}";
+
+  #colorScheme = nixColors.colorSchemeFromPicture {
+  #  path = "${curWallPaper}";
+  #  variant = "dark";
+  #};
 
   # Import Program Configurations
   imports = [

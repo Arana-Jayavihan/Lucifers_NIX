@@ -19,7 +19,7 @@
     impermanence.url = "github:nix-community/impermanence";
   };
 
-  outputs = inputs@{ nixpkgs-stable, nixpkgs, home-manager, impermanence, ... }:
+  outputs = inputs@{ nixpkgs-stable, nixpkgs, home-manager, impermanence, nix-colors, ... }:
   let
     system = "x86_64-linux";
     inherit (import ./options.nix) username hostname;
@@ -37,6 +37,9 @@
 	    allowUnfree = true;
       };
     };
+
+    nixColors = nix-colors.lib.contrib { inherit pkgs; };
+
   in {
     nixosConfigurations = {
       "${hostname}" = nixpkgs.lib.nixosSystem {
@@ -44,6 +47,7 @@
           inherit system; inherit inputs; 
           inherit username; inherit hostname;
           inherit pkgs-stable;
+          inherit nixColors;
         };
 	modules = [ 
 	  ./system.nix
@@ -51,8 +55,9 @@
           home-manager.nixosModules.home-manager {
 	    home-manager.extraSpecialArgs = {
 	      inherit username; inherit inputs;
-              inherit (inputs.nix-colors.lib-contrib {inherit pkgs;}) gtkThemeFromScheme;
+              inherit (inputs.nix-colors.lib-contrib {inherit pkgs;}) gtkThemeFromScheme colorSchemeFromPicture;
               inherit pkgs-stable;
+              inherit nixColors;
             };
 	    home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
