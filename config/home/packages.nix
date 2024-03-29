@@ -28,7 +28,8 @@ in {
     (import ./../scripts/noproxyrun.nix { inherit pkgs; })
     (import ./../scripts/nixInstaller.nix { inherit pkgs; inherit flakeDir; })
     (import ./../scripts/gituplink.nix { inherit pkgs; inherit flakeDir; }) 
-    (import ./../scripts/batteryNotify.nix { inherit pkgs; })  
+    (import ./../scripts/batteryNotify.nix { inherit pkgs; }) 
+    (import ./../scripts/wall-selector.nix { inherit pkgs; inherit wallpaperDir; })
   ];
 
   programs.gh.enable = true;
