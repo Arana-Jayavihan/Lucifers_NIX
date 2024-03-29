@@ -13,6 +13,10 @@ in {
 
   # Set The Colorscheme
   colorScheme = inputs.nix-colors.colorSchemes."${theme}";
+  colorScheme2 = gtkThemeFromScheme.colorSchemeFromPicture {
+    path = /home/lucifer/Projects/nix-wallpapers/wall7.jpg;
+    variant = "dark";
+  };
 
   # Import Program Configurations
   imports = [
