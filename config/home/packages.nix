@@ -24,7 +24,6 @@ in {
     (import ./../scripts/rofi-launcher.nix { inherit pkgs; })
     (import ./../scripts/screenshootin.nix { inherit pkgs; })
     (import ./../scripts/list-hypr-bindings.nix { inherit pkgs; })
-    (import ./../scripts/wallchanger.nix { inherit pkgs; inherit wallpaperDir; })
     (import ./../scripts/noproxyrun.nix { inherit pkgs; })
     (import ./../scripts/nixInstaller.nix { inherit pkgs; inherit flakeDir; })
     (import ./../scripts/gituplink.nix { inherit pkgs; inherit flakeDir; }) 
