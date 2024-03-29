@@ -1,7 +1,7 @@
 { pkgs, wallpaperDir, ... }:
 
 pkgs.writeShellScriptBin "wallSelector" ''
-  chosen=$(ls ${wallpaperDir} | grep "wall*" | ${pkgs.rofi}/bin/rofi -dmenu -p "Select a wallpaper")
+  chosen=$(ls ${wallpaperDir} | grep "wall*" | ${pkgs.rofi-wayland}/bin/rofi -dmenu -p "Select a wallpaper")
 
   [ -z "$chosen" ] && exit;
 
