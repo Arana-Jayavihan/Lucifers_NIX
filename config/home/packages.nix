@@ -47,7 +47,7 @@ in {
       inherit wallpaperDir; 
       inherit flakeDir;  
     })
-    (import ./../scripts/generateListBindings.nix {
+    (import ./../scripts/list-hypr-bindings-v2.nix {
       inherit pkgs;
       inherit flakeDir;
     })
