@@ -47,6 +47,10 @@ in {
       inherit wallpaperDir; 
       inherit flakeDir;  
     })
+    (import ./../scripts/generateListBindings.nix {
+      inherit pkgs;
+      inherit flakeDir;
+    })
   ];
 
   programs.gh.enable = true;

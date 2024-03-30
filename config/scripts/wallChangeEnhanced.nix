@@ -10,6 +10,7 @@ function changeTheme {
   sed -i "s#curWallPaper = .*;#curWallPaper = $1;#g" $flakeDir/options.nix
   sed -i "s/useWallColors = false;/useWallColors = $THEME;/g" $flakeDir/options.nix
   sudo nixos-rebuild switch --flake "$flakeDir"
+  ${pkgs.swaynotificationcenter}/bin/swaync-client -rs
 }
 
 while [[ $# -gt 0 ]]; do
@@ -44,12 +45,12 @@ if [ "$THEME" = "true" ] && [ -n "$WALLPAPER" ]; then
     changeTheme "$wallPath"
 fi
 
-if [ "$THEME" = "false" ]; then
+if [ "$THEME" = "false" ] && [ -z "$WALLPAPER" ] ; then
     #if [ "$useWallColors" = "true" ]
     #then
     sed -i "s/useWallColors = true;/useWallColors = $THEME;/g" $flakeDir/options.nix;
     sudo nixos-rebuild switch --flake "$flakeDir";
-    
+    ${pkgs.swaynotificationcenter}/bin/swaync-client -rs
 fi
 
 if [ "$WALLPAPER" ]; then

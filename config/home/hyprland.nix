@@ -7,7 +7,7 @@ let
     browser cpuType gpuType
     wallpaperDir borderAnim
     theKBDLayout terminal
-    theSecondKBDLayout
+    theSecondKBDLayout gitUsername
     theKBDVariant sdl-videodriver;
 in with lib; {
   wayland.windowManager.hyprland = {
@@ -115,7 +115,7 @@ in with lib; {
       exec-once = swww init
       exec-once = waybar
       exec-once = swaync
-      exec-once = wallsetter
+      #exec-once = wallsetter
       exec-once = nm-applet --indicator
       exec-once = swayidle -w timeout 86400 'swaylock --image ~/.config/swaylock-bg.jpg --text-color FFCC33 --indicator-radius 100 --indicator-thickness 10 -e --show-failed-attempts --indicator-caps-lock --ring-color 161131 --key-hl-color c2303a --font UBUNTU --config ""' timeout 86000 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on' before-sleep 'swaylock --image ~/.config/swaylock-bg.jpg --text-color FFCC33 --indicator-radius 100 --indicator-thickness 10 -e --show-failed-attempts --indicator-caps-lock --ring-color 161131 --key-hl-color c2303a --font UBUNTU --config ""'
       dwindle {
@@ -125,64 +125,72 @@ in with lib; {
       master {
         new_is_master = true
       }
-      bind = ${modifier},Return,exec,${terminal}
-      bind = ${modifier}SHIFT,Return,exec,rofi-launcher
-      bind = ${modifier}SHIFT,W,exec,wallSelector
-      bind = ${modifier}SHIFT,N,exec,swaync-client -rs
+      bind = ${modifier},Return,exec,${terminal}          #Launch Terminal
+      bind = ${modifier}SHIFT,Return,exec,rofi-launcher   #Rofi App Launcher
+      bind = ${modifier}SHIFT,W,exec,wallSelector         #Simple Wallpaper Selector
       ${if browser == "google-chrome" then ''
 	bind = ${modifier},W,exec,google-chrome-stable
       '' else ''
 	bind = ${modifier},W,exec,${browser}
       ''}
-      bind = ${modifier},E,exec,emopicker9000
-      bind = ${modifier},S,exec,screenshootin
-      bind = ${modifier},D,exec,discord
-      bind = ${modifier},O,exec,obs
-      bind = ${modifier},T,exec,thunar
-      bind = ${modifier},M,exec,spotify
-      bind = ${modifier},Q,killactive,
-      bind = ${modifier},P,pseudo,
-      bind = ${modifier}SHIFT,I,togglesplit,
-      bind = ${modifier},F,fullscreen,
-      bind = ${modifier}SHIFT,F,togglefloating,
-      bind = ${modifier}SHIFT,left,movewindow,l
-      bind = ${modifier}SHIFT,right,movewindow,r
-      bind = ${modifier}SHIFT,up,movewindow,u
-      bind = ${modifier}SHIFT,down,movewindow,d
-      bind = ${modifier},left,movefocus,l
-      bind = ${modifier},right,movefocus,r
-      bind = ${modifier},up,movefocus,u
-      bind = ${modifier},down,movefocus,d
-      bind = ${modifier},1,workspace,1
-      bind = ${modifier},2,workspace,2
-      bind = ${modifier},3,workspace,3
-      bind = ${modifier},4,workspace,4
-      bind = ${modifier},5,workspace,5
-      bind = ${modifier},6,workspace,6
-      bind = ${modifier},7,workspace,7
-      bind = ${modifier},8,workspace,8
-      bind = ${modifier},9,workspace,9
-      bind = ${modifier},0,workspace,10
-      bind = ${modifier}SHIFT,SPACE,movetoworkspace,special
-      bind = ${modifier},SPACE,togglespecialworkspace
-      bind = ${modifier}SHIFT,1,movetoworkspace,1
-      bind = ${modifier}SHIFT,2,movetoworkspace,2
-      bind = ${modifier}SHIFT,3,movetoworkspace,3
-      bind = ${modifier}SHIFT,4,movetoworkspace,4
-      bind = ${modifier}SHIFT,5,movetoworkspace,5
-      bind = ${modifier}SHIFT,6,movetoworkspace,6
-      bind = ${modifier}SHIFT,7,movetoworkspace,7
-      bind = ${modifier}SHIFT,8,movetoworkspace,8
-      bind = ${modifier}SHIFT,9,movetoworkspace,9
-      bind = ${modifier}SHIFT,0,movetoworkspace,10
-      bind = ${modifier}CONTROL,right,workspace,e+1
-      bind = ${modifier}CONTROL,left,workspace,e-1
-      bind = ${modifier},mouse_down,workspace, e+1
-      bind = ${modifier},mouse_up,workspace, e-1
-      bindm = ${modifier},mouse:272,movewindow
-      bindm = ${modifier},mouse:273,resizewindow
-      bind = ALT,Tab,cyclenext
-      bind = ALT,Tab,bringactivetotop
+      bind = ${modifier},E,exec,emopicker9000       #Emoji Picker
+      bind = ${modifier},S,exec,screenshootin       #Take Screenshot
+      bind = ${modifier},D,exec,discord             #Discord
+      bind = ${modifier},O,exec,obs                 #OBS
+      bind = ${modifier},T,exec,thunar              #Thunar
+      bind = ${modifier},M,exec,spotify             #Spotify
+      bind = ${modifier}SHIFT,L,exec,swaylock --config ~/.config/swaylock/config     #Lock Screen
+      bind = ${modifier}SHIFT,O,exec,hyprpicker -a -f hex     #Launch Color Picker
+      bind = ${modifier}SHIFT,A,exec,waydroid show-full-ui    #Launch Waydroid
+      bind = ${modifier}SHIFT,N,exec,brave https://search.nixos.org/    #Open NixOS Search
+      bind = ${modifier}SHIFT,X,exec,wlogout    #Show Power Menu
+      bind = ${modifier}SHIFT,T,exec,noproxyrun "flatpak run com.github.IsmaelMartinez.teams_for_linux" #Launch Teams
+      bind = ${modifier}SHIFT,G,exec,brave https://github.com/${gitUsername}/  #Open GitHub
+      bind = ${modifier},G,exec,brave https://chat.openai.com/    #Open ChatGPT
+      bind = ${modifier},Q,killactive,    #Kill Active Window
+      bind = ${modifier},P,pseudo,        #Pseudo Tiling
+      bind = ${modifier}SHIFT,I,togglesplit,      #Toggle Split Direction
+      bind = ${modifier},F,fullscreen,            #Toggle Fullscreen
+      bind = ${modifier}SHIFT,F,togglefloating,   #Toggle Floating Window
+      bind = ${modifier}SHIFT,left,movewindow,l   #Move Window Left
+      bind = ${modifier}SHIFT,right,movewindow,r  #Move Window Right
+      bind = ${modifier}SHIFT,up,movewindow,u     #Move Window Up
+      bind = ${modifier}SHIFT,down,movewindow,d   #Move Window Down
+      bind = ${modifier},left,movefocus,l         #Move Focus To Window On The Left
+      bind = ${modifier},right,movefocus,r        #Move Focus To Window On The Right
+      bind = ${modifier},up,movefocus,u           #Move Focus To Window On The Above
+      bind = ${modifier},down,movefocus,d         #Move Focus To Window On The Below
+      bind = ${modifier},1,workspace,1            #Move To Workspace 1
+      bind = ${modifier},2,workspace,2            #Move To Workspace 2
+      bind = ${modifier},3,workspace,3            #Move To Workspace 3
+      bind = ${modifier},4,workspace,4            #Move To Workspace 4
+      bind = ${modifier},5,workspace,5            #Move To Workspace 5
+      bind = ${modifier},6,workspace,6            #Move To Workspace 6
+      bind = ${modifier},7,workspace,7            #Move To Workspace 7
+      bind = ${modifier},8,workspace,8            #Move To Workspace 8
+      bind = ${modifier},9,workspace,9            #Move To Workspace 9
+      bind = ${modifier},0,workspace,10           #Move To Workspace 10
+      bind = ${modifier}SHIFT,SPACE,movetoworkspace,special     #Move To Special Workspace
+      bind = ${modifier},SPACE,togglespecialworkspace           #Toggle Special Workspace
+      bind = ${modifier}SHIFT,1,movetoworkspace,1       #Move Focus Window To Workspace 1
+      bind = ${modifier}SHIFT,2,movetoworkspace,2       #Move Focus Window To Workspace 2
+      bind = ${modifier}SHIFT,3,movetoworkspace,3       #Move Focus Window To Workspace 3
+      bind = ${modifier}SHIFT,4,movetoworkspace,4       #Move Focus Window To Workspace 4
+      bind = ${modifier}SHIFT,5,movetoworkspace,5       #Move Focus Window To Workspace 5
+      bind = ${modifier}SHIFT,6,movetoworkspace,6       #Move Focus Window To Workspace 6
+      bind = ${modifier}SHIFT,7,movetoworkspace,7       #Move Focus Window To Workspace 7
+      bind = ${modifier}SHIFT,8,movetoworkspace,8       #Move Focus Window To Workspace 8
+      bind = ${modifier}SHIFT,9,movetoworkspace,9       #Move Focus Window To Workspace 9
+      bind = ${modifier}SHIFT,0,movetoworkspace,10      #Move Focus Window To Workspace 10
+      bind = ${modifier}CONTROL,right,workspace,e+1     #Move To Next Workspace
+      bind = ${modifier}CONTROL,left,workspace,e-1      #Move To Previous Woekspace
+      bind = ${modifier},mouse_down,workspace, e+1      #Move To Next Workspace
+      bind = ${modifier},mouse_up,workspace, e-1        #Move To Previous Workspace
+      bindm = ${modifier},mouse:272,movewindow          #Move Window
+      bindm = ${modifier},mouse:273,resizewindow        #Resize Window
+      bind = ${modifier}SHIFT,R,exec,swaync-client -rs  #Reload SwayNC Styling
+      bind = ALT,Tab,cyclenext                          #Cycle Windows
+      bind = ALT,Tab,bringactivetotop                   #Bring Active Window To Front
       bind = ,XF86AudioRaiseVolume,exec,wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+
       bind = ,XF86AudioLowerVolume,exec,wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
       binde = ,XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
@@ -191,15 +199,7 @@ in with lib; {
       bind = ,XF86AudioNext, exec, playerctl next
       bind = ,XF86AudioPrev, exec, playerctl previous
       bind = ,XF86MonBrightnessDown,exec,brightnessctl set 5%-
-      bind = ,XF86MonBrightnessUp,exec,brightnessctl set +5%
-      bind = ${modifier}SHIFT,L,exec,swaylock --config ~/.config/swaylock/config     
-      bind = ${modifier}SHIFT,O,exec,hyprpicker -a -f hex
-      bind = ${modifier}SHIFT,A,exec,waydroid show-full-ui
-      bind = ${modifier}SHIFT,N,exec,brave https://search.nixos.org/
-      bind = ${modifier}SHIFT,X,exec,wlogout
-      bind = ${modifier}SHIFT,T,exec,noproxyrun "flatpak run com.github.IsmaelMartinez.teams_for_linux"
-      bind = ${modifier}SHIFT,G,exec,brave https://github.com/Arana-Jayavihan/
-      bind = ${modifier},G,exec,brave https://chat.openai.com/
+      bind = ,XF86MonBrightnessUp,exec,brightnessctl set +5% 
     '' ];
   };
 }

@@ -12,9 +12,9 @@ in {
   # User Variables
   username = "lucifer";
   hostname = "nixos";
-  gitUsername = "Arana Jayavihan";
+  gitUsername = "Arana-Jayavihan";
   gitEmail = "aranajayavihan@gmail.com";
-  theme = "nord";
+  theme = "ashes";
   slickbar = if waybarStyle == "slickbar" then true else false;
   simplebar = if waybarStyle == "simplebar" then true else false;
   bar-number = true; # Enable / Disable Workspace Numbers In Waybar
