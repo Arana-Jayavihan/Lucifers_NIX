@@ -28,7 +28,7 @@ in {
       transparency: "real";
       orientation: vertical;
       border: 2px ;
-      border-color: #5DA478;
+      border-color: #${palette.base08};
       border-radius: 10px;
     }
 
@@ -82,8 +82,8 @@ in {
     }
 
     inputbar {
-      background-image: url("~/.config/rofi/rofi.jpg", width);
-      padding: 180 0 0;
+      //background-image: url("~/.config/rofi/rofi.jpg", width);
+      padding: 10 0 0;
       margin: 0 0 0 0;
     } 
 
@@ -111,7 +111,7 @@ in {
 
     button selected {
       background-color: @bg;
-      text-color: #C8E690;
+      text-color: #${palette.base0D};
     }
 
     message {

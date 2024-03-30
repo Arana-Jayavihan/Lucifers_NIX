@@ -2,6 +2,7 @@
 
 let
   palette = config.colorScheme.palette;
+  inherit (import ../../options.nix) curWallPaper;
 in {
   home.file.".config/swaylock/config".text = ''
     daemonize
@@ -16,7 +17,7 @@ in {
     indicator-thickness=10
     indicator-radius=120
     hide-keyboard-layout
-    image=~/.config/swaylock-bg.jpg
+    image=${curWallPaper}
     ring-color=${palette.base0D}
     key-hl-color=06292FFF
     line-color=00000000
