@@ -23,7 +23,6 @@ in {
     (import ./../scripts/web-search.nix { inherit pkgs; })
     (import ./../scripts/rofi-launcher.nix { inherit pkgs; })
     (import ./../scripts/screenshootin.nix { inherit pkgs; })
-    (import ./../scripts/list-hypr-bindings.nix { inherit pkgs; })
     (import ./../scripts/noproxyrun.nix { 
       inherit pkgs; 
     })
@@ -47,7 +46,7 @@ in {
       inherit wallpaperDir; 
       inherit flakeDir;  
     })
-    (import ./../scripts/list-hypr-bindings-v2.nix {
+    (import ./../scripts/list-hypr-bindings.nix {
       inherit pkgs;
       inherit flakeDir;
     })

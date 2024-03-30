@@ -8,7 +8,7 @@ let
     wallpaperDir borderAnim
     theKBDLayout terminal
     theSecondKBDLayout gitUsername
-    theKBDVariant sdl-videodriver;
+    theKBDVariant sdl-videodriver autoWallChange;
 in with lib; {
   wayland.windowManager.hyprland = {
     enable = true;
@@ -115,7 +115,10 @@ in with lib; {
       exec-once = swww init
       exec-once = waybar
       exec-once = swaync
-      #exec-once = wallsetter
+      ${if autoWallChange == true then ''
+      exec-once = wallsetter
+      '' else ''
+      ''}    
       exec-once = nm-applet --indicator
       exec-once = swayidle -w timeout 86400 'swaylock --image ~/.config/swaylock-bg.jpg --text-color FFCC33 --indicator-radius 100 --indicator-thickness 10 -e --show-failed-attempts --indicator-caps-lock --ring-color 161131 --key-hl-color c2303a --font UBUNTU --config ""' timeout 86000 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on' before-sleep 'swaylock --image ~/.config/swaylock-bg.jpg --text-color FFCC33 --indicator-radius 100 --indicator-thickness 10 -e --show-failed-attempts --indicator-caps-lock --ring-color 161131 --key-hl-color c2303a --font UBUNTU --config ""'
       dwindle {

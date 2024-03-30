@@ -20,6 +20,7 @@ in {
   bar-number = true; # Enable / Disable Workspace Numbers In Waybar
   borderAnim = true;
   browser = "brave";
+  autoWallChange = false;
   wallpaperGit = "https://github.com/Arana-Jayavihan/nix-wallpapers.git";
   # ^ (use as is or replace with your own repo - removing will break the wallsetter script) 
   wallpaperDir = "${userHome}/Projects/nix-wallpapers";
