@@ -149,6 +149,7 @@ in with lib; {
       bind = ${modifier}SHIFT,X,exec,wlogout    #Show Power Menu
       bind = ${modifier}SHIFT,T,exec,noproxyrun "flatpak run com.github.IsmaelMartinez.teams_for_linux" #Launch Teams
       bind = ${modifier}SHIFT,G,exec,brave https://github.com/${gitUsername}/  #Open GitHub
+      bind = ${modifier}SHIFT,S,exec,com.github.rajsolai.textsnatcher #Launch OCR Clipboard
       bind = ${modifier},G,exec,brave https://chat.openai.com/    #Open ChatGPT
       bind = ${modifier},Q,killactive,    #Kill Active Window
       bind = ${modifier},P,pseudo,        #Pseudo Tiling
@@ -191,7 +192,7 @@ in with lib; {
       bind = ${modifier},mouse_up,workspace, e-1        #Move To Previous Workspace
       bindm = ${modifier},mouse:272,movewindow          #Move Window
       bindm = ${modifier},mouse:273,resizewindow        #Resize Window
-      bind = ${modifier}SHIFT,R,exec,swaync-client -rs  #Reload SwayNC Styling
+      bind = ${modifier}SHIFT,R,exec,swaync-client -rs  #Reload SwayNC Styling 
       bind = ALT,Tab,cyclenext                          #Cycle Windows
       bind = ALT,Tab,bringactivetotop                   #Bring Active Window To Front
       bind = ,XF86AudioRaiseVolume,exec,wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+

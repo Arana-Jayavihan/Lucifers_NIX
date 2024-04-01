@@ -24,7 +24,8 @@ in {
   networking.proxy.ftpProxy = "${httpProxy}";
 
   networking.extraHosts = ''
-  172.25.161.30 esp-psc.mitesp.local
+    172.25.161.30  esp-vcenter.mitesp.local
+    172.25.161.34  esp-psc.mitesp.local
   '';
 
   #Firewall
@@ -67,6 +68,7 @@ in {
       ++
 
       (with pkgs-stable; [
+	pkgs.textsnatcher
 	#STABLE_USER
       ]);
     };

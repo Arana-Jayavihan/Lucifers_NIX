@@ -138,6 +138,7 @@ in {
       ++
 
       (with pkgs-stable; [
+	pkgs.android-studio
 	#STABLE_SYSTEM
       ]);
  
