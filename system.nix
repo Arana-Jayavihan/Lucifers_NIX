@@ -68,7 +68,8 @@ in {
       ++
 
       (with pkgs-stable; [
-	pkgs.textsnatcher
+	textsnatcher
+	hdparm
 	#STABLE_USER
       ]);
     };
@@ -100,7 +101,6 @@ in {
 	dex2jar
 	android-tools
 	file
-	xz
 	tshark
 	sshpass
 	motrix
@@ -136,11 +136,12 @@ in {
         dbeaver
 	#SYSTEM_PKG
       ])
-
+    
       ++
 
       (with pkgs-stable; [
-	pkgs.android-studio
+        android-studio
+        xz
 	#STABLE_SYSTEM
       ]);
  

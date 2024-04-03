@@ -14,7 +14,7 @@ in {
   hostname = "nixos";
   gitUsername = "Arana-Jayavihan";
   gitEmail = "aranajayavihan@gmail.com";
-  theme = "atelier-plateau";
+  theme = "ashes";
   slickbar = if waybarStyle == "slickbar" then true else false;
   simplebar = if waybarStyle == "simplebar" then true else false;
   bar-number = true; # Enable / Disable Workspace Numbers In Waybar
@@ -25,7 +25,7 @@ in {
   # ^ (use as is or replace with your own repo - removing will break the wallsetter script) 
   wallpaperDir = "${userHome}/Projects/nix-wallpapers";
   useWallColors = true;
-  curWallPaper = /home/lucifer/Projects/nix-wallpapers/wall3.jpg;
+  curWallPaper = /home/lucifer/Projects/nix-wallpapers/wall15.jpg;
   screenshotDir = "${userHome}/Pictures/Screenshots";
   flakeDir = "${flakeDir}";
   flakePrev = "${userHome}/.LuciNix-previous";

@@ -70,7 +70,7 @@ else
     exit 1
   else
     for pkg in "$@"; do
-      addPkgs "$mode" "pkgs.$pkg" || {
+      addPkgs "$mode" "$pkg" || {
         echo "Invalid package installation mode: $2"
         printHelp
         exit 1
