@@ -26,6 +26,7 @@ in {
   networking.extraHosts = ''
     172.25.161.30  esp-vcenter.mitesp.local
     172.25.161.34  esp-psc.mitesp.local
+    165.22.52.204  simple-web.me
   '';
 
   #Firewall
@@ -70,6 +71,12 @@ in {
       (with pkgs-stable; [
 	textsnatcher
 	hdparm
+	nasm
+	pwninit
+	steam-run
+	gef
+	patchelf
+	qbittorrent
 	#STABLE_USER
       ]);
     };
@@ -134,6 +141,7 @@ in {
         cava
         firefox
         dbeaver
+        python27Full
 	#SYSTEM_PKG
       ])
     
@@ -141,7 +149,7 @@ in {
 
       (with pkgs-stable; [
         android-studio
-        xz
+        xz 
 	#STABLE_SYSTEM
       ]);
  
@@ -171,7 +179,8 @@ in {
     };
   };
   nixpkgs.config.permittedInsecurePackages = [
-	"nix-2.16.2"
+    "nix-2.16.2"
+    "python-2.7.18.7"
   ];
   system.stateVersion = "23.11";
 }

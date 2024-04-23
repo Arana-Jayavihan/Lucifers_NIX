@@ -54,6 +54,7 @@ lib.mkIf (theShell == "zsh") {
       la="lsd -a";
       lal="lsd -al";
       ".."="cd ..";
+      hell="ssh lucifer@165.22.52.204 -i /home/lucifer/Projects/cloudNix/sshPrivKey.pem";
       neofetch="neofetch --ascii ~/.config/ascii-neofetch";
       fastfetch="fastfetch -c ~/.config/fastfetch/config.jsonc";
       tunnel="~/Projects/sni-injector/start.sh";

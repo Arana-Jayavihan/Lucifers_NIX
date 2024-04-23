@@ -33,6 +33,7 @@ lib.mkIf (theShell == "bash") {
       la="lsd -a";
       lal="lsd -al";
       ".."="cd ..";
+      hell="ssh lucifer@165.22.52.204 -i /home/lucifer/Projects/cloudNix/sshPrivKey.pem";
       tunnel="~/Projects/sni-injector/start.sh";
       pyserver="python -m http.server";
       pyvenv="~/Projects/Scripts/pyvenv.sh";
