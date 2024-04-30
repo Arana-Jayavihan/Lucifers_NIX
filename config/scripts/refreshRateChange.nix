@@ -11,7 +11,7 @@ fi
 if [[ $rate =~ $regex ]]; then
   if [[ $rate -ge 60 && $rate -le 180 ]]; then
     sed -i "s/@[0-9]\+,/@$rate,/" $flakeDir/config/home/hyprland.nix
-    rebuild
+     sudo nixos-rebuild switch --flake "$flakeDir"
   else
     echo "Refresh Rate Not Within Limits (60Hz - 180Hz)";
   fi
