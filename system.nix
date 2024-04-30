@@ -76,7 +76,7 @@ in {
 	steam-run
 	gef
 	patchelf
-	qbittorrent
+	qbittorrent-qt5
 	#STABLE_USER
       ]);
     };

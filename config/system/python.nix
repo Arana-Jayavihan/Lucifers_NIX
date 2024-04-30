@@ -4,6 +4,7 @@ let
   inherit (import ../../options.nix) python;
   my-python-packages = ps: with ps; [
     pandas
+    numpy
     requests
   ];
 in lib.mkIf (python == true) {

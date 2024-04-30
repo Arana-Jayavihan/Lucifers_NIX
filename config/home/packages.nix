@@ -50,6 +50,10 @@ in {
       inherit pkgs;
       inherit flakeDir;
     })
+    (import ./../scripts/refreshRateChange.nix {
+      inherit pkgs;
+      inherit flakeDir;
+    })
   ];
 
   programs.gh.enable = true;
