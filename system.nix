@@ -59,7 +59,7 @@ in {
       hashedPassword = "$6$YdPBODxytqUWXCYL$AHW1U9C6Qqkf6PZJI54jxFcPVm2sm/XWq3Z1qa94PFYz0FF.za9gl5WZL/z/g4nFLQ94SSEzMg5GMzMjJ6Vd7.";
       isNormalUser = true;
       description = "${gitUsername}";
-      extraGroups = [ "networkmanager" "wheel" "libvirtd" "docker" "audio" "pulse-access" ];
+      extraGroups = [ "networkmanager" "wheel" "libvirtd" "docker" "audio" "pulse-access" "qemu-libvirtd" "kvm" ];
       shell = pkgs.${theShell};
       ignoreShellProgramCheck = true;
       packages = (with pkgs; [
@@ -77,6 +77,13 @@ in {
 	gef
 	patchelf
 	qbittorrent-qt5
+	scrcpy
+	sqlmap
+	exploitdb
+	apktool
+	frida-tools
+	virtiofsd
+	spice-gtk
 	#STABLE_USER
       ]);
     };
@@ -159,6 +166,13 @@ in {
   virtualisation.virtualbox.host.enable = true;
   virtualisation.waydroid.enable = true;
   virtualisation.vmware.host.enable = true;
+
+#  virtualisation.qemu.options = [
+#    "-vga qxl"
+#    "-spice port=5924,disable-ticketing=on"
+#    "-device virtio-serial -chardev spicevmc,id=vdagent,debug=0,name=vdagent"
+#    "-device virtserialport,chardev=vdagent,name=com.redhat.spice.0"
+#  ];
 
   services.openssh.enable = true;
 

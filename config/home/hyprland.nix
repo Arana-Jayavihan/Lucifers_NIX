@@ -138,13 +138,15 @@ in with lib; {
       ''}
       bind = ${modifier},E,exec,emopicker9000       #Emoji Picker
       bind = ${modifier},S,exec,screenshootin       #Take Screenshot
-      bind = ${modifier},D,exec,discord             #Discord
+      bind = ${modifier},D,exec,noproxyrun discord             #Discord
       bind = ${modifier},O,exec,obs                 #OBS
       bind = ${modifier},T,exec,thunar              #Thunar
       bind = ${modifier},M,exec,spotify             #Spotify
+      bind = ${modifier}SHIFT,K,exec,scrcpy -m720 -b2M #Launch scrcpy cast
       bind = ${modifier}SHIFT,L,exec,swaylock --config ~/.config/swaylock/config     #Lock Screen
       bind = ${modifier}SHIFT,O,exec,hyprpicker -a -f hex     #Launch Color Picker
       bind = ${modifier}SHIFT,A,exec,waydroid show-full-ui    #Launch Waydroid
+      bind = ${modifier}SHIFT,E,exec,VirtualBoxVM --startvm Windows10 --scaled    #Launch Windows
       bind = ${modifier}SHIFT,N,exec,brave https://search.nixos.org/    #Open NixOS Search
       bind = ${modifier}SHIFT,X,exec,wlogout    #Show Power Menu
       bind = ${modifier}SHIFT,T,exec,noproxyrun "flatpak run com.github.IsmaelMartinez.teams_for_linux" #Launch Teams

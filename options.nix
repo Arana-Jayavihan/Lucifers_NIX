@@ -14,7 +14,7 @@ in {
   hostname = "nixos";
   gitUsername = "Arana-Jayavihan";
   gitEmail = "aranajayavihan@gmail.com";
-  theme = "black-metal-dark-funeral";
+  theme = "black-metal-nile";
   slickbar = if waybarStyle == "slickbar" then true else false;
   simplebar = if waybarStyle == "simplebar" then true else false;
   bar-number = true; # Enable / Disable Workspace Numbers In Waybar
@@ -55,7 +55,7 @@ in {
 
   #Firewall Allowed TCP Ports
   useFirewall = true;
-  firewallPorts = [ 1090 5000 9000 ];
+  firewallPorts = [ 1090 5000 5050 5900 9000 ];
 
   # Nvidia Hybrid Devices
   # ONLY NEEDED FOR HYBRID
