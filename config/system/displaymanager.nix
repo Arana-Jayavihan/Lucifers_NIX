@@ -9,15 +9,29 @@ theKBDLayout theSecondKBDLayout; in
       variant = "${theKBDVariant}";
       layout = "${theKBDLayout}, ${theSecondKBDLayout}";
     };
-    libinput.enable = true;
-    displayManager.sddm = {
-      enable = true;
-      autoNumlock = true;
-      wayland.enable = true;
-      theme = "sddm-firewatch";
-    };
-    desktopManager.gnome.enable = true;
+
+    #displayManager.sddm = {
+    #  enable = true;
+    #  autoNumlock = true;
+    #  wayland.enable = true;
+    #  theme = "sddm-firewatch";
+    #};
+    desktopManager.gnome.enable = true;    
   };
+
+  services.displayManager = {
+    enable = true;
+    sddm = {
+      enable = true;
+      wayland = {
+        enable = true;
+      };
+      theme = "sddm-firewatch";
+      autoNumlock = true;
+    };
+  };
+
+  services.libinput.enable = true;
 
   environment.systemPackages =
 let

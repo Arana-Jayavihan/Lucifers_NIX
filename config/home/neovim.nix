@@ -9,7 +9,7 @@ in {
 
     globals.mapleader = " "; # Sets the leader key to space
     
-    options = {
+    opts = {
       clipboard="unnamedplus";
       number = true;         # Show line numbers
       relativenumber = false; # Show relative line numbers
@@ -60,7 +60,7 @@ in {
       nvim-colorizer.enable = true;
       nvim-autopairs.enable = true;
       nix.enable = true;
-      comment-nvim.enable = true;
+      comment.enable = true;
       lualine = {
         enable = true;
       };

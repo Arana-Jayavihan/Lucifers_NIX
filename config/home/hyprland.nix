@@ -125,9 +125,9 @@ in with lib; {
         pseudotile = true
         preserve_split = true
       }
-      master {
-        new_is_master = true
-      }
+      #master {
+      #  new_is_master = true
+      #}
       bind = ${modifier},Return,exec,${terminal}          #Launch Terminal
       bind = ${modifier}SHIFT,Return,exec,rofi-launcher   #Rofi App Launcher
       bind = ${modifier}SHIFT,W,exec,wallSelector         #Simple Wallpaper Selector

@@ -147,9 +147,7 @@ in {
 	john
         cava
         firefox
-        dbeaver
-        python27Full
-        hyprcursor
+        dbeaver-bin
 	#SYSTEM_PKG
       ])
     
@@ -166,14 +164,7 @@ in {
   virtualisation.docker.enable = true;
   virtualisation.virtualbox.host.enable = true;
   virtualisation.waydroid.enable = true;
-  virtualisation.vmware.host.enable = true;
-
-#  virtualisation.qemu.options = [
-#    "-vga qxl"
-#    "-spice port=5924,disable-ticketing=on"
-#    "-device virtio-serial -chardev spicevmc,id=vdagent,debug=0,name=vdagent"
-#    "-device virtserialport,chardev=vdagent,name=com.redhat.spice.0"
-#  ];
+#  virtualisation.vmware.host.enable = true;
 
   services.openssh.enable = true;
 
@@ -196,6 +187,7 @@ in {
   nixpkgs.config.permittedInsecurePackages = [
     "nix-2.16.2"
     "python-2.7.18.7"
+    "python"
   ];
   system.stateVersion = "23.11";
 }
