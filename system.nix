@@ -149,6 +149,7 @@ in {
         firefox
         dbeaver
         python27Full
+        hyprcursor
 	#SYSTEM_PKG
       ])
     

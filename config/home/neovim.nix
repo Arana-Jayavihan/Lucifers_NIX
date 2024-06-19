@@ -12,7 +12,7 @@ in {
     options = {
       clipboard="unnamedplus";
       number = true;         # Show line numbers
-      relativenumber = true; # Show relative line numbers
+      relativenumber = false; # Show relative line numbers
       shiftwidth = 2;        # Tab width should be 2
       softtabstop = 2;
       smartindent = true;
@@ -27,7 +27,7 @@ in {
     };
 
     colorschemes.base16.enable = true;
-    colorschemes.base16.customColorScheme = {
+    colorschemes.base16.colorscheme = {
       base00 = "#${theme.base00}";
       base01 = "#${theme.base01}";
       base02 = "#${theme.base02}";

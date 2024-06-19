@@ -5,7 +5,7 @@ lib.mkIf (theShell == "zsh") {
   programs.zsh = {
     enable = true;
     syntaxHighlighting.enable = true;
-    enableAutosuggestions = true;
+    autosuggestion.enable = true;
     historySubstringSearch.enable = true;
     profileExtra = ''
       #if [ -z "$DISPLAY" ] && [ "$XDG_VNTR" = 1 ]; then
