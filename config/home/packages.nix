@@ -54,6 +54,9 @@ in {
       inherit pkgs;
       inherit flakeDir;
     })
+    (import ./../scripts/autopalette.nix {
+      inherit pkgs;
+    })
   ];
 
   programs.gh.enable = true;
