@@ -26,5 +26,6 @@
     ./steam.nix
     ./syncthing.nix
     ./vm.nix
+    ./customPackages.nix
   ];
 }

@@ -55,8 +55,8 @@
   systemd.timers."batteryNotify" = {
   wantedBy = [ "timers.target" ];
     timerConfig = {
-      OnBootSec = "5m";
-      OnUnitActiveSec = "5m";
+      OnBootSec = "3m";
+      OnUnitActiveSec = "3m";
       Unit = "batteryNotify.service";
     };
   };
