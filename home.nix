@@ -1,9 +1,10 @@
-{ config, pkgs, inputs, username, nixColors, ... }:
+{ config, pkgs, inputs, username, nixColorsContrib, ... }:
 let 
   inherit (import ./options.nix)
     gitUsername gitEmail theme browser 
     wallpaperDir wallpaperGit flakeDir 
-    curWallPaper waybarStyle useWallColors;
+    curWallPaper waybarStyle useWallColors 
+    useYAMLColors curColorSchemeYAML;
 in {
   # Home Manager Settings
   home.username = "${username}";
@@ -13,10 +14,13 @@ in {
   # Set The Colorscheme
   colorScheme = if useWallColors == false 
   then inputs.nix-colors.colorSchemes."${theme}"
-  else nixColors.colorSchemeFromPicture {
-    path = "${curWallPaper}";
-    variant = "dark";
-  };
+  else if useYAMLColors == false 
+    then nixColorsContrib.colorSchemeFromPicture {
+      path = "${curWallPaper}";
+      variant = "dark";
+    }
+    else inputs.nix-colors.lib.schemeFromYAML "auto-generated" (builtins.readFile "${curColorSchemeYAML}");
+
 
   #colorScheme = inputs.nix-colors.colorSchemes."${theme}";
 

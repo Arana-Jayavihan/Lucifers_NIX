@@ -49,7 +49,7 @@
       };
     };
 
-    nixColors = nix-colors.lib.contrib { inherit pkgs; };
+    nixColorsContrib = nix-colors.lib.contrib { inherit pkgs; };
 
   in {
     nixosConfigurations = {
@@ -58,7 +58,7 @@
           inherit system; inherit inputs; 
           inherit username; inherit hostname;
           inherit pkgs-stable;
-          inherit nixColors;
+          inherit nixColorsContrib;
         };
 	modules = [ 
 	  ./system.nix
@@ -66,9 +66,10 @@
           home-manager.nixosModules.home-manager {
 	    home-manager.extraSpecialArgs = {
 	      inherit username; inherit inputs;
-              inherit (inputs.nix-colors.lib-contrib {inherit pkgs;}) gtkThemeFromScheme colorSchemeFromPicture;
+              #inherit (inputs.nix-colors.lib-contrib {inherit pkgs;}) gtkThemeFromScheme;
+              #inherit (inputs.nix-colors.lib-contrib {inherit pkgs;}) colorSchemeFromPicture;
               inherit pkgs-stable;
-              inherit nixColors;
+              inherit nixColorsContrib;
             };
 	    home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;

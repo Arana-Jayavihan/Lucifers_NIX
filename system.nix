@@ -148,6 +148,8 @@ in {
         cava
         firefox
         dbeaver-bin
+        musl
+        libxml2
 	#SYSTEM_PKG
       ])
     

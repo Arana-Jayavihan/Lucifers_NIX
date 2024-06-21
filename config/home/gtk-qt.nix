@@ -1,4 +1,4 @@
-{ pkgs, config, gtkThemeFromScheme, ... }:
+{ pkgs, config, nixColorsContrib, ... }:
 
 {
   # Configure Cursor Theme
@@ -20,7 +20,7 @@
     };
     theme = {
       name = "${config.colorScheme.slug}";
-      package = gtkThemeFromScheme {scheme = config.colorScheme;};
+      package = nixColorsContrib.gtkThemeFromScheme {scheme = config.colorScheme;};
     };
     iconTheme = {
       name = "Papirus-Dark";

@@ -1,26 +1,30 @@
-{ stdenv, fetchgit }:
+{ pkgs, fetchgit, ... }:
+let 
+  musl = pkgs.musl;
+  libvirt = pkgs.libvirt;
+  libxml2 = pkgs.libxml2;
+in
 {
-  schemer = stdenv.mkDerivation rec {
-    pname = "schemer";
-    version = "v2";
-    dontBuild = true;
-    dontConfigure = true;
-
+  schemer = pkgs.buildGoPackage rec {
+    pname = "schemer2";
+    version = "2";
+    vendorHash = null;
+    goPackagePath = "https://github.com/thefryscorer/schemer2"; 
     src = fetchgit {
-      leaveDotGit = true;
       url = "https://github.com/thefryscorer/schemer2";
+      hash = "sha256-EKjVz4NkxtxqGissFwlzUahFut9UAxS8icxx3V7aNnw=";
     };
+    buildInputs = [
+      libvirt
+      libxml2
+    ];
+    #nativeBuildInputs = [musl];
 
-    buildPhase = ''
-      cd $src
-      go mod init schemer
-      go mod tidy
-      go build
-    '';
+    CGO_ENABLED = 1;
 
-    installPhase = ''
-      mkdir -p $out/bin
-      cp schemer $out/bin/schemer
-    '';
+    #ldflags = [
+    #  "-linkmode external"
+    #  "-extldflags '-static -L${musl}/lib'"
+    #];
   };
 }
