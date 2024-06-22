@@ -25,9 +25,9 @@ in {
   # ^ (use as is or replace with your own repo - removing will break the wallsetter script) 
   wallpaperDir = "${userHome}/Projects/nix-wallpapers";
   useWallColors = true;
-  useYAMLColors = false;
+  useYAMLColors = true;
   curColorSchemeYAML = "${flakeDir}/config/customColorSchemes/custom.yaml";
-  curWallPaper = /home/lucifer/Projects/nix-wallpapers/wall28.png;
+  curWallPaper = /home/lucifer/Projects/nix-wallpapers/wall30.jpg;
   screenshotDir = "${userHome}/Pictures/Screenshots";
   flakeDir = "${flakeDir}";
   flakePrev = "${userHome}/.LuciNix-previous";

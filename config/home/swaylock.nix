@@ -19,12 +19,15 @@ in {
     hide-keyboard-layout
     image=${curWallPaper}
     ring-color=${palette.base0D}
-    key-hl-color=06292FFF
+    key-hl-color=${palette.base00}
     line-color=00000000
     inside-color=00000088
     inside-clear-color=00000088
     separator-color=00000000
+    ring-ver-color=${palette.base04}
+    inside-ver-color=00000000
     text-color=${palette.base05}
+    text-ver-color=${palette.base05}
     text-clear-color=${palette.base05}
     bs-hl-color=${palette.base0F}
     ring-clear-color=${palette.base0F}

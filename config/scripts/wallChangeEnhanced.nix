@@ -9,8 +9,12 @@ flakeDir=${flakeDir}
 function changeTheme { 
   sed -i "s#curWallPaper = .*;#curWallPaper = $1;#g" $flakeDir/options.nix
   sed -i "s/useWallColors = false;/useWallColors = $THEME;/g" $flakeDir/options.nix
-  sudo nixos-rebuild switch --flake "$flakeDir"
+  autopalette
+  sudo nixos-rebuild switch --flake "$flakeDir" --impure
   ${pkgs.swaynotificationcenter}/bin/swaync-client -rs
+  #pid=$(ps -eaf | grep waybar | grep -v "grep waybar" | awk '{print $2}' | xargs)
+  #kill -9 $pid
+  #waybar &
 }
 
 while [[ $# -gt 0 ]]; do
@@ -49,8 +53,13 @@ if [ "$THEME" = "false" ] && [ -z "$WALLPAPER" ] ; then
     #if [ "$useWallColors" = "true" ]
     #then
     sed -i "s/useWallColors = true;/useWallColors = $THEME;/g" $flakeDir/options.nix;
-    sudo nixos-rebuild switch --flake "$flakeDir";
+    sudo nixos-rebuild switch --flake "$flakeDir" --impure;
+    #autopalette
     ${pkgs.swaynotificationcenter}/bin/swaync-client -rs
+    #pid=$(ps -eaf | grep waybar | grep -v "grep waybar" | awk '{print $2}' | xargs)
+    #kill -9 $pid
+    #waybar &
+
 fi
 
 if [ "$WALLPAPER" ]; then

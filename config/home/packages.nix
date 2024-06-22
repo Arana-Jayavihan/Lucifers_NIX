@@ -2,7 +2,7 @@
 
 let 
   inherit (import ../../options.nix) 
-    browser wallpaperDir wallpaperGit flakeDir useWallColors;
+    browser wallpaperDir wallpaperGit flakeDir useWallColors curWallPaper;
 in {
   # Install Packages For The User
   home.packages = with pkgs; [
@@ -56,6 +56,7 @@ in {
     })
     (import ./../scripts/autopalette.nix {
       inherit pkgs;
+      inherit flakeDir;
     })
   ];
 

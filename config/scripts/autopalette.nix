@@ -1,7 +1,46 @@
-{ pkgs,  ... }
+{ pkgs, flakeDir, ... }:
 
 pkgs.writeShellScriptBin "autopalette" ''
-${pkgs.python3} << EOF
+# NIX Inherited Variables
+flakeDir=${flakeDir}
+
+# Local BASH Variables
+templatePath=$flakeDir/config/customColorSchemes/template.yaml
+colorsPath=$flakeDir/config/customColorSchemes/colors.txt
+palettePath=$flakeDir/config/customColorSchemes/custom.yaml
+colorPalette=$flakeDir/config/customColorSchemes/palette.html
+
+curWallPaper=$(cat $flakeDir/options.nix | grep curWallPaper | cut -d '=' -f2 | cut -d ';' -f1 | xargs)
+imageWidth=$(exiftool $curWallPaper | grep "Image Width" | cut -d ':' -f2 | xargs)
+imageHeight=$(exiftool $curWallPaper | grep "Image Height" | cut -d ':' -f2 | xargs)
+
+# Base16 ColorPalette Template
+cat <<EOF > $templatePath
+scheme: "auto-generated"
+author: "Auto Base16 Theme"
+base00: "{}"
+base01: "{}"
+base02: "{}"
+base03: "{}"
+base04: "{}"
+base05: "{}"
+base06: "{}"
+base07: "{}"
+base08: "{}"
+base09: "{}"
+base0A: "{}"
+base0B: "{}"
+base0C: "{}"
+base0D: "{}"
+base0E: "{}"
+base0F: "{}"
+EOF
+
+# Colors Extraction
+schemer2 -width $imageWidth -height $imageHeight -format img::colors -in $curWallPaper -out $colorsPath
+
+# Palette Generator Python Script
+${pkgs.python3}/bin/python3 <<EOF
 import random
 import colorsys
 import sys
@@ -28,21 +67,6 @@ Base16 Style (from https://github.com/chriskempson/base16/blob/master/styling.md
     base0E - Keywords, Storage, Selector, Markup Italic, Diff Changed
     base0F - Deprecated, Opening/Closing Embedded Language Tags, e.g. <?php ?>
 """
-
-argParser = argparse.ArgumentParser(
-    description='This script generates a base16 color theme intended for code syntax highlighting from a source image.')
-argParser.add_argument('--inputColorPaletteFile', type=str, dest='inputColorPaletteFile', default='colors.txt',
-                       help='The colors the script will select from will be read in from this file. The file should'
-                       ' be a list of hexadecimal color values separated by newlines')
-argParser.add_argument('template', type=str,
-                       help='The template which the hex colors will be output to. This template should'
-                       ' have 16 curly brace pair (\"{}\") where the 16 colors will be output in order. Due to'
-                       ' python formatting, you\'ll need to add another brace to any non-format braces'
-                       ' ("{{" will become a single "{")')
-argParser.add_argument('outputFile', type=str,
-                       help='Colors will be inserted into outputTemplate then written to this outputFile')
-argParser.add_argument('--debugColorsVerbose', action='store_const', const=True, default=False, dest='debugColorsVerbose',
-                       help='Print detailed information about color selection')
 
 """
 
@@ -234,8 +258,8 @@ Procedure
 
 """
 
-def main(inputColorsFilename, outputTemplateFilename, outputFilename):
-    colorsFile = open(inputColorsFilename, 'r')
+def main():
+    colorsFile = open("$colorsPath", 'r')
     colorsLines = colorsFile.readlines()
     colorsFile.close()
 
@@ -313,8 +337,8 @@ def main(inputColorsFilename, outputTemplateFilename, outputFilename):
         print('Selected {} for {}'.format(base16Colors[i].color, base16Color.name))
 
     # Output selected colors
-    outputTemplateFile = open(outputTemplateFilename, 'r')
-    outputTemplate = ''.join(outputTemplateFile.readlines())
+    outputTemplateFile = open("$templatePath", 'r')
+    outputTemplate = "".join(outputTemplateFile.readlines())
     outputTemplateFile.close()
     
     outputText = outputTemplate.format((base16Colors[0].color)[1:],  (base16Colors[1].color)[1:],
@@ -326,19 +350,155 @@ def main(inputColorsFilename, outputTemplateFilename, outputFilename):
                                        (base16Colors[12].color)[1:], (base16Colors[13].color)[1:],
                                        (base16Colors[14].color)[1:], (base16Colors[15].color)[1:])
     
-    outputFile = open(outputFilename, 'w')
+    outputFile = open("$palettePath", 'w')
     outputFile.write(outputText)
     outputFile.close()
-    print('Wrote {} using template {}'.format(outputFilename, outputTemplateFilename))
 
-if __name__ == '__main__':
-    if len(sys.argv) == 1:
-        argParser.print_help()
-        exit()
-    args = argParser.parse_args()
+if __name__ == '__main__':  
+    main()
+EOF
 
-    debugColorsVerbose = args.debugColorsVerbose
+base00=""
+base01=""
+base02=""
+base03=""
+base04=""
+base05=""
+base06=""
+base07=""
+base08=""
+base09=""
+base0A=""
+base0B=""
+base0C=""
+base0D=""
+base0E=""
+base0F=""
+
+while IFS="" read -r p || [ -n "$p" ]
+do
+  if [ "$p" != 'scheme: "auto-generated"' ] && [ "$p" != 'author: "Auto Base16 Theme"' ]; then
+    base=$(printf '%s\n' "$p" | cut -d ':' -f1 | xargs)
+    color="#$(printf '%s\n' "$p" | cut -d ':' -f2 | xargs)"
     
-    main(args.inputColorPaletteFile, args.template, args.outputFile)
+    case $base in
+      "base00")
+	base00=$color
+	;;
+      "base01")
+	base01=$color
+	;;
+      "base02")
+	base02=$color
+	;;
+      "base03")
+	base03=$color
+	;;
+      "base04")
+	base04=$color
+	;;
+      "base05")
+	base05=$color
+	;;
+      "base06")
+	base06=$color
+	;;
+      "base07")
+	base07=$color
+	;;
+      "base08")
+	base08=$color
+	;;
+      "base09")
+	base09=$color
+	;;
+      "base0A")
+	base0A=$color
+	;;
+      "base0B")
+	base0B=$color
+	;;
+      "base0C")
+	base0C=$color
+	;;
+      "base0D")
+	base0D=$color
+	;;
+      "base0E")
+	base0E=$color
+	;;
+      "base0F")
+	base0F=$color
+    	;;
+    esac
+  fi
+done < $palettePath
+
+cat <<EOF > $colorPalette
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Base16 Color Palette</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+        .palette-info {
+            margin-bottom: 20px;
+        }
+        .palette-info h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .palette-info p {
+            margin: 5px 0 0;
+            font-size: 18px;
+        }
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 100px);
+            grid-gap: 10px;
+        }
+        .color-box {
+            width: 100px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+        }
+    </style>
+</head>
+<body>
+    <div class="palette-info">
+        <h1>Palette: auto-generated</h1>
+        <p>Author: Auto Base16 Theme</p>
+    </div>
+    <div class="color-grid">
+        <div class="color-box" style="background-color: $base00;">base00</div>
+        <div class="color-box" style="background-color: $base01;">base01</div>
+        <div class="color-box" style="background-color: $base02;">base02</div>
+        <div class="color-box" style="background-color: $base03;">base03</div>
+        <div class="color-box" style="background-color: $base04;">base04</div>
+        <div class="color-box" style="background-color: $base05;">base05</div>
+        <div class="color-box" style="background-color: $base06;">base06</div>
+        <div class="color-box" style="background-color: $base07;">base07</div>
+        <div class="color-box" style="background-color: $base08;">base08</div>
+        <div class="color-box" style="background-color: $base09;">base09</div>
+        <div class="color-box" style="background-color: $base0A;">base0A</div>
+        <div class="color-box" style="background-color: $base0B;">base0B</div>
+        <div class="color-box" style="background-color: $base0C;">base0C</div>
+        <div class="color-box" style="background-color: $base0D;">base0D</div>
+        <div class="color-box" style="background-color: $base0E;">base0E</div>
+        <div class="color-box" style="background-color: $base0F;">base0F</div>
+    </div>
+</body>
+</html>
 EOF
 ''
