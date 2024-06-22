@@ -185,10 +185,10 @@ in {
       options = "--delete-older-than 7d";
     };
   };
-  nixpkgs.config.permittedInsecurePackages = [
-    "nix-2.16.2"
-    "python-2.7.18.7"
-    "python"
-  ];
+  #nixpkgs.config.permittedInsecurePackages = [
+  #  "nix-2.16.2"
+  #  "python-2.7.18.7"
+  #  "python"
+  #];
   system.stateVersion = "23.11";
 }

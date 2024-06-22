@@ -66,8 +66,6 @@
           home-manager.nixosModules.home-manager {
 	    home-manager.extraSpecialArgs = {
 	      inherit username; inherit inputs;
-              #inherit (inputs.nix-colors.lib-contrib {inherit pkgs;}) gtkThemeFromScheme;
-              #inherit (inputs.nix-colors.lib-contrib {inherit pkgs;}) colorSchemeFromPicture;
               inherit pkgs-stable;
               inherit nixColorsContrib;
             };
