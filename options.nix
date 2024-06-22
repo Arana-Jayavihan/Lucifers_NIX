@@ -10,8 +10,8 @@ let
   http = "1090";
 in {
   # User Variables
-  username = "lucifer";
-  hostname = "nixos";
+  username = username;
+  hostname = hostname;
   gitUsername = "Arana-Jayavihan";
   gitEmail = "aranajayavihan@gmail.com";
   theme = "3024";
@@ -25,8 +25,6 @@ in {
   # ^ (use as is or replace with your own repo - removing will break the wallsetter script) 
   wallpaperDir = "${userHome}/Projects/nix-wallpapers";
   useWallColors = true;
-  useYAMLColors = true;
-  curColorSchemeYAML = "${flakeDir}/config/customColorSchemes/custom.yaml";
   curWallPaper = /home/lucifer/Projects/nix-wallpapers/wall20.jpg;
   screenshotDir = "${userHome}/Pictures/Screenshots";
   flakeDir = "${flakeDir}";

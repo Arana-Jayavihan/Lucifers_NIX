@@ -1,9 +1,7 @@
-{ inputs, username, nixColorsContrib, ... }:
+{ inputs, username, ... }:
 let 
   inherit (import ./options.nix)
-    gitUsername gitEmail theme 
-    curWallPaper useWallColors 
-    useYAMLColors curColorSchemeYAML;
+    gitUsername gitEmail theme useWallColors;
 
   inherit (import ./config/customColorSchemes/custom.nix) customPalette;
 in {
@@ -12,23 +10,9 @@ in {
   home.homeDirectory = "/home/${username}";
   home.stateVersion = "23.11";
 
-  # Set The Colorscheme
   colorScheme = if useWallColors == false 
   then inputs.nix-colors.colorSchemes."${theme}"
-  else if useYAMLColors == false 
-    then nixColorsContrib.colorSchemeFromPicture {
-      path = "${curWallPaper}";
-      variant = "dark";
-    }
-    else inputs.nix-colors.lib.schemeFromYAML "auto-generated" "${customPalette}";
-
-
-  #colorScheme = inputs.nix-colors.colorSchemes."${theme}";
-
-  #colorScheme = nixColors.colorSchemeFromPicture {
-  #  path = "${curWallPaper}";
-  #  variant = "dark";
-  #};
+  else customPalette;
 
   # Import Program Configurations
   imports = [
