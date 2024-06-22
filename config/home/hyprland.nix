@@ -6,7 +6,7 @@ let
   inherit (import ../../options.nix) 
     browser cpuType gpuType
     wallpaperDir borderAnim
-    theKBDLayout terminal
+    theKBDLayout terminal curWallPaper
     theSecondKBDLayout gitUsername
     theKBDVariant sdl-videodriver autoWallChange;
 in with lib; {
@@ -15,7 +15,7 @@ in with lib; {
     xwayland.enable = true;
     systemd.enable = true;
     plugins = [
-      # hyprplugins.hyprtrails
+      #hyprplugins.hyprtrails
     ];
     extraConfig = let
       modifier = "SUPER";
@@ -115,6 +115,7 @@ in with lib; {
       exec-once = swww init
       exec-once = waybar
       exec-once = swaync
+      exec-once = swww img "${curWallPaper}"
       ${if autoWallChange == true then ''
       exec-once = wallsetter
       '' else ''
