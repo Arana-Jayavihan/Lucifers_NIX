@@ -1,3 +1,6 @@
+{ ... }:
+{
+  customPalette = ''
 scheme: "auto-generated"
 author: "Auto Base16 Theme"
 base00: "000104"
@@ -16,3 +19,6 @@ base0C: "819a84"
 base0D: "6e8670"
 base0E: "6e8670"
 base0F: "6e8670"
+'';
+}
+

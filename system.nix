@@ -1,11 +1,10 @@
-{ inputs, config, pkgs, username, hostname, pkgs-stable, ... }:
+{ pkgs, username, hostname, pkgs-stable, ... }:
 
 let 
   inherit (import ./options.nix) 
     theLocale theTimezone gitUsername
-    theShell wallpaperDir wallpaperGit
-    theLCVariables theKBDLayout flakeDir
-    theme httpProxy socksProxy firewallPorts useFirewall;
+    theShell theLCVariables theKBDLayout flakeDir
+    httpProxy socksProxy firewallPorts useFirewall;
 in {
   imports =
     [
@@ -158,6 +157,7 @@ in {
       (with pkgs-stable; [
         android-studio
         xz 
+	zed-editor
 	#STABLE_SYSTEM
       ]);
  
@@ -166,7 +166,6 @@ in {
   virtualisation.docker.enable = true;
   virtualisation.virtualbox.host.enable = true;
   virtualisation.waydroid.enable = true;
-#  virtualisation.vmware.host.enable = true;
 
   services.openssh.enable = true;
 

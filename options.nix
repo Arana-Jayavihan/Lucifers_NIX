@@ -27,7 +27,7 @@ in {
   useWallColors = true;
   useYAMLColors = true;
   curColorSchemeYAML = "${flakeDir}/config/customColorSchemes/custom.yaml";
-  curWallPaper = /home/lucifer/Projects/nix-wallpapers/wall30.jpg;
+  curWallPaper = /home/lucifer/Projects/nix-wallpapers/wall20.jpg;
   screenshotDir = "${userHome}/Pictures/Screenshots";
   flakeDir = "${flakeDir}";
   flakePrev = "${userHome}/.LuciNix-previous";
