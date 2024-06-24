@@ -24,13 +24,16 @@
     hyprcursor = {
       type = "git";
       url = "https://github.com/hyprwm/hyprcursor";
-      inputs.nixpkgs.follows = "nixpkgs";
       rev = "66d5b46ff94efbfa6fa3d1d1b66735f1779c34a6";
+    };
+    spicetify-nix = {
+      url = "github:Gerg-L/spicetify-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     impermanence.url = "github:nix-community/impermanence";
   };
 
-  outputs = inputs@{ nixpkgs-stable, nixpkgs, home-manager, impermanence, nix-colors, ... }:
+  outputs = inputs@{ nixpkgs-stable, nixpkgs, home-manager, impermanence, nix-colors, spicetify-nix, ... }:
   let
     system = "x86_64-linux";
     inherit (import ./options.nix) username hostname;
@@ -55,19 +58,23 @@
     nixosConfigurations = {
       "${hostname}" = nixpkgs.lib.nixosSystem {
 	specialArgs = { 
-          inherit system; inherit inputs; 
-          inherit username; inherit hostname;
+          inherit system; 
+          inherit inputs; 
+          inherit username; 
+          inherit hostname;
           inherit pkgs-stable;
           inherit nixColorsContrib;
         };
 	modules = [ 
-	  ./system.nix
+          ./system.nix
 	  impermanence.nixosModules.impermanence
           home-manager.nixosModules.home-manager {
 	    home-manager.extraSpecialArgs = {
-	      inherit username; inherit inputs;
+              inherit username; 
+              inherit inputs;
               inherit pkgs-stable;
               inherit nixColorsContrib;
+              inherit spicetify-nix;
             };
 	    home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;

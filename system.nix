@@ -1,4 +1,4 @@
-{ pkgs, username, hostname, pkgs-stable, ... }:
+{ config, pkgs, username, hostname, pkgs-stable, ... }:
 
 let 
   inherit (import ./options.nix) 
@@ -11,7 +11,7 @@ in {
       ./hardware.nix
       ./config/system
     ];
-
+  
   # Enable networking
   networking.hostName = "${hostname}"; # Define your hostname
   networking.networkmanager.enable = true;
@@ -62,6 +62,7 @@ in {
       shell = pkgs.${theShell};
       ignoreShellProgramCheck = true;
       packages = (with pkgs; [
+	taskwarrior3
 	#USER_PKG
       ])
 

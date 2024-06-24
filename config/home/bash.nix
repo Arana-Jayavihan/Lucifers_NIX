@@ -36,7 +36,6 @@ lib.mkIf (theShell == "bash") {
       hell="ssh lucifer@165.22.52.204 -i /home/lucifer/Projects/cloudNix/sshPrivKey.pem";
       tunnel="~/Projects/sni-injector/start.sh";
       pyserver="python -m http.server";
-      pyvenv="~/Projects/Scripts/pyvenv.sh";
       neofetch="neofetch --ascii ~/.config/ascii-neofetch";
       fastfetch="fastfetch -c ~/.config/fastfetch/config.jsonc";
       fuff="./usr/share/ffuf/ffuf";
@@ -50,7 +49,7 @@ lib.mkIf (theShell == "bash") {
       config="cd ~/Lucifers_NIX/";	
       nixsearch="brave https://search.nixos.org/";
       lock="swaylock --config ~/.config/swaylock/config";
-      rebuild="config && sudo nixos-rebuild switch --flake .";
+      rebuild="config && git add . && sudo nixos-rebuild switch --flake .";
       try="nix-shell -p ";
     };
   };

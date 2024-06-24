@@ -1,4 +1,4 @@
-{ inputs, username, ... }:
+{ config, inputs, username, ... }:
 let 
   inherit (import ./options.nix)
     gitUsername gitEmail theme useWallColors;
@@ -19,6 +19,7 @@ in {
     inputs.nix-colors.homeManagerModules.default
     inputs.nixvim.homeManagerModules.nixvim
     inputs.hyprland.homeManagerModules.default
+    inputs.spicetify-nix.homeManagerModules.default
     ./config/home
   ];
 

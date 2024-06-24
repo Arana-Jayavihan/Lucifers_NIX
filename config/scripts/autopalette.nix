@@ -384,7 +384,7 @@ cat <<EOF > $colorPalette
             font-family: Arial, sans-serif;
             padding: 20px;
             background-color: #f0f0f0;
-            text-align: center;
+	    text-align: center;
         }
         .palette-info {
             margin-bottom: 20px;
@@ -400,12 +400,14 @@ cat <<EOF > $colorPalette
         .container {
 	    display: flex;
 	    width: 100%;
-	    justify-content: center;
 	}
         .color-grid {
+	    position: relative;
+	    width: 100%;
             display: grid;
-            grid-template-columns: repeat(8, 200px);
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             grid-gap: 10px;
+	    justify-items: center;
         }
         .color-box {
             width: 200px;

@@ -1,4 +1,4 @@
-{ pkgs, config, inputs, ... }:
+{ pkgs, inputs, ... }:
 
 {
   # Allow unfree packages

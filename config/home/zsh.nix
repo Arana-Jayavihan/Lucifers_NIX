@@ -1,6 +1,6 @@
-{ config, lib, pkgs, ... }:
+{ lib, ... }:
 
-let inherit (import ../../options.nix) flakeDir theShell hostname; in
+let inherit (import ../../options.nix) theShell hostname; in
 lib.mkIf (theShell == "zsh") {
   programs.zsh = {
     enable = true;
@@ -59,7 +59,6 @@ lib.mkIf (theShell == "zsh") {
       fastfetch="fastfetch -c ~/.config/fastfetch/config.jsonc";
       tunnel="~/Projects/sni-injector/start.sh";
       pyserver="python -m http.server";
-      pyvenv="~/Projects/Scripts/pyvenv.sh";
       fuff="./usr/share/ffuf/ffuf";
       burp="cd /home/lucifer/Projects/burpsuite_pro_v2022.9; java -jar burploader.jar";
       jdgui="java -jar /usr/share/jdgui/jd-gui-1.6.6.jar";	
@@ -71,7 +70,7 @@ lib.mkIf (theShell == "zsh") {
       config="cd ~/Lucifers_NIX/";	
       nixsearch="brave https://search.nixos.org/";
       lock="swaylock --config ~/.config/swaylock/config";
-      rebuild="config && sudo nixos-rebuild switch --flake .";
+      rebuild="config && git add . && sudo nixos-rebuild switch --flake .";
       try="nix-shell -p ";
     };
   };

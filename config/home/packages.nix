@@ -9,7 +9,7 @@ in {
     pkgs."${browser}" discord libvirt swww grim slurp gnome.file-roller
     swaynotificationcenter rofi-wayland imv transmission-gtk mpv
     gimp obs-studio rustup audacity pavucontrol tree
-    font-awesome swayidle spotify neovide element-desktop swaylock-effects
+    font-awesome swayidle neovide element-desktop swaylock-effects
     (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
     # Import Scripts
     (import ./../scripts/emopicker9000.nix { inherit pkgs; })
@@ -57,6 +57,9 @@ in {
     (import ./../scripts/autopalette.nix {
       inherit pkgs;
       inherit flakeDir;
+    })
+    (import ./../scripts/pyvenv.nix {
+      inherit pkgs;
     })
   ];
 

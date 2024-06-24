@@ -22,7 +22,7 @@
     ./wezterm.nix
     ./zsh.nix
     ./fastfetch.nix
-
+    ./spicetify.nix
     # Place Home Files Like Pictures
     ./files.nix
   ];
