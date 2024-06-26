@@ -6,7 +6,8 @@ Hello folks, Welcome to my flake repository for NixOS, I've been loving NixOS si
 ![preview2](https://github.com/Arana-Jayavihan/Lucifers_NIX/blob/master/assets/showcase1.png?raw=true)
 ![preview3](https://github.com/Arana-Jayavihan/Lucifers_NIX/blob/master/assets/showcase2.png?raw=true)
 ![preview4](https://github.com/Arana-Jayavihan/Lucifers_NIX/blob/master/assets/showcase3.png?raw=true)
-![preview5](https://github.com/Arana-Jayavihan/Lucifers_NIX/blob/master/assets/wlogout.png?raw=true)
+![preview4](https://github.com/Arana-Jayavihan/Lucifers_NIX/blob/master/assets/showcase4.png?raw=true)
+![preview6](https://github.com/Arana-Jayavihan/Lucifers_NIX/blob/master/assets/wlogout.png?raw=true)
 
 ## Installation ⚙️
 ### Install a fresh NixOS on target system (Recommended).
@@ -48,6 +49,13 @@ mkpasswd -m sha-512 "password"
 ### Change configuration in options.nix accordingly
 The options.nix file contains the options to configure the shell, system, and other configurations.
 
+
+### Flake Installation
+After all optional configurations are done, install the flake by executing,
+```sh
+sudo nixos-rebuild switch --flake ~/Lucifers_NIX/
+```
+
 ### Installing packages
 #### Pre-Installation
 The system.nix file contains the packages to be installed as the system or user, you can add the packages of your preference in the system.nix file.
@@ -56,12 +64,6 @@ The system.nix file contains the packages to be installed as the system or user,
 After flake installation and rebooting, you can simply use "nixInstall" command to install packages
 ```sh
 nixInstall user||system <package1> <package2>
-```
-
-### Flake Installation
-After all optional configurations are done, install the flake by executing,
-```sh
-sudo nixos-rebuild switch --flake ~/Lucifers_NIX/
 ```
 
 Then reboot the system to enjoy 🍃
