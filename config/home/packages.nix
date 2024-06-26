@@ -5,12 +5,29 @@ let
     browser wallpaperDir wallpaperGit flakeDir useWallColors curWallPaper;
 in {
   # Install Packages For The User
-  home.packages = with pkgs; [
-    pkgs."${browser}" discord libvirt swww grim slurp gnome.file-roller
-    swaynotificationcenter rofi-wayland imv transmission-gtk mpv
-    gimp obs-studio rustup audacity pavucontrol tree
-    font-awesome swayidle neovide element-desktop swaylock-effects
+  home.packages = with pkgs; [    
+    pkgs."${browser}"
+    discord
+    libvirt
+    swww
+    grim
+    slurp
+    gnome.file-roller
+    swaynotificationcenter 
+    rofi-wayland 
+    imv 
+    transmission-gtk
+    mpv
+    obs-studio
+    rustup
+    pavucontrol
+    tree
+    font-awesome
+    swayidle
+    neovide
+    swaylock-effects
     (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+
     # Import Scripts
     (import ./../scripts/emopicker9000.nix { 
       inherit pkgs;

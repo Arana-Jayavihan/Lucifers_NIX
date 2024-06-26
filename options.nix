@@ -79,7 +79,6 @@ in {
   distrobox = false;
   flatpak = true;
   kdenlive = true;
-  blender = true;
 
   # Enable Support For
   # Logitech Devices
@@ -93,8 +92,4 @@ in {
 
   # Enable Python & PyCharm
   python = true;
-  
-  # Enable SyncThing
-  syncthing = false;
-
 }

@@ -11,6 +11,7 @@
     ./kitty.nix
     ./neofetch.nix
     ./neovim.nix
+    ./neovide.nix
     ./packages.nix
     ./rofi.nix
     ./starship.nix
@@ -23,7 +24,6 @@
     ./zsh.nix
     ./fastfetch.nix
     ./spicetify.nix
-    # Place Home Files Like Pictures
     ./files.nix
   ];
 }

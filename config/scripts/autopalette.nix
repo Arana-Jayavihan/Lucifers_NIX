@@ -258,7 +258,7 @@ def main():
   customPalette = {{
     name = "auto-generated";
     slug = "auto-generated";
-    author = "Lucifer's 🍃";
+    author = "Lucifer 🍃";
     palette = {{
       base00 = "{base00}";
       base01 = "{base01}";

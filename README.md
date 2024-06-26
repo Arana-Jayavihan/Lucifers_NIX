@@ -2,15 +2,15 @@
 Hello folks, Welcome to my flake repository for NixOS, I've been loving NixOS since the day I installed it on my system. So here is my current configuration, I'll be updating this pretty often with new features, bug fixes, and improvements. Enjoy 🍃
 
 ## Preview ✨
-### Demo
-https://github.com/Arana-Jayavihan/Lucifers_NIX/assets/87359147/b7b1bf79-cb66-41b8-ab3d-eee305cedce8
+[comment]: ### Demo
+[comment]: https://github.com/Arana-Jayavihan/Lucifers_NIX/assets/87359147/b7b1bf79-cb66-41b8-ab3d-eee305cedce8
 
 ### Screenshots
-![preview1](https://github.com/Arana-Jayavihan/Lucifers_NIX/blob/master/assets/swappy-20240325-010510.png?raw=true)
-![preview2](https://github.com/Arana-Jayavihan/Lucifers_NIX/blob/master/assets/swappy-20240325-010424.png?raw=true)
-![preview3](https://github.com/Arana-Jayavihan/Lucifers_NIX/blob/master/assets/swappy-20240325-011229.png?raw=true)
-![preview4](https://github.com/Arana-Jayavihan/Lucifers_NIX/blob/master/assets/swappy-20240325-011120.png?raw=true)
-![preview5](https://github.com/Arana-Jayavihan/Lucifers_NIX/blob/master/assets/swappy-20240325-010626.png?raw=true)
+![preview1](https://github.com/Arana-Jayavihan/Lucifers_NIX/blob/master/assets/lockscreen.png?raw=true)
+![preview2](https://github.com/Arana-Jayavihan/Lucifers_NIX/blob/master/assets/showcase1.png?raw=true)
+![preview3](https://github.com/Arana-Jayavihan/Lucifers_NIX/blob/master/assets/showcase2.png?raw=true)
+![preview4](https://github.com/Arana-Jayavihan/Lucifers_NIX/blob/master/assets/showcase3.png?raw=true)
+![preview5](https://github.com/Arana-Jayavihan/Lucifers_NIX/blob/master/assets/wlogout.png?raw=true)
 
 ## Installation ⚙️
 ### Install a fresh NixOS on target system (Recommended).

@@ -138,7 +138,7 @@ in with lib; {
 	bind = ${modifier},W,exec,${browser}
       ''}
       bind = ${modifier},E,exec,emopicker9000       #Emoji Picker
-      bind = ${modifier},S,exec,screenshootin       #Take Screenshot
+      bindl = ${modifier},S,exec,screenshootin       #Take Screenshot
       bind = ${modifier},D,exec,noproxyrun discord             #Discord
       bind = ${modifier},O,exec,obs                 #OBS
       bind = ${modifier},T,exec,thunar              #Thunar
