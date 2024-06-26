@@ -3,7 +3,7 @@ let
   inherit (import ./options.nix)
     gitUsername gitEmail theme useWallColors;
 
-  inherit (import ./config/customColorSchemes/custom.nix) customPalette;
+  inherit (import ./config/home/files/autopalette/custom.nix) customPalette;
 in {
   # Home Manager Settings
   home.username = "${username}";

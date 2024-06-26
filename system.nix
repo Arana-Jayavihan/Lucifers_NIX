@@ -84,6 +84,8 @@ in {
 	frida-tools
 	virtiofsd
 	spice-gtk
+	cbonsai
+	peaclock
 	#STABLE_USER
       ]);
     };
@@ -159,6 +161,7 @@ in {
         android-studio
         xz 
 	zed-editor
+	dmidecode
 	#STABLE_SYSTEM
       ]);
  

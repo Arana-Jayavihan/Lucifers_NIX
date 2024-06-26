@@ -8,6 +8,8 @@ in
   programs.spicetify = {
     enable = true;
     enabledExtensions = with spicePkgs.extensions; [
+        playlistIcons
+        historyShortcut
         adblock
         hidePodcasts
         shuffle 
@@ -27,7 +29,7 @@ in
       sidebar = "${palette.base01}";
       player = "${palette.base01}";
       card = "${palette.base05}";
-      shadow = "${palette.base01}";
+      shadow = "${palette.base00}";
       selected-row = "${palette.base0B}";
       button = "${palette.base04}";
       button-active = "${palette.base07}";

@@ -5,9 +5,9 @@ pkgs.writeShellScriptBin "autopalette" ''
 flakeDir=${flakeDir}
 
 # Local BASH Variables
-colorsPath=$flakeDir/config/customColorSchemes/colors.txt
-palettePath=$flakeDir/config/customColorSchemes/custom.nix
-colorPalette=$flakeDir/config/customColorSchemes/palette.html
+colorsPath=$flakeDir/config/home/files/autopalette/colors.txt
+palettePath=$flakeDir/config/home/files/autopalette/custom.nix
+colorPalette=$flakeDir/config/home/files/autopalette/palette.html
 
 curWallPaper=$(cat $flakeDir/options.nix | grep curWallPaper | cut -d '=' -f2 | cut -d ';' -f1 | xargs)
 imageWidth=$(exiftool $curWallPaper | grep "Image Width" | cut -d ':' -f2 | xargs)
