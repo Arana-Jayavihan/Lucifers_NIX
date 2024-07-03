@@ -619,17 +619,18 @@
         ]
       },
       "locked": {
-        "lastModified": 1719263712,
-        "narHash": "sha256-aQ/NSNX6POtfP0i8pNGVuwOr79UpPlqbWrlLdP029ds=",
-        "owner": "Gerg-L",
-        "repo": "spicetify-nix",
-        "rev": "ac3283cc7144e31dd67c59e48f1fcc31d3afb091",
-        "type": "github"
+        "lastModified": 1720038160,
+        "narHash": "sha256-LUvkH3tMUWBbmip3AFt6a+dR6DEQuuRDpHB9p4RDU/o=",
+        "ref": "refs/heads/master",
+        "rev": "c0dd587b9f1f871a05cd71bda67ad2f2759d9d45",
+        "revCount": 556,
+        "type": "git",
+        "url": "https://github.com/Arana-Jayavihan/spicetify-nix.git"
       },
       "original": {
-        "owner": "Gerg-L",
-        "repo": "spicetify-nix",
-        "type": "github"
+        "rev": "c0dd587b9f1f871a05cd71bda67ad2f2759d9d45",
+        "type": "git",
+        "url": "https://github.com/Arana-Jayavihan/spicetify-nix.git"
       }
     },
     "systems": {

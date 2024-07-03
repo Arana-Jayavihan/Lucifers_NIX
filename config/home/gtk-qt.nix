@@ -23,8 +23,10 @@
       package = nixColorsContrib.gtkThemeFromScheme {scheme = config.colorScheme;};
     };
     iconTheme = {
-      name = "Papirus-Dark";
-      package = pkgs.papirus-icon-theme;
+      #name = "Papirus-Dark";
+      #package = pkgs.papirus-icon-theme;
+      name = "Dracula";
+      package = pkgs.dracula-icon-theme;
     };
     gtk3.extraConfig = {
       gtk-application-prefer-dark-theme=1;

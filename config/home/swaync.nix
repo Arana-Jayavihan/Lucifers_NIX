@@ -19,9 +19,9 @@ in {
         "timeout-low": 5,
         "timeout-critical": 0,
         "fit-to-screen": false,
-        "control-center-width": 500,
-        "control-center-height": 1025,
-        "notification-window-width": 500,
+        "control-center-width": 450,
+        "control-center-height": 800,
+        "notification-window-width": 450,
         "keyboard-shortcuts": true,
         "image-visibility": "when-available",
         "transition-time": 200,
@@ -30,9 +30,7 @@ in {
         "script-fail-notify": true,
         "widgets": [
             "title",
-            "buttons-grid",
             "mpris",
-            "volume",
             "backlight",
             "dnd",
             "notifications"
@@ -110,13 +108,13 @@ in {
 
   home.file.".config/swaync/style.css".text = ''
     * {
-        font-family: Ubuntu;
-        font-weight: bolder;
+        font-family: "JetBrainsMono Nerd Font";
+        font-weight: normal;
     }
 
     .control-center .notification-row:focus,
     .control-center .notification-row:hover {
-        opacity: 0.9;
+        opacity: 0.75;
         background: #${palette.base00}
     }
 
@@ -133,6 +131,7 @@ in {
     }
 
     .notification-content {
+        opacity: 0.75;
         background: #${palette.base00};
         padding: 10px;
         border-radius: 5px;
@@ -260,8 +259,9 @@ in {
 
     .control-center {
         background: #${palette.base00};
+        opacity: 0.85;
         border: 2px solid #${palette.base0C};
-        border-radius: 5px;
+        border-radius: 10px;
     }
 
     .control-center-list {
@@ -402,7 +402,7 @@ in {
         background: #${palette.base01};
         padding: 5px;
         margin: 10px 10px 5px 10px;
-        border-radius: 5px;
+        border-radius: 10px;
         font-size: x-large;
         color: #${palette.base05};
     }
@@ -423,7 +423,7 @@ in {
         background: #${palette.base01};
         padding: 5px;
         margin: 10px 10px 5px 10px;
-        border-radius: 5px;
+        border-radius: 10px;
         font-size: x-large;
         color: #${palette.base05}
     }

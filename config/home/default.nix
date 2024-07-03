@@ -25,5 +25,7 @@
     ./fastfetch.nix
     ./spicetify.nix
     ./files.nix
+    ./cava.nix
+    ./vesktop.nix
   ];
 }

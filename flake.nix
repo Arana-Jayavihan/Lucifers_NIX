@@ -29,7 +29,9 @@
       rev = "66d5b46ff94efbfa6fa3d1d1b66735f1779c34a6";
     };
     spicetify-nix = {
-      url = "github:Gerg-L/spicetify-nix";
+      type = "git";
+      url = "https://github.com/Arana-Jayavihan/spicetify-nix.git";
+      rev = "c0dd587b9f1f871a05cd71bda67ad2f2759d9d45";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     impermanence.url = "github:nix-community/impermanence";

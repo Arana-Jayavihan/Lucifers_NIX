@@ -424,7 +424,7 @@ cat <<EOF > $colorPalette
 <body>
     <div class="palette-info">
         <h1>Wallpaper Based Auto Generated Color Palette</h1>
-        <p>Author: Lucifer's 🍃</p>
+        <p>Author: Lucifer 🍃</p>
     </div>
     <div class="container">
         <div class="color-grid">

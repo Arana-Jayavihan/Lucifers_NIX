@@ -22,8 +22,27 @@ in with lib; {
     in concatStrings [ ''
       monitor=eDP-1,1920x1080,0x0,1,bitdepth,10
       monitor=HDMI-A-1,1920x1080@144,auto,1,bitdepth,10
+
       windowrule = fullscreen, ^(wlogout)$
       windowrule = animation fade,^(wlogout)$
+
+      windowrulev2 = opacity 0.75 override 0.75 override,initialClass:^(pulseeffects.*)$
+      windowrulev2 = opacity 0.75 override 0.75 override,initialClass:^(pavucontrol.*)$
+      windowrulev2 = opacity 0.75 override 0.75 override,initialClass:^(thunar.*)$
+
+      windowrulev2 = opacity 0.8 override 0.8 override,initialClass:^(vesktop.*)$
+      windowrulev2 = opacity 0.8 override 0.8 override,initialTitle:^(Spotify.*)$
+      windowrulev2 = opacity 0.8 override 0.8 override,initialClass:^(teams-for-linux.*)$
+      windowrulev2 = opacity 0.8 override 0.8 override,initialClass:^(brave-browser.*)$
+      windowrulev2 = opacity 0.8 override 0.8 override,initialClass:^(firefox.*)$
+      windowrulev2 = opacity 0.8 override 0.8 override,initialClass:^(xdg-desktop-portal-gtk.*)$
+      windowrulev2 = opacity 0.8 override 0.8 override,initialClass:^(yad.*)$
+      windowrulev2 = opacity 0.8 override 0.8 override,initialClass:^(org.gnome.Nautilus.*)$ 
+
+      windowrulev2 = opacity 1.0 override 1.0 override,title:^(.*YouTube.*)$
+      windowrulev2 = opacity 1.0 override 1.0 override,title:^(.*HiAnime.*)$
+      windowrulev2 = opacity 1.0 override 1.0 override,title:^(.*HollyMovieHD.*)$
+
       general {
         gaps_in = 6
         gaps_out = 8
@@ -139,10 +158,10 @@ in with lib; {
       ''}
       bind = ${modifier},E,exec,emopicker9000       #Emoji Picker
       bindl = ${modifier},S,exec,screenshootin       #Take Screenshot
-      bind = ${modifier},D,exec,noproxyrun discord             #Discord
+      bind = ${modifier},D,exec,noproxyrun vesktop             #Discord
       bind = ${modifier},O,exec,obs                 #OBS
       bind = ${modifier},T,exec,thunar              #Thunar
-      bind = ${modifier},M,exec,spotify             #Spotify
+      bind = ${modifier},M,exec, spotify             #Spotify
       bind = ${modifier}SHIFT,K,exec,scrcpy -m720 -b2M #Launch scrcpy cast
       bind = ${modifier}SHIFT,L,exec,swaylock --config ~/.config/swaylock/config     #Lock Screen
       bind = ${modifier}SHIFT,O,exec,hyprpicker -a -f hex     #Launch Color Picker

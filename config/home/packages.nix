@@ -7,7 +7,7 @@ in {
   # Install Packages For The User
   home.packages = with pkgs; [    
     pkgs."${browser}"
-    discord
+    vesktop
     libvirt
     swww
     grim
