@@ -37,7 +37,7 @@ in {
         ],
         "widget-config": {
             "title": {
-                "text": "Notification Center",
+                "text": "Notifications 🍃",
                 "clear-all-button": true,
                 "button-text": "󰆴 Clear All"
             },
@@ -46,7 +46,7 @@ in {
             },
             "label": {
                 "max-lines": 1,
-                "text": "Notification Center"
+                "text": "Notifications 🍃"
             },
             "mpris": {
                 "image-size": 96,
@@ -114,7 +114,7 @@ in {
 
     .control-center .notification-row:focus,
     .control-center .notification-row:hover {
-        opacity: 0.75;
+        opacity: 0.8;
         background: #${palette.base00}
     }
 
@@ -131,7 +131,7 @@ in {
     }
 
     .notification-content {
-        opacity: 0.75;
+        opacity: 0.8;
         background: #${palette.base00};
         padding: 10px;
         border-radius: 5px;
@@ -259,7 +259,7 @@ in {
 
     .control-center {
         background: #${palette.base00};
-        opacity: 0.85;
+        opacity: 0.9;
         border: 2px solid #${palette.base0C};
         border-radius: 10px;
     }

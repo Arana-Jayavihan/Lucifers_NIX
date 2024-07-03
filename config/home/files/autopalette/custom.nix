@@ -12,14 +12,14 @@
       base05 = "#567264";
       base06 = "#094158";
       base07 = "#005670";
-      base08 = "#79a598";
-      base09 = "#5ba0a7";
-      base0A = "#7db5b6";
+      base08 = "#5ba0a7";
+      base09 = "#7db5b6";
+      base0A = "#79a598";
       base0B = "#7db5b6";
-      base0C = "#79a598";
+      base0C = "#5ba0a7";
       base0D = "#5ba0a7";
-      base0E = "#7db5b6";
-      base0F = "#79a598";
+      base0E = "#5ba0a7";
+      base0F = "#5ba0a7";
     };
   };
 }
