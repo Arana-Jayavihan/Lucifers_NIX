@@ -2,21 +2,20 @@
 
 let 
   inherit (import ../../options.nix) 
-    browser wallpaperDir wallpaperGit flakeDir useWallColors curWallPaper;
+    browser wallpaperDir wallpaperGit flakeDir useWallColors curWallPaper userHome;
 in {
   # Install Packages For The User
   home.packages = with pkgs; [    
     pkgs."${browser}"
+    brave
     vesktop
     libvirt
     swww
     grim
     slurp
-    gnome.file-roller
     swaynotificationcenter 
     rofi-wayland 
     imv 
-    transmission-gtk
     mpv
     obs-studio
     rustup
@@ -24,7 +23,6 @@ in {
     tree
     font-awesome
     swayidle
-    neovide
     swaylock-effects
     (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
 
@@ -99,6 +97,11 @@ in {
     })
     (import ./../scripts/pyvenv.nix {
       inherit pkgs;
+    })
+    (import ./../scripts/rebuild.nix {
+      inherit pkgs;
+      inherit flakeDir;
+      inherit userHome;
     })
   ];
 

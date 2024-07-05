@@ -1,4 +1,4 @@
-{ pkgs, config, lib, inputs, ... }:
+{ pkgs, config, lib, inputs, ... }: 
 
 let
   theme = config.colorScheme.palette;
@@ -26,22 +26,20 @@ in with lib; {
       windowrule = fullscreen, ^(wlogout)$
       windowrule = animation fade,^(wlogout)$
 
+      windowrulev2 = opacity 0.8 override 0.8 override,initialClass:^(.*)$
+
       windowrulev2 = opacity 0.75 override 0.75 override,initialClass:^(pulseeffects.*)$
       windowrulev2 = opacity 0.75 override 0.75 override,initialClass:^(pavucontrol.*)$
       windowrulev2 = opacity 0.75 override 0.75 override,initialClass:^(thunar.*)$
-
-      windowrulev2 = opacity 0.8 override 0.8 override,initialClass:^(vesktop.*)$
-      windowrulev2 = opacity 0.8 override 0.8 override,initialTitle:^(Spotify.*)$
-      windowrulev2 = opacity 0.8 override 0.8 override,initialClass:^(teams-for-linux.*)$
-      windowrulev2 = opacity 0.8 override 0.8 override,initialClass:^(brave-browser.*)$
-      windowrulev2 = opacity 0.8 override 0.8 override,initialClass:^(firefox.*)$
-      windowrulev2 = opacity 0.8 override 0.8 override,initialClass:^(xdg-desktop-portal-gtk.*)$
-      windowrulev2 = opacity 0.8 override 0.8 override,initialClass:^(yad.*)$
-      windowrulev2 = opacity 0.8 override 0.8 override,initialClass:^(org.gnome.Nautilus.*)$ 
+      windowrulev2 = opacity 0.75 override 0.75 override,initialClass:^(kitty.*)$
 
       windowrulev2 = opacity 1.0 override 1.0 override,title:^(.*YouTube.*)$
       windowrulev2 = opacity 1.0 override 1.0 override,title:^(.*HiAnime.*)$
       windowrulev2 = opacity 1.0 override 1.0 override,title:^(.*HollyMovieHD.*)$
+      windowrulev2 = opacity 1.0 override 1.0 override,initialClass:^(.*VirtualBox.*)$ 
+      windowrulev2 = opacity 1.0 override 1.0 override,initialClass:^(.*imv.*)$
+      windowrulev2 = opacity 1.0 override 1.0 override,initialClass:^(.*org.kde.kdenlive.*)$ 
+      windowrulev2 = opacity 1.0 override 1.0 override,initialClass:^(.*Waydroid.*)$ 
 
       general {
         gaps_in = 6
@@ -113,7 +111,7 @@ in with lib; {
       }
       decoration {
         rounding = 10
-        drop_shadow = false
+        drop_shadow = true
         blur {
             enabled = true
             size = 5
@@ -167,12 +165,12 @@ in with lib; {
       bind = ${modifier}SHIFT,O,exec,hyprpicker -a -f hex     #Launch Color Picker
       bind = ${modifier}SHIFT,A,exec,waydroid show-full-ui    #Launch Waydroid
       bind = ${modifier}SHIFT,E,exec,VirtualBoxVM --startvm Windows10 --scaled    #Launch Windows
-      bind = ${modifier}SHIFT,N,exec,brave https://search.nixos.org/    #Open NixOS Search
+      bind = ${modifier}SHIFT,N,exec,${browser} https://search.nixos.org/    #Open NixOS Search
       bind = ${modifier}SHIFT,X,exec,wlogout    #Show Power Menu
       bind = ${modifier}SHIFT,T,exec,noproxyrun "flatpak run com.github.IsmaelMartinez.teams_for_linux" #Launch Teams
-      bind = ${modifier}SHIFT,G,exec,brave https://github.com/${gitUsername}/  #Open GitHub
+      bind = ${modifier}SHIFT,G,exec,${browser} https://github.com/${gitUsername}/  #Open GitHub
       bind = ${modifier}SHIFT,S,exec,com.github.rajsolai.textsnatcher #Launch OCR Clipboard
-      bind = ${modifier},G,exec,brave https://chat.openai.com/    #Open ChatGPT
+      bind = ${modifier},G,exec,${browser} https://chat.openai.com/    #Open ChatGPT
       bind = ${modifier},Q,killactive,    #Kill Active Window
       bind = ${modifier},P,pseudo,        #Pseudo Tiling
       bind = ${modifier}SHIFT,I,togglesplit,      #Toggle Split Direction

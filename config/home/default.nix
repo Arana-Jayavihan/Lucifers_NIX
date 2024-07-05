@@ -11,7 +11,6 @@
     ./kitty.nix
     ./neofetch.nix
     ./neovim.nix
-    ./neovide.nix
     ./packages.nix
     ./rofi.nix
     ./starship.nix

@@ -47,9 +47,7 @@ lib.mkIf (theShell == "bash") {
       code="flatpak run com.visualstudio.code";
       reboot="killall5 -9 && shutdown -r now";
       config="cd ~/Lucifers_NIX/";	
-      nixsearch="brave https://search.nixos.org/";
-      lock="swaylock --config ~/.config/swaylock/config";
-      rebuild="config && git add . && sudo nixos-rebuild switch --flake .";
+      lock="swaylock --config ~/.config/swaylock/config"; 
       try="nix-shell -p ";
     };
   };

@@ -1,5 +1,8 @@
 ## FIRST LINE/ROW: Info & Status
 # First param ─┌
+
+command_timeout = 10000
+
 [username]
 format = " [╭─$user]($style)@"
 show_always = true

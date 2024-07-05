@@ -19,7 +19,7 @@ in {
   simplebar = if waybarStyle == "simplebar" then true else false;
   bar-number = true; # Enable / Disable Workspace Numbers In Waybar
   borderAnim = true;
-  browser = "brave";
+  browser = "firefox";
   autoWallChange = false;
   wallpaperGit = "https://github.com/Arana-Jayavihan/nix-wallpapers.git";
   # ^ (use as is or replace with your own repo - removing will break the wallsetter script) 
@@ -27,6 +27,7 @@ in {
   useWallColors = true;
   curWallPaper = /home/lucifer/Projects/nix-wallpapers/wall40.jpg;
   screenshotDir = "${userHome}/Pictures/Screenshots";
+  userHome = "${userHome}";
   flakeDir = "${flakeDir}";
   flakePrev = "${userHome}/.LuciNix-previous";
   flakeBackup = "${userHome}/.LuciNix-backup";

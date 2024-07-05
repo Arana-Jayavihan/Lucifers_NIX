@@ -399,7 +399,7 @@ in {
     }
 
     .widget-volume {
-        background: #${palette.base01};
+        background: #${palette.base00};
         padding: 5px;
         margin: 10px 10px 5px 10px;
         border-radius: 10px;
@@ -420,7 +420,7 @@ in {
     }
 
     .widget-backlight {
-        background: #${palette.base01};
+        background: #${palette.base00};
         padding: 5px;
         margin: 10px 10px 5px 10px;
         border-radius: 10px;
