@@ -20,7 +20,7 @@ in {
         "timeout-critical": 0,
         "fit-to-screen": false,
         "control-center-width": 450,
-        "control-center-height": 800,
+        "control-center-height": 600,
         "notification-window-width": 450,
         "keyboard-shortcuts": true,
         "image-visibility": "when-available",

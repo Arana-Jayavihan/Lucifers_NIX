@@ -8,6 +8,9 @@ lib.mkIf ("${gpuType}" == "intel") {
       enableHybridCodec = true;
     };
   };
+  
+  # GPU Tools
+  hardware.intel-gpu-tools.enable = true;
 
   # OpenGL
   hardware.opengl = {

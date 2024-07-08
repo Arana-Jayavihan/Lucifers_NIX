@@ -14,17 +14,14 @@
   gtk = {
     enable = true;
     font = {
-      name = "Ubuntu";
+      name = "JetBrainsMono Nerd Font";
       size = 12;
-      package = pkgs.ubuntu_font_family;
     };
     theme = {
       name = "${config.colorScheme.slug}";
       package = nixColorsContrib.gtkThemeFromScheme {scheme = config.colorScheme;};
     };
     iconTheme = {
-      #name = "Papirus-Dark";
-      #package = pkgs.papirus-icon-theme;
       name = "Dracula";
       package = pkgs.dracula-icon-theme;
     };
@@ -42,7 +39,7 @@
     platformTheme.name = "gtk";
     style = {
         name = "adwaita-dark";
-        package = pkgs.adwaita-qt;
+        package = pkgs.adwaita-qt6;
     };
   };
 }

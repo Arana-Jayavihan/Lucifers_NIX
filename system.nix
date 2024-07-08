@@ -29,8 +29,10 @@ in {
   '';
 
   #Firewall
-  networking.firewall.enable = useFirewall;
-  networking.firewall.allowedTCPPorts = firewallPorts;
+  networking.firewall.enable = false;
+  networking.firewall.allowedTCPPorts = if useFirewall == true 
+  then firewallPorts
+  else [];
 
   # Set your time zone
   time.timeZone = "${theTimezone}";

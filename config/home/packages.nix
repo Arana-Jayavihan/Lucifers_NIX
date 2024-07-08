@@ -81,7 +81,9 @@ in {
     (import ./../scripts/wallChangeEnhanced.nix { 
       inherit pkgs; 
       inherit wallpaperDir; 
-      inherit flakeDir;  
+      inherit flakeDir;
+      inherit wallpaperGit;
+      inherit username;
     })
     (import ./../scripts/list-hypr-bindings.nix {
       inherit pkgs;

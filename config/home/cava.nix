@@ -234,14 +234,14 @@ lower_cutoff_freq = 20
 # background must also be defined in hex or remain commented out. 1 = on, 0 = off.
 # You can define as many as 8 different colors. They range from bottom to top of screen
 gradient = 1
-gradient_color_1 = '#${palette.base0C}'
-gradient_color_2 = '#${palette.base0C}'
-gradient_color_3 = '#${palette.base0F}'
-gradient_color_4 = '#${palette.base0F}'
-gradient_color_5 = '#${palette.base0F}'
-gradient_color_6 = '#${palette.base0F}'
-gradient_color_7 = '#${palette.base0F}'
-gradient_color_8 = '#${palette.base0F}'
+gradient_color_1 = '#${palette.base0F}'
+gradient_color_2 = '#${palette.base0F}'
+gradient_color_3 = '#${palette.base0B}'
+gradient_color_4 = '#${palette.base0B}'
+gradient_color_5 = '#${palette.base0B}'
+gradient_color_6 = '#${palette.base0B}'
+gradient_color_7 = '#${palette.base0B}'
+gradient_color_8 = '#${palette.base0B}'
 
 [smoothing]
 

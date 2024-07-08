@@ -1,10 +1,30 @@
-{ pkgs, wallpaperDir, flakeDir, ... }:
+{ pkgs, wallpaperDir, flakeDir, wallpaperGit, username, ... }:
 
 pkgs.writeShellScriptBin "wallchange" ''
 THEME="false"
 
 wallpaperDir=${wallpaperDir} 
 flakeDir=${flakeDir}
+
+if [ -d ${wallpaperDir} ]; then
+  num_files=$(ls -1 ${wallpaperDir} | wc -l)
+
+  if [ $num_files -lt 1 ]; then
+    notify-send -t 9000 "The wallpaper folder is expected to have more than 1 image. Exiting Wallsetter."
+    exit
+  else
+    cd ${wallpaperDir}
+    if [ -d ".git" ]; then
+      git pull
+    else
+      notify-send -t 9000 "The wallpaper directory is expected to be a Git repository. Exiting Wallsetter."
+      exit
+    fi
+  fi
+else
+  ${pkgs.git}/bin/git clone ${wallpaperGit} ${wallpaperDir}
+  chown -R ${username}:users ${wallpaperDir}
+fi
 
 function changeTheme { 
   sed -i "s#curWallPaper = .*;#curWallPaper = $1;#g" $flakeDir/options.nix
