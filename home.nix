@@ -1,4 +1,4 @@
-{ config, inputs, username, ... }:
+{ inputs, username, pkgs, ... }:
 let 
   inherit (import ./options.nix)
     gitUsername gitEmail theme useWallColors;
@@ -16,6 +16,7 @@ in {
 
   # Import Program Configurations
   imports = [
+    inputs.ags.homeManagerModules.default
     inputs.nix-colors.homeManagerModules.default
     inputs.nixvim.homeManagerModules.nixvim
     inputs.hyprland.homeManagerModules.default
@@ -26,6 +27,14 @@ in {
   # Define Settings For Xresources
   xresources.properties = {
     "Xcursor.size" = 24;
+  };
+
+  programs.ags = {
+    enable = true;
+    configDir = ./config/home/files/ags;
+    extraPackages = with pkgs; [
+      bun
+    ];
   };
 
   # Install & Configure Git
