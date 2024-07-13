@@ -100,6 +100,7 @@ in {
   };
 
   environment.systemPackages = (with pkgs; [
+        pulseaudioFull
         networkmanager-fortisslvpn
 	bun
 	go-ethereum

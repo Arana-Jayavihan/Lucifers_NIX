@@ -1,18 +1,216 @@
-// watchexec --restart --wrap-process=none -- "ags -c ~/nixos/modules/hyprland/ags/config.js"
-const main = '/tmp/ags/main.js';
-const nix = JSON.parse(Utils.readFile(`/home/${Utils.USER}/.local/share/ags/nix.json`));
+const date = Variable('', {
+    poll: [1000, 'date'],
+})
 
-try {
-    await Utils.execAsync([
-        nix.bun, 'build', `${App.configDir}/src/main.ts`,
-        '--outfile', main,
-        '--external', 'resource://*',
-        '--external', 'gi://*',
-        '--external', 'file://*',
-    ]);
-    await import(`file://${main}`);
-} catch (error) {
-		console.log("nixData: ", nix);
-    console.error(error);
-    App.quit();
+const battery = await Service.import('battery')
+
+const batteryProgress = Widget.CircularProgress({
+    child: Widget.Icon({
+        icon: battery.bind('icon_name')
+    }),
+    visible: battery.bind('available'),
+    value: battery.bind('percent').as(p => p > 0 ? p / 100 : 0),
+    class_name: battery.bind('charging').as(ch => ch ? 'charging' : ''),
+})
+
+const Container = (children) =>
+  Widget.Box({
+    className: "container",
+    css: `
+	background-color:transparent;
+	background-color:rgba(54, 58, 79,0.8);
+	border-radius:5px;
+	padding:3px;
+	padding-left:5px;
+	padding-right:5px;
+	margin:1px;`,
+    children: children,
+  });
+
+App.applyCss(`
+.side-button {
+font-size:18px;
+margin:2px;
 }
+.side-button button {
+background-color:transparent;
+color:red;
+}
+`);
+
+
+const mpris = await Service.import("mpris")
+const players = mpris.bind("players")
+
+const FALLBACK_ICON = "audio-x-generic-symbolic"
+const PLAY_ICON = "media-playback-start-symbolic"
+const PAUSE_ICON = "media-playback-pause-symbolic"
+const PREV_ICON = "media-skip-backward-symbolic"
+const NEXT_ICON = "media-skip-forward-symbolic"
+
+/** @param {number} length */
+function lengthStr(length) {
+    const min = Math.floor(length / 60)
+    const sec = Math.floor(length % 60)
+    const sec0 = sec < 10 ? "0" : ""
+    return `${min}:${sec0}${sec}`
+}
+
+/** @param {import('types/service/mpris').MprisPlayer} player */
+function Player(player) {
+    const img = Widget.Box({
+        class_name: "img",
+        vpack: "start",
+        css: player.bind("cover_path").transform(p => `
+            background-image: url('${p}');
+        `),
+    })
+
+    const title = Widget.Label({
+        class_name: "title",
+        wrap: true,
+        hpack: "start",
+        label: player.bind("track_title"),
+    })
+
+    const artist = Widget.Label({
+        class_name: "artist",
+        wrap: true,
+        hpack: "start",
+        label: player.bind("track_artists").transform(a => a.join(", ")),
+    })
+
+    const positionSlider = Widget.Slider({
+        class_name: "position",
+        draw_value: false,
+        on_change: ({ value }) => player.position = value * player.length,
+        visible: player.bind("length").as(l => l > 0),
+        setup: self => {
+            function update() {
+                const value = player.position / player.length
+                self.value = value > 0 ? value : 0
+            }
+            self.hook(player, update)
+            self.hook(player, update, "position")
+            self.poll(1000, update)
+        },
+    })
+
+    const positionLabel = Widget.Label({
+        class_name: "position",
+        hpack: "start",
+        setup: self => {
+            const update = (_, time) => {
+                self.label = lengthStr(time || player.position)
+                self.visible = player.length > 0
+            }
+
+            self.hook(player, update, "position")
+            self.poll(1000, update)
+        },
+    })
+
+    const lengthLabel = Widget.Label({
+        class_name: "length",
+        hpack: "end",
+        visible: player.bind("length").transform(l => l > 0),
+        label: player.bind("length").transform(lengthStr),
+    })
+
+    const icon = Widget.Icon({
+        class_name: "icon",
+        hexpand: true,
+        hpack: "end",
+        vpack: "start",
+        tooltip_text: player.identity || "",
+        icon: player.bind("entry").transform(entry => {
+            const name = `${entry}-symbolic`
+            return Utils.lookUpIcon(name) ? name : FALLBACK_ICON
+        }),
+    })
+
+    const playPause = Widget.Button({
+        class_name: "play-pause",
+        on_clicked: () => player.playPause(),
+        visible: player.bind("can_play"),
+        child: Widget.Icon({
+            icon: player.bind("play_back_status").transform(s => {
+                switch (s) {
+                    case "Playing": return PAUSE_ICON
+                    case "Paused":
+                    case "Stopped": return PLAY_ICON
+                }
+            }),
+        }),
+    })
+
+    const prev = Widget.Button({
+        on_clicked: () => player.previous(),
+        visible: player.bind("can_go_prev"),
+        child: Widget.Icon(PREV_ICON),
+    })
+
+    const next = Widget.Button({
+        on_clicked: () => player.next(),
+        visible: player.bind("can_go_next"),
+        child: Widget.Icon(NEXT_ICON),
+    })
+
+    return Widget.Box(
+        { class_name: "player" },
+        img,
+        Widget.Box(
+            {
+                vertical: true,
+                hexpand: true,
+            },
+            Widget.Box([
+                title,
+                icon,
+            ]),
+            artist,
+            Widget.Box({ vexpand: true }),
+            positionSlider,
+            Widget.CenterBox({
+                start_widget: positionLabel,
+                center_widget: Widget.Box([
+                    prev,
+                    playPause,
+                    next,
+                ]),
+                end_widget: lengthLabel,
+            }),
+        ),
+    )
+}
+
+export function Media() {
+    return Widget.Box({
+        vertical: true,
+        css: "min-height: 2px; min-width: 2px;", // small hack to make it visible
+        visible: players.as(p => p.length > 0),
+        children: players.as(p => p.map(Player)),
+    })
+}
+
+const Bar = (monitor = 0) => Widget.Window({
+    monitor,
+    name: `bar${monitor}`,
+    anchor: ['top', 'left', 'right'],
+    //child: Widget.Label({ label: date.bind() }),
+    child: Widget.CenterBox({
+        center_widget: Widget.Box({
+            children: [
+              batteryProgress,
+              Media()
+            ],
+          })
+    })
+})
+
+App.config({
+    windows: [
+        Bar(0), // can be instantiated for each monitor
+        Bar(1),
+    ],
+})

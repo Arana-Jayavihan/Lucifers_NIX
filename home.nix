@@ -34,6 +34,9 @@ in {
     configDir = ./config/home/files/ags;
     extraPackages = with pkgs; [
       bun
+      gtksourceview
+      webkitgtk
+      accountsservice
     ];
   };
 
