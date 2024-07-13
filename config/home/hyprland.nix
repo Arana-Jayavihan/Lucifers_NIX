@@ -112,6 +112,7 @@ in with lib; {
       decoration {
         rounding = 10
         drop_shadow = true
+        fullscreen_opacity = 0.8
         blur {
             enabled = true
             size = 5
