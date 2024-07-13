@@ -104,6 +104,9 @@ in {
       inherit flakeDir;
       inherit userHome;
     })
+    (import ./../scripts/gameMode.nix {
+      inherit pkgs;
+    })
   ];
 
   programs.gh.enable = true;
