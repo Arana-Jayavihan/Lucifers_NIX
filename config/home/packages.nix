@@ -22,7 +22,6 @@ in {
     pavucontrol
     tree
     font-awesome
-    swayidle
     swaylock-effects
     (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
 
