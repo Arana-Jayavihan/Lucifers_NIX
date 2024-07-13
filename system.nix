@@ -58,7 +58,6 @@ in {
     mutableUsers = true;
     users."${username}" = {
       homeMode = "755";
-      hashedPassword = "$6$YdPBODxytqUWXCYL$AHW1U9C6Qqkf6PZJI54jxFcPVm2sm/XWq3Z1qa94PFYz0FF.za9gl5WZL/z/g4nFLQ94SSEzMg5GMzMjJ6Vd7.";
       isNormalUser = true;
       description = "${gitUsername}";
       extraGroups = [ "networkmanager" "wheel" "libvirtd" "docker" "audio" "pulse-access" "qemu-libvirtd" "kvm" ];
