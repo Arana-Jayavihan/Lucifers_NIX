@@ -23,11 +23,6 @@
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    hyprcursor = {
-      type = "git";
-      url = "https://github.com/hyprwm/hyprcursor";
-      rev = "66d5b46ff94efbfa6fa3d1d1b66735f1779c34a6";
-    };
     spicetify-nix = {
       type = "git";
       url = "https://github.com/Arana-Jayavihan/spicetify-nix.git";

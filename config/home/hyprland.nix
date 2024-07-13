@@ -15,7 +15,7 @@ in with lib; {
     xwayland.enable = true;
     systemd.enable = true;
     plugins = [
-      #hyprplugins.hyprtrails
+      #pkgs.hyprlandPlugins.hyprtrails
     ];
     extraConfig = let
       modifier = "SUPER";
@@ -126,7 +126,7 @@ in with lib; {
           color = rgba(${theme.base0A}ff)
         }
       }
-#      lock = swaylock -f
+
       exec-once = $POLKIT_BIN
       exec-once = dbus-update-activation-environment --systemd --all
       exec-once = systemctl --user import-environment QT_QPA_PLATFORMTHEME WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
@@ -139,7 +139,7 @@ in with lib; {
       '' else ''
       ''}    
       exec-once = nm-applet --indicator
-      exec-once = swayidle -w timeout 86400 'swaylock --image ~/.config/swaylock-bg.jpg --text-color FFCC33 --indicator-radius 100 --indicator-thickness 10 -e --show-failed-attempts --indicator-caps-lock --ring-color 161131 --key-hl-color c2303a --font UBUNTU --config ""' timeout 86000 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on' before-sleep 'swaylock --image ~/.config/swaylock-bg.jpg --text-color FFCC33 --indicator-radius 100 --indicator-thickness 10 -e --show-failed-attempts --indicator-caps-lock --ring-color 161131 --key-hl-color c2303a --font UBUNTU --config ""'
+
       dwindle {
         pseudotile = true
         preserve_split = true
@@ -162,7 +162,7 @@ in with lib; {
       bind = ${modifier},T,exec,thunar              #Thunar
       bind = ${modifier},M,exec, spotify             #Spotify
       bind = ${modifier}SHIFT,K,exec,scrcpy -m720 -b2M #Launch scrcpy cast
-      bind = ${modifier}SHIFT,L,exec,swaylock --config ~/.config/swaylock/config     #Lock Screen
+      bind = ${modifier}SHIFT,L,exec,swaylock       #Lock Screen
       bind = ${modifier}SHIFT,O,exec,hyprpicker -a -f hex     #Launch Color Picker
       bind = ${modifier}SHIFT,A,exec,waydroid show-full-ui    #Launch Waydroid
       bind = ${modifier}SHIFT,E,exec,VirtualBoxVM --startvm Windows10 --scaled    #Launch Windows

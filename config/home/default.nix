@@ -1,4 +1,4 @@
-{ pkgs, config, ... }:
+{ pkgs, config, inputs, ... }:
 
 {
   imports = [
@@ -26,5 +26,6 @@
     ./files.nix
     ./cava.nix
     ./vesktop.nix
+    ./hypridle.nix
   ];
 }
