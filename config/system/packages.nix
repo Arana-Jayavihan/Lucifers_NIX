@@ -31,6 +31,7 @@
       enableSSHSupport = true;
     };
     virt-manager.enable = true;
+    thunar.enable = true;
   };
 
   virtualisation.libvirtd = {
