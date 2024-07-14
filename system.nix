@@ -165,6 +165,7 @@ in {
         xz 
 	zed-editor
 	dmidecode
+	sysstat
 	#STABLE_SYSTEM
       ]);
  

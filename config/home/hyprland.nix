@@ -90,6 +90,7 @@ in with lib; {
       misc {
         mouse_move_enables_dpms = true
         key_press_enables_dpms = false
+        vfr = true
       }
       animations {
         enabled = yes
@@ -112,10 +113,12 @@ in with lib; {
       decoration {
         rounding = 10
         drop_shadow = true
-        fullscreen_opacity = 0.8
+        fullscreen_opacity = 1
+        shadow_render_power = 3
+        shadow_range = 6
         blur {
             enabled = true
-            size = 5
+            size = 3
             passes = 3
             new_optimizations = on
             ignore_opacity = on
@@ -150,6 +153,7 @@ in with lib; {
       }
       bind = ${modifier},Return,exec,${terminal}          #Launch Terminal
       bind = ${modifier}SHIFT,Return,exec,rofi-launcher   #Rofi App Launcher
+      bind = ${modifier},F1, exec, gamemode               #Toggle Game Mode
       bind = ${modifier}SHIFT,W,exec,wallSelector         #Simple Wallpaper Selector
       ${if browser == "google-chrome" then ''
 	bind = ${modifier},W,exec,google-chrome-stable
