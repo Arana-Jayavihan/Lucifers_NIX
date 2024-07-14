@@ -5,8 +5,7 @@ window.bar {
 
 button {
     min-width: 0;
-    padding-top: 0;
-    padding-bottom: 0;
+    padding: 0 0.3rem;
     background-color: transparent;
 }
 
