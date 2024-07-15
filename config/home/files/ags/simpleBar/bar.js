@@ -112,19 +112,17 @@ const Info = () => {
 
 const ClientTitle = () => {
   const winTitle = hyprland.active.client.bind("title");
-  const winClass = hyprland.active.client.bind("class");
 
-  if (winTitle != undefined) {
     return Widget.Box({
       class_name: "client-title-box",
       children: [
         Widget.Label({
-          visible: winClass.as((wClass) => wClass != ""),
+          visible: winTitle.as((wTitle) => wTitle != ""),
           hpack: "start",
-          truncate: "end",
-          maxWidthChars: 15,
+          truncate: "middle",
+          maxWidthChars: 32,
           class_name: "client-title",
-          label: winClass,
+          label: winTitle,
         }),
         Widget.Label({
           visible: winTitle.as((wTitle) => wTitle == ""),
@@ -133,28 +131,10 @@ const ClientTitle = () => {
           maxWidthChars: 15,
           class_name: "client-title",
           label: " ~ ",
-        }),
-        Widget.Label({
-          visible:
-            winTitle.as((wTitle) => wTitle == "") &&
-            winClass.as((wClass) => wClass != ""),
-          hpack: "start",
-          truncate: "end",
-          maxWidthChars: 15,
-          class_name: "client-title",
-          label: " ~ ",
-        }),
-        Widget.Label({
-          visible: winTitle.as((wTitle) => wTitle != "~"),
-          hpack: "start",
-          truncate: "end",
-          maxWidthChars: 20,
-          class_name: "client-title",
-          label: winTitle,
-        }),
+        })
       ],
     });
-  }
+
 };
 
 const Clock = () => {
@@ -163,7 +143,7 @@ const Clock = () => {
   });
   return Widget.Label({
     class_name: "clock",
-    label: date.bind(),
+    label: date.bind().as((date) => ` ${date}`),
   });
 };
 
@@ -314,6 +294,26 @@ const SysTray = () => {
   });
 };
 
+const Workspaces = (monitor = 0) => {
+  const activeId = hyprland.active.workspace.bind("id");
+  let workspaces = hyprland.bind("workspaces").as((ws) =>
+    ws
+      .filter((ws) => ws.monitorID === monitor)
+      .sort((a, b) => a.id - b.id)
+      .map(({ id }) =>
+        Widget.Button({
+          on_clicked: () => hyprland.messageAsync(`dispatch workspace ${id}`),
+          child: Widget.Label(`${id}`),
+          class_name: activeId.as((i) => `${i === id ? "focused" : ""}`),
+        })
+      )
+  );
+  return Widget.Box({
+    class_name: "workspaces",
+    children: workspaces,
+  });
+}
+
 // layout of the bar
 const Left = (monitor = 0) => {
   return Widget.Box({
@@ -337,26 +337,6 @@ const Right = (monitor = 0) => {
   });
 };
 
-function Workspaces(monitor = 0) {
-  const activeId = hyprland.active.workspace.bind("id");
-  let workspaces = hyprland.bind("workspaces").as((ws) =>
-    ws
-      .filter((ws) => ws.monitorID === monitor)
-      .sort((a, b) => a.id - b.id)
-      .map(({ id }) =>
-        Widget.Button({
-          on_clicked: () => hyprland.messageAsync(`dispatch workspace ${id}`),
-          child: Widget.Label(`${id}`),
-          class_name: activeId.as((i) => `${i === id ? "focused" : ""}`),
-        })
-      )
-  );
-  return Widget.Box({
-    class_name: "workspaces",
-    children: workspaces,
-  });
-}
-
 export const Bar = (monitor = 0) => {
   return Widget.Window({
     name: `bar-${monitor}`, // name has to be unique
@@ -371,30 +351,3 @@ export const Bar = (monitor = 0) => {
     }),
   });
 };
-
-// export const updateMonitors = () => {
-//   // const monitorBars = hyprland.bind('monitors').as((monitor) => {
-//   //   console.log(monitor)
-//   //   monitor.map(({id}) => Bar(id))
-//   // })
-//   // console.log(hyprland.bind('clients'))
-//   const monitorCount = 2
-//   const monitorBars = Utils.merge(
-//     [
-//       hyprland.bind("monitors"), 
-//       hyprland.bind("monitors").as((monitors) => monitors.length)
-//     ],
-//     (monitors, count) => {
-//       console.log(count, monitorCount)
-//       // if (count < monitorCount){
-//       //   monitors.map(({id}) => Bar(id))
-//       // }
-//       for(let id = 0; id < monitorCount; id++){
-//         monitors.map(({id}) => Bar(id))
-//       }
-//     }
-//   )
-//   return Widget.Box({
-//     children: monitorBars
-//   })
-// };

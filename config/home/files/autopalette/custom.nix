@@ -4,22 +4,22 @@
     slug = "auto-generated";
     author = "Lucifer 🍃";
     palette = {
-      base00 = "#00030a";
-      base01 = "#0c2040";
-      base02 = "#22282c";
-      base03 = "#366472";
-      base04 = "#2b778d";
-      base05 = "#567264";
-      base06 = "#094158";
-      base07 = "#005670";
-      base08 = "#5ba0a7";
-      base09 = "#7db5b6";
-      base0A = "#79a598";
-      base0B = "#7db5b6";
-      base0C = "#5ba0a7";
-      base0D = "#5ba0a7";
-      base0E = "#5ba0a7";
-      base0F = "#5ba0a7";
+      base00 = "#031625";
+      base01 = "#151d36";
+      base02 = "#024863";
+      base03 = "#1aafb5";
+      base04 = "#5c6586";
+      base05 = "#a3597a";
+      base06 = "#0c6873";
+      base07 = "#334c65";
+      base08 = "#cb4f73";
+      base09 = "#f866ae";
+      base0A = "#b67ad1";
+      base0B = "#f1418a";
+      base0C = "#867bbf";
+      base0D = "#51a9b4";
+      base0E = "#e88bdc";
+      base0F = "#cb4f73";
     };
   };
 }

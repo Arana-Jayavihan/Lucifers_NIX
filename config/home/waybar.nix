@@ -39,12 +39,12 @@ in with lib; {
       	separate-outputs = false;
       };
       "memory" = {
-      	interval = 5;
+      	interval = 1;
       	format = " {}%";
         tooltip = true;
       };
       "cpu" = {
-      	interval = 5;
+      	interval = 1;
       	format = " {usage:2}%";
         tooltip = true;
       };
@@ -129,6 +129,7 @@ in with lib; {
         escape = true;
       };
       "battery" = {
+        interval = 1;
         states = {
           warning = 25;
           critical = 10;

@@ -10,19 +10,25 @@ general {
 }
 
 listener {
-  timeout = 300                            # 5min
-  on-timeout = ${pkgs.swaylock-effects}/bin/swaylock  && ${pkgs.brightnessctl}/bin/brightnessctl -sd asus::kbd_backlight set 0
+  timeout = 60
+  on-timeout = ${pkgs.brightnessctl}/bin/brightnessctl -sd asus::kbd_backlight set 0
+  on-resume = ${pkgs.brightnessctl}/bin/brightnessctl -sd asus::kbd_backlight set 1
+}
+
+listener {
+  timeout = 600                            # 10min
+  on-timeout = ${pkgs.swaylock-effects}/bin/swaylock
   on-resume = ${pkgs.libnotify}/bin/notify-send "Hi ${username} 🍃" "Welcome Back  ʕっ•ᴥ•ʔっ"  && ${pkgs.brightnessctl}/bin/brightnessctl -sd asus::kbd_backlight set 1
 }
 
 listener {
-  timeout = 900                           # 15min
+  timeout = 1800                           # 30min
   on-timeout = ${pkgs.hyprland}/bin/hyprctl dispatch dpms off
   on-resume = ${pkgs.hyprland}/bin/hyprctl dispatch dpms on
 }
 
 listener {
-  timeout = 1800
+  timeout = 3600
   on-timeout = systemctl suspend
 }
 '';

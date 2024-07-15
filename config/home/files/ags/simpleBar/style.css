@@ -26,7 +26,7 @@ label {
   color: @theme_selected_bg_color;
   border-radius: 15px 50px 15px 50px;
   padding: 0px 15px;
-  opacity: 0.8;
+  opacity: 0.9;
   margin-top: 0.2px;
 }
 
@@ -35,7 +35,7 @@ label {
   color: @theme_selected_bg_color;
   border-radius: 15px 50px 15px 50px;
   padding: 0px 15px;
-  opacity: 0.8;
+  opacity: 0.9;
   margin-top: 0.2px;
 }
 
@@ -54,7 +54,7 @@ label {
   color: @theme_selected_bg_color;
   border-radius: 15px 0px 0px 50px;
   padding: 0px 1rem 0rem 1rem;
-  opacity: 0.8;
+  opacity: 0.9;
   margin-top: 0.2px;
 }
 
@@ -63,7 +63,7 @@ label {
   color: @theme_selected_bg_color;
   border-radius: 15px 50px 15px 50px;
   padding: 0px .5rem 0px 1rem;
-  opacity: 0.8;
+  opacity: 0.9;
   margin-top: 0.2px;
 }
 
@@ -72,7 +72,7 @@ label {
   color: @theme_selected_bg_color;
   border-radius: 15px 50px 15px 50px;
   padding: 0px 20px;
-  opacity: 0.8;
+  opacity: 0.9;
   margin-top: 0.2px;
 }
 
@@ -81,7 +81,7 @@ label {
   color: @theme_selected_bg_color;
   border-radius: 15px 50px 15px 50px;
   padding: 0px 20px;
-  opacity: 0.8;
+  opacity: 0.9;
   margin-top: 0.2px;
 }
 
@@ -90,7 +90,7 @@ label {
   color: @theme_bg_color;
   border-radius: 15px 50px 15px 50px;
   padding: 0px 20px;
-  opacity: 0.8;
+  opacity: 0.9;
   margin-top: 0.2px;
 }
 
@@ -99,7 +99,7 @@ label {
   color: @theme_selected_bg_color;
   border-radius: 15px 50px 15px 50px;
   padding: 0px 20px;
-  opacity: 0.8;
+  opacity: 0.9;
   margin-top: 0.2px;
 }
 
@@ -109,7 +109,7 @@ label {
 }
 
 .workspaces {
-  opacity: 0.8;
+  opacity: 0.9;
   background-color: @theme_bg_color;
   border-radius: 0px 50px 15px 0px;
   padding: 0rem 1rem 0rem .5rem; 
@@ -122,7 +122,7 @@ label {
 
 .client-title-box {
   background-color: @theme_bg_color;
-  opacity: 0.8;
+  opacity: 0.9;
   padding: 0px 20px;
   border-radius: 50px 15px 50px 15px;
   margin-top: 0.2px;
