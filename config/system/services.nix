@@ -1,7 +1,6 @@
 { pkgs, config, lib, ... }:
 
 {
-  sound.enable = true;
   xdg.portal = {
     enable = true;
     extraPortals = [ 
