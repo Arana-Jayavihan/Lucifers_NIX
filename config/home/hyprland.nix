@@ -1,4 +1,4 @@
- { pkgs, config, lib, inputs, ... }: 
+{ pkgs, config, lib, inputs, ... }: 
 
 let
   theme = config.colorScheme.palette;
@@ -43,7 +43,7 @@ in with lib; {
 
       general {
         gaps_in = 6
-        gaps_out = 8
+        gaps_out = 4
         border_size = 2
         col.active_border = rgba(${theme.base0C}ff) rgba(${theme.base0D}ff) rgba(${theme.base0B}ff) rgba(${theme.base0E}ff) 45deg
         col.inactive_border = rgba(${theme.base00}cc) rgba(${theme.base01}cc) 45deg
@@ -115,7 +115,7 @@ in with lib; {
         drop_shadow = true
         fullscreen_opacity = 1
         shadow_render_power = 3
-        shadow_range = 6
+        shadow_range = 4
         blur {
             enabled = true
             size = 3
@@ -152,6 +152,7 @@ in with lib; {
       }
       bind = ${modifier},Return,exec,${terminal}          #Launch Terminal
       bind = ${modifier}SHIFT,Return,exec,rofi-launcher   #Rofi App Launcher
+      bind = ${modifier}SHIFT,B,exec,list-hypr-bindings   #List Hyprland Binds
       bind = ${modifier},F1, exec, gamemode               #Toggle Game Mode
       bind = ${modifier}SHIFT,W,exec,wallSelector         #Simple Wallpaper Selector
       ${if browser == "google-chrome" then ''

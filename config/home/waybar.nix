@@ -39,12 +39,12 @@ in with lib; {
       	separate-outputs = false;
       };
       "memory" = {
-      	interval = 5;
+      	interval = 0.5;
       	format = " {}%";
         tooltip = true;
       };
       "cpu" = {
-      	interval = 5;
+      	interval = 0.5;
       	format = " {usage:2}%";
         tooltip = true;
       };
@@ -63,6 +63,7 @@ in with lib; {
         spacing = 12;
       };
       "pulseaudio" = {
+		interval = 1;
         format = "{icon} {volume}% {format_source}";
         format-bluetooth = "{volume}% {icon} {format_source}";
         format-bluetooth-muted = " {icon} {format_source}";
@@ -129,6 +130,7 @@ in with lib; {
         escape = true;
       };
       "battery" = {
+		interval = 1;
         states = {
           warning = 25;
           critical = 10;
@@ -140,6 +142,9 @@ in with lib; {
         on-click = "";
         tooltip = true;
       };
+	  "power-profiles-daemon" = {
+		tooltip = true;
+	  };
    }];
     style = concatStrings [''
       * {
@@ -324,6 +329,25 @@ in with lib; {
 	''}
       }
       #memory {
+   	color: #${palette.base0F};
+	${if slickbar == true then ''
+	  background: #${palette.base00};
+	  border-radius: 50px 15px 50px 15px;
+	  margin: 5px;
+	  padding: 2px 20px;
+	'' else if simplebar == true then ''
+	  background: #${palette.base00};
+	  margin: 6px 4px;
+	  padding: 0px 10px;
+	  border-radius: 15px;
+	'' else ''
+	  background: #${palette.base01};
+	  margin: 4px;
+	  padding: 2px 10px;
+	  border-radius: 10px;
+	''}
+      }
+	  #power-profiles-daemon {
    	color: #${palette.base0F};
 	${if slickbar == true then ''
 	  background: #${palette.base00};
