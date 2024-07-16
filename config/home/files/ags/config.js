@@ -1,4 +1,4 @@
-import { Bar, } from "./simpleBar/bar.js";
+import { Bar, } from "./simpleBar/bar.ts";
 
 App.config({
   style: "./simpleBar/style.css",

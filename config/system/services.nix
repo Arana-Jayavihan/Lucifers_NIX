@@ -23,7 +23,7 @@
   services.gvfs.enable = true;
   services.tumbler.enable = true;
   services.upower.enable = true;
-  services.hypridle.enable = true;
+  services.hypridle.enable = false;
   services.power-profiles-daemon.enable = true;
   services.gnome.gnome-keyring.enable = true;
   services.gnome.gnome-remote-desktop.enable = true;
