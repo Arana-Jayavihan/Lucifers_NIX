@@ -64,13 +64,67 @@ in {
       shell = pkgs.${theShell};
       ignoreShellProgramCheck = true;
       packages = (with pkgs; [
-	taskwarrior3
+        taskwarrior3
+        pulseaudioFull
+        networkmanager-fortisslvpn
+	bun
+	go-ethereum
+	gcc
+	openssl
+	netcat
+	pavucontrol
+	pulseeffects-legacy
+	gnupg
+	railway
+	ghidra
+	jdk
+	nmap
+	gobuster
+	metasploit
+	dex2jar
+	android-tools
+	file
+	tshark
+	sshpass
+	motrix
+	inetutils
+	netdiscover
+	exiftool
+	hexedit
+	binwalk
+	thc-hydra
+	openfortivpn
+	dig
+	stunnel
+	samba4Full
+	enum4linux-ng
+	openvpn
+	wireshark
+	zip
+	steghide
+	mangohud
+	lutris
+	protonup-qt
+	wine64
+	wineWowPackages.waylandFull
+	winetricks
+	wineWowPackages.stable
+	tcptraceroute
+	hyprpicker
+	john
+        cava
+        dbeaver-bin
+        android-studio
+	zed-editor
 	#USER_PKG
       ])
 
       ++
 
       (with pkgs-stable; [
+        xz
+        sysstat
+        dmidecode
 	textsnatcher
 	hdparm
 	nasm
@@ -100,73 +154,20 @@ in {
   };
 
   environment.systemPackages = (with pkgs; [
-        pulseaudioFull
-        networkmanager-fortisslvpn
-	bun
-	go-ethereum
-	gcc
-	openssl
-	netcat
-	pavucontrol
-	pciutils
-	pulseeffects-legacy
-	plocate
-	gnupg
-	railway
-	ghidra
-	jdk
-	nmap
-	gobuster
-	metasploit
-	dex2jar
-	android-tools
-	file
-	tshark
-	sshpass
-	motrix
-	inetutils
-	netdiscover
-	exiftool
-	hexedit
-	binwalk
-	thc-hydra
-	openfortivpn
-	dig
-	stunnel
-	tcpdump
-	samba4Full
-	enum4linux-ng
-	openvpn
-	wireshark
-	zip
-	steghide
-	mangohud
-	lutris
-	protonup-qt
-	wine64
-	wineWowPackages.waylandFull
-	winetricks
-	wineWowPackages.stable
-	tcptraceroute
-	hyprpicker
-	libxcrypt
-	john
-        cava
-        dbeaver-bin
-        musl
-        libxml2
-	#SYSTEM_PKG
+        #SYSTEM_PKG
       ])
     
       ++
 
       (with pkgs-stable; [
-        android-studio
-        xz 
-	zed-editor
-	dmidecode
-	sysstat
-	#STABLE_SYSTEM
+        curl
+        git
+        pciutils
+        wget
+        file
+        inetutils
+        tcpdump
+        #STABLE_SYSTEM
       ]);
  
   environment.etc."ppp/options".text = "ipcp-accept-remote";

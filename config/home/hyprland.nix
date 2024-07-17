@@ -21,7 +21,7 @@ in with lib; {
       modifier = "SUPER";
     in concatStrings [ ''
       monitor=eDP-1,1920x1080,0x0,1,bitdepth,10
-      monitor=HDMI-A-1,1920x1080@60,auto,1,bitdepth,10
+      monitor=HDMI-A-1,1920x1080@144,auto,1,bitdepth,10
 
       windowrule = fullscreen, ^(wlogout)$
       windowrule = animation fade,^(wlogout)$
@@ -134,6 +134,7 @@ in with lib; {
       exec-once = dbus-update-activation-environment --systemd --all
       exec-once = systemctl --user import-environment QT_QPA_PLATFORMTHEME WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
       exec-once = swww init
+      exec-once = hypridle
       #exec-once = waybar
       #exec-once = swaync
       exec-once = ags

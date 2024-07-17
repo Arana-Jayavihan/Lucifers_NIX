@@ -1,6 +1,5 @@
 { pkgs, fetchgit, ... }:
 let 
-  musl = pkgs.musl;
   libvirt = pkgs.libvirt;
   libxml2 = pkgs.libxml2;
 in
@@ -18,13 +17,7 @@ in
       libvirt
       libxml2
     ];
-    #nativeBuildInputs = [musl];
 
     CGO_ENABLED = 1;
-
-    #ldflags = [
-    #  "-linkmode external"
-    #  "-extldflags '-static -L${musl}/lib'"
-    #];
   };
 }
