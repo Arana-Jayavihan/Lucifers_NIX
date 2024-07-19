@@ -64,16 +64,13 @@ in {
       shell = pkgs.${theShell};
       ignoreShellProgramCheck = true;
       packages = (with pkgs; [
-        taskwarrior3
-        pulseaudioFull
+        taskwarrior3 
         networkmanager-fortisslvpn
 	bun
 	go-ethereum
 	gcc
 	openssl
 	netcat
-	pavucontrol
-	pulseeffects-legacy
 	gnupg
 	railway
 	ghidra
@@ -143,6 +140,7 @@ in {
 	cbonsai
 	peaclock
 	putty
+	anydesk
 	#STABLE_USER
       ]);
     };
@@ -167,7 +165,11 @@ in {
         file
         inetutils
         tcpdump
-        #STABLE_SYSTEM
+        parted
+        pulseaudioFull
+        pavucontrol
+	pulseeffects-legacy
+	#STABLE_SYSTEM
       ]);
  
   environment.etc."ppp/options".text = "ipcp-accept-remote";

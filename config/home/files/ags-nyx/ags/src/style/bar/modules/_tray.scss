@@ -1,0 +1,38 @@
+.tray {
+	margin: 0;
+}
+
+.trayChevron {
+	font-family: $iconFont;
+}
+
+.trayIcons {
+	margin: 3px 0 0;
+
+	&:hover {
+		background: lighten($surface, 5%);
+	}
+}
+
+.trayIcon {
+	margin: 0 0 3px;
+}
+
+.trayMenu {
+	@include barModule;
+
+	background: $surface;
+	border-radius: 12px;
+	margin: 6px 4px;
+	padding: 4px;
+
+	separator {
+		background-color: $onSurfaceVariant;
+	}
+
+	menuitem {
+		border-radius: 0;
+		background: $surfaceVariant;
+		margin: 4px 2px;
+	}
+}

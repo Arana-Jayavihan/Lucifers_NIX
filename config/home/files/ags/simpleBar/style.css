@@ -7,15 +7,14 @@ button {
     min-width: 0;
     padding: 0 0.3rem;
     background-color: transparent;
+    transition: all 0.5s ease-out;
 }
 
-button:active {
-    background-color: @theme_selected_bg_color;
-}
-
-button:hover {
+/*button:hover {
     border-bottom: 3px solid @theme_fg_color;
-}
+    color: @theme_bg_color;
+    background: linear-gradient(45deg, @insensitive_fg_color, @theme_selected_bg_color);
+}*/
 
 label {
     font-weight: bold;
@@ -24,16 +23,21 @@ label {
 .power-profile {
   background-color: @theme_bg_color;
   color: @theme_selected_bg_color;
-  border-radius: 15px 50px 15px 50px;
+  border-radius: 15px 40px 15px 40px;
   padding: 0px 15px;
   opacity: 0.9;
   margin-top: 0.2px;
 }
 
+.power-profile:hover {
+    color: @theme_bg_color;
+    background: linear-gradient(45deg, @insensitive_fg_color, @theme_selected_bg_color);
+}
+
 .info-bars {
   background-color: @theme_bg_color;
   color: @theme_selected_bg_color;
-  border-radius: 15px 50px 15px 50px;
+  border-radius: 15px 40px 15px 40px;
   padding: 0px 15px;
   opacity: 0.9;
   margin-top: 0.2px;
@@ -52,7 +56,7 @@ label {
 .sys-tray {
   background-color: @theme_bg_color;
   color: @theme_selected_bg_color;
-  border-radius: 15px 0px 0px 50px;
+  border-radius: 15px 0px 0px 40px;
   padding: 0px 1rem 0rem 1rem;
   opacity: 0.9;
   margin-top: 0.2px;
@@ -61,7 +65,7 @@ label {
 .volume {
   background-color: @theme_bg_color;
   color: @theme_selected_bg_color;
-  border-radius: 15px 50px 15px 50px;
+  border-radius: 15px 40px 15px 40px;
   padding: 0px .5rem 0px 1rem;
   opacity: 0.9;
   margin-top: 0.2px;
@@ -70,7 +74,7 @@ label {
 .clock {
   background-color: @theme_bg_color;
   color: @theme_selected_bg_color;
-  border-radius: 15px 50px 15px 50px;
+  border-radius: 15px 40px 15px 40px;
   padding: 0px 20px;
   opacity: 0.9;
   margin-top: 0.2px;
@@ -79,7 +83,7 @@ label {
 .battery {
   background-color: @theme_bg_color;
   color: @theme_selected_bg_color;
-  border-radius: 15px 50px 15px 50px;
+  border-radius: 15px 40px 15px 40px;
   padding: 0px 20px;
   opacity: 0.9;
   margin-top: 0.2px;
@@ -88,7 +92,7 @@ label {
 .battery-low {
   background-color: @theme_selected_bg_color;
   color: @theme_bg_color;
-  border-radius: 15px 50px 15px 50px;
+  border-radius: 15px 40px 15px 40px;
   padding: 0px 20px;
   opacity: 0.9;
   margin-top: 0.2px;
@@ -97,34 +101,42 @@ label {
 .media {
   background-color: @theme_bg_color;
   color: @theme_selected_bg_color;
-  border-radius: 15px 50px 15px 50px;
+  border-radius: 15px 40px 15px 40px;
   padding: 0px 20px;
   opacity: 0.9;
   margin-top: 0.2px;
 }
 
-.media-label {
-  color: @theme_selected_bg_color;
-  opacity: 1;
+.media:hover {
+    color: @theme_bg_color;
+    background: linear-gradient(45deg, @insensitive_fg_color, @theme_selected_bg_color);
 }
 
 .workspaces {
   opacity: 0.9;
   background-color: @theme_bg_color;
-  border-radius: 0px 50px 15px 0px;
+  border-radius: 0px 40px 15px 0px;
   padding: 0rem 1rem 0rem .5rem; 
   margin-top: 0.2px;
 }
 
 .workspaces button.focused {
     border-bottom: 3px solid @theme_selected_bg_color;
+    color: @theme_selected_bg_color;
+    /*color: @theme_bg_color;
+    background: linear-gradient(45deg, @insensitive_fg_color, @theme_selected_bg_color);*/
+}
+
+.workspaces button:hover {
+  border-bottom: 3px solid @theme_fg_color;
+ 
 }
 
 .client-title-box {
   background-color: @theme_bg_color;
   opacity: 0.9;
   padding: 0px 20px;
-  border-radius: 50px 15px 50px 15px;
+  border-radius: 15px 15px 40px 40px;
   margin-top: 0.2px;
 }
 
@@ -141,3 +153,5 @@ highlight {
     min-height: 5px;
     border-radius: 3px;
 }
+
+/* #1EADC9 #3BCACE */

@@ -32,9 +32,8 @@ function changeTheme {
   autopalette
   sudo nixos-rebuild switch --flake "$flakeDir"
   ${pkgs.swaynotificationcenter}/bin/swaync-client -rs
-  #pid=$(ps -eaf | grep waybar | grep -v "grep waybar" | awk '{print $2}' | xargs)
-  #kill -9 $pid
-  #waybar &
+  ags -q
+  ${pkgs.hyprland}/bin/hyprctl dispatch exec ags
 }
 
 while [[ $# -gt 0 ]]; do

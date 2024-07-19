@@ -47,11 +47,11 @@ const Info = () => {
       { total: 0, used: 0 },
       {
         poll: [
-          500,
-          ["bash", "-c", `LANG=C free | awk '/^Mem/ {print $2,$3}'`],
+          1000,
+          ["bash", "-c", `cat /proc/meminfo | awk '/MemTotal/ {total=$2} /MemAvailable/ {available=$2} END {print total ":" available}'`],
           (x) => {
-            let split = x.split(" ");
-            return { total: Number(split[0]), used: Number(split[1]) };
+            let split = x.split(":");
+            return { total: Number(split[0]), used: Number(split[0] - split[1]) };
           },
         ],
       }
@@ -62,12 +62,7 @@ const Info = () => {
         .bind()
         .as(
           (x) =>
-            `${(x.used / 1024 / 1024 / 1024).toFixed(2)}GiB / ${(
-              x.total /
-              1024 /
-              1024 /
-              1024
-            ).toFixed(2)}GiB (${((x.used / x.total) * 100).toFixed(2)}%)`
+            `${(x.used / 1024 / 1024).toFixed(2)}GiB / ${(x.total / 1024 / 1024).toFixed(2)}GiB (${((x.used / x.total) * 100).toFixed(2)}%)`
         ),
       class_name: "info-child",
       children: [
@@ -75,7 +70,7 @@ const Info = () => {
         Widget.Label({
           label: ram
             .bind()
-            .as((x) => `${((x.used / x.total) * 100).toFixed(2)}%`),
+            .as((x) => `${((x.used / x.total) * 100).toFixed(0)}%`),
         }),
       ],
     });
@@ -84,22 +79,22 @@ const Info = () => {
   const Cpu = () => {
     const cpu = Variable(0, {
       poll: [
-        500,
+        1000,
         [
           "bash",
           "-c",
-          String.raw`mpstat | awk '$3 ~ /CPU/ { for(i=1;i<=NF;i++) { if ($i ~ /%idle/) field=i } } $3 ~ /all/ { print 100 - $field }'`,
+          String.raw`mpstat 1 1 -o JSON | grep '"cpu":' | awk -F ' ' '{print 100 - $22}'`,
         ],
       ],
     });
 
     return Widget.Box({
-      tooltipText: cpu.bind().as((x) => `${x.padStart(4, "0")}%`),
+      tooltipText: cpu.bind().as((x) => `${x}%`),
       class_name: "info-child",
       children: [
         Widget.Label({ label: "󰓅 " }),
         Widget.Label({
-          label: cpu.bind().as((x) => `${x}%`),
+          label: cpu.bind().as((x) => `${parseFloat(x).toFixed(0)}%`),
         }),
       ],
     });
