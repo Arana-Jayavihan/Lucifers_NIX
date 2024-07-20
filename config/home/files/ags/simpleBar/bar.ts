@@ -3,7 +3,7 @@ const mpris = await Service.import("mpris");
 const audio = await Service.import("audio");
 const battery = await Service.import("battery");
 const systemtray = await Service.import("systemtray");
-const bluetooth = await Service.import("bluetooth")
+const bluetooth = await Service.import("bluetooth");
 const powerProfiles = await Service.import("powerprofiles");
 
 const PowerProfile = () => {
@@ -48,10 +48,17 @@ const Info = () => {
       {
         poll: [
           1000,
-          ["bash", "-c", `cat /proc/meminfo | awk '/MemTotal/ {total=$2} /MemAvailable/ {available=$2} END {print total ":" available}'`],
+          [
+            "bash",
+            "-c",
+            `cat /proc/meminfo | awk '/MemTotal/ {total=$2} /MemAvailable/ {available=$2} END {print total ":" available}'`,
+          ],
           (x) => {
             let split = x.split(":");
-            return { total: Number(split[0]), used: Number(split[0] - split[1]) };
+            return {
+              total: Number(split[0]),
+              used: Number(split[0] - split[1]),
+            };
           },
         ],
       }
@@ -62,7 +69,11 @@ const Info = () => {
         .bind()
         .as(
           (x) =>
-            `${(x.used / 1024 / 1024).toFixed(2)}GiB / ${(x.total / 1024 / 1024).toFixed(2)}GiB (${((x.used / x.total) * 100).toFixed(2)}%)`
+            `${(x.used / 1024 / 1024).toFixed(2)}GB / ${(
+              x.total /
+              1024 /
+              1024
+            ).toFixed(2)}GB (${((x.used / x.total) * 100).toFixed(2)}%)`
         ),
       class_name: "info-child",
       children: [
@@ -108,28 +119,28 @@ const Info = () => {
 const ClientTitle = () => {
   const winTitle = hyprland.active.client.bind("title");
 
-    return Widget.Box({
-      class_name: "client-title-box",
-      children: [
-        Widget.Label({
-          visible: winTitle.as((wTitle) => wTitle != ""),
-          hpack: "start",
-          truncate: "middle",
-          maxWidthChars: 32,
-          class_name: "client-title",
-          label: winTitle,
-        }),
-        Widget.Label({
-          visible: winTitle.as((wTitle) => wTitle == ""),
-          hpack: "start",
-          truncate: "end",
-          maxWidthChars: 15,
-          class_name: "client-title",
-          label: " ~ ",
-        })
-      ],
-    });
-
+  return Widget.Box({
+    tooltipText: winTitle,
+    class_name: "client-title-box",
+    children: [
+      Widget.Label({
+        visible: winTitle.as((wTitle) => wTitle != ""),
+        hpack: "start",
+        truncate: "middle",
+        maxWidthChars: 32,
+        class_name: "client-title",
+        label: winTitle,
+      }),
+      Widget.Label({
+        visible: winTitle.as((wTitle) => wTitle == ""),
+        hpack: "start",
+        truncate: "end",
+        maxWidthChars: 15,
+        class_name: "client-title",
+        label: " ~ ",
+      }),
+    ],
+  });
 };
 
 const Clock = () => {
@@ -143,22 +154,205 @@ const Clock = () => {
 };
 
 const Media = () => {
-  const players = mpris.bind("players");
-  const label = Utils.watch("", mpris, "player-changed", () => {
-    if (players.as((p) => p.length > 0)) {
-      const { track_artists, track_title } = mpris.players[0];
-      return `${track_artists.join(", ")} - ${track_title}`;
-    } else {
-      return NaN;
+  const playerData = Variable({
+    busName: "",
+    label: "",
+    status: "",
+  });
+
+  mpris.connect("player-added", (mpris, busName) => {
+    const activePlayer = mpris.players.find(
+      (player) => player["bus_name"] == busName
+    );
+    if (activePlayer != undefined) {
+      const { track_artists, track_title, identity, play_back_status } =
+        activePlayer;
+      const label = `${track_artists.join(", ")} - ${track_title}`;
+      const status = `${identity} - ${play_back_status}`;
+      playerData.value = {
+        busName: busName,
+        label: label,
+        status: status,
+      };
     }
   });
 
+  mpris.connect("player-changed", (mpris, busName) => {
+    if (mpris.players.length > 1) {
+      const changedPlayer = mpris.players.find(
+        (player) => player["bus-name"] == busName
+      );
+      if (
+        changedPlayer != undefined &&
+        (changedPlayer["play-back-status"] == "Paused" ||
+          changedPlayer["play-back-status"] == "Stopped")
+      ) {
+        const activePlayer = mpris.players.find(
+          (player) => player["play-back-status"] == "Playing"
+        );
+        if (activePlayer != undefined) {
+          const {
+            track_artists,
+            track_title,
+            identity,
+            play_back_status,
+            bus_name,
+          } = activePlayer;
+          const label = `${track_artists.join(", ")} - ${track_title}`;
+          const status = `${identity} - ${play_back_status}`;
+          playerData.value = {
+            busName: bus_name,
+            label: label,
+            status: status,
+          };
+        } else {
+          const {
+            track_artists,
+            track_title,
+            identity,
+            play_back_status,
+            bus_name,
+          } = changedPlayer;
+          const label = `${track_artists.join(", ")} - ${track_title}`;
+          const status = `${identity} - ${play_back_status}`;
+          playerData.value = {
+            busName: bus_name,
+            label: label,
+            status: status,
+          };
+        }
+      } else if (
+        changedPlayer != undefined &&
+        changedPlayer["play-back-status"] == "Playing"
+      ) {
+        const {
+          track_artists,
+          track_title,
+          identity,
+          play_back_status,
+          bus_name,
+        } = changedPlayer;
+        const label = `${track_artists.join(", ")} - ${track_title}`;
+        const status = `${identity} - ${play_back_status}`;
+        playerData.value = {
+          busName: bus_name,
+          label: label,
+          status: status,
+        };
+      }
+    } else if (mpris.players.length > 0) {
+      const activePlayer = mpris.players.find(
+        (player) => player["bus_name"] == busName
+      );
+      if (activePlayer != undefined) {
+        const { track_artists, track_title, identity, play_back_status } =
+          activePlayer;
+        const label = `${track_artists.join(", ")} - ${track_title}`;
+        const status = `${identity} - ${play_back_status}`;
+        playerData.value = {
+          busName: busName,
+          label: label,
+          status: status,
+        };
+      }
+    }
+  });
+
+  mpris.connect("player-closed", (mpris) => {
+    const players = mpris.players;
+    if (players.length > 0) {
+      const activePlayer = players.find(
+        (player) =>
+          player["play-back-status"] == "Playing" ||
+          player["play-back-status"] == "Paused"
+      );
+      if (activePlayer != undefined) {
+        const {
+          track_artists,
+          track_title,
+          identity,
+          play_back_status,
+          bus_name,
+        } = activePlayer;
+        const label = `${track_artists.join(", ")} - ${track_title}`;
+        const status = `${identity} - ${play_back_status}`;
+        playerData.value = {
+          busName: bus_name,
+          label: label,
+          status: status,
+        };
+      }
+    } else {
+      playerData.value = {
+        busName: "",
+        label: "",
+        status: "",
+      };
+    }
+  });
+
+  const currentPlayer = Variable(0);
+
+  const cyclePlayers = () => {
+    const players = mpris.players;
+
+    if (currentPlayer.value == players.length - 1) {
+      currentPlayer.setValue(0);
+      const activePlayer = players[currentPlayer.value];
+      const {
+        track_artists,
+        track_title,
+        identity,
+        play_back_status,
+        bus_name,
+      } = activePlayer;
+      const label = `${track_artists.join(", ")} - ${track_title}`;
+      const status = `${identity} - ${play_back_status}`;
+      playerData.value = {
+        busName: bus_name,
+        label: label,
+        status: status,
+      };
+    } else {
+      currentPlayer.setValue(currentPlayer.value + 1);
+      if (currentPlayer.value != players.length){
+        const activePlayer = players[currentPlayer.value];
+        if (activePlayer != undefined) {
+          const {
+            track_artists,
+            track_title,
+            identity,
+            play_back_status,
+            bus_name,
+          } = activePlayer;
+          const label = `${track_artists.join(", ")} - ${track_title}`;
+          const status = `${identity} - ${play_back_status}`;
+          playerData.value = {
+            busName: bus_name,
+            label: label,
+            status: status,
+          };
+        }
+      }
+    }
+  };
+
   return Widget.Button({
-    visible: players.as((p) => p.length > 0),
+    setup: (self) =>
+      self.hook(playerData, () => {
+        (self.tooltip_text = playerData.value.status.toString()),
+          (self.on_primary_click = () =>
+            mpris.getPlayer(playerData.value.busName)?.playPause()),
+          (self.on_scroll_up = () =>
+            mpris.getPlayer(playerData.value.busName)?.next()),
+          (self.on_scroll_down = () =>
+            mpris.getPlayer(playerData.value.busName)?.previous()),
+          (self.visible =
+            playerData.value.status != "" &&
+            playerData.value.status != "Stopped"),
+          (self.on_middle_click = cyclePlayers);
+      }),
     class_name: "media",
-    on_primary_click: () => mpris.getPlayer("")?.playPause(),
-    on_scroll_up: () => mpris.getPlayer("")?.next(),
-    on_scroll_down: () => mpris.getPlayer("")?.previous(),
     child: Widget.Label({
       justification: "left",
       truncate: "end",
@@ -167,7 +361,10 @@ const Media = () => {
       wrap: true,
       useMarkup: true,
       class_name: "media-label",
-      label,
+      setup: (self) =>
+        self.hook(playerData, () => {
+          self.label = playerData.value.label.toString();
+        }),
     }),
   });
 };
@@ -189,26 +386,33 @@ const Volume = () => {
         );
 
     return `audio-volume-${icons[icon]}-symbolic`;
-  }
+  };
 
   const icon = Widget.Icon({
     icon: Utils.watch(getIcon(), audio.speaker, getIcon),
   });
 
   const connectedList = Widget.Box({
-    setup: self => self.hook(bluetooth, self => {
-        self.children = bluetooth.connected_devices
-            .map(({ icon_name, name }) => Widget.Box([
+    setup: (self) =>
+      self.hook(
+        bluetooth,
+        (self) => {
+          self.children = bluetooth.connected_devices.map(
+            ({ icon_name, name }) =>
+              Widget.Box([
                 Widget.Icon({
-                  icon: icon_name + '-symbolic',
+                  icon: icon_name + "-symbolic",
                   tooltipText: name,
-                  css: "margin: 0px 0.2rem;"
+                  css: "margin: 0px 0.2rem;",
                 }),
-            ]));
-  
-        self.visible = bluetooth.connected_devices.length > 0;
-    }, 'notify::connected-devices'),
-  })
+              ])
+          );
+
+          self.visible = bluetooth.connected_devices.length > 0;
+        },
+        "notify::connected-devices"
+      ),
+  });
 
   const VolumeSlider = (type = "speaker") =>
     Widget.Slider({
@@ -307,7 +511,7 @@ const Workspaces = (monitor = 0) => {
     class_name: "workspaces",
     children: workspaces,
   });
-}
+};
 
 // layout of the bar
 const Left = (monitor = 0) => {

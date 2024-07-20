@@ -56,7 +56,7 @@ label {
 .sys-tray {
   background-color: @theme_bg_color;
   color: @theme_selected_bg_color;
-  border-radius: 15px 0px 0px 40px;
+  border-radius: 40px 0px 0px 15px;
   padding: 0px 1rem 0rem 1rem;
   opacity: 0.9;
   margin-top: 0.2px;
@@ -65,7 +65,7 @@ label {
 .volume {
   background-color: @theme_bg_color;
   color: @theme_selected_bg_color;
-  border-radius: 15px 40px 15px 40px;
+  border-radius: 40px 15px 40px 15px;
   padding: 0px .5rem 0px 1rem;
   opacity: 0.9;
   margin-top: 0.2px;
@@ -74,7 +74,7 @@ label {
 .clock {
   background-color: @theme_bg_color;
   color: @theme_selected_bg_color;
-  border-radius: 15px 40px 15px 40px;
+  border-radius: 40px 15px 40px 15px;
   padding: 0px 20px;
   opacity: 0.9;
   margin-top: 0.2px;
@@ -83,7 +83,7 @@ label {
 .battery {
   background-color: @theme_bg_color;
   color: @theme_selected_bg_color;
-  border-radius: 15px 40px 15px 40px;
+  border-radius: 40px 15px 40px 15px;
   padding: 0px 20px;
   opacity: 0.9;
   margin-top: 0.2px;
@@ -92,7 +92,7 @@ label {
 .battery-low {
   background-color: @theme_selected_bg_color;
   color: @theme_bg_color;
-  border-radius: 15px 40px 15px 40px;
+  border-radius: 40px 15px 40px 15px;
   padding: 0px 20px;
   opacity: 0.9;
   margin-top: 0.2px;
