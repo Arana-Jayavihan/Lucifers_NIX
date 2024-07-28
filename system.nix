@@ -141,6 +141,7 @@ in {
 	peaclock
 	putty
 	anydesk
+	ntfs3g
 	#STABLE_USER
       ]);
     };

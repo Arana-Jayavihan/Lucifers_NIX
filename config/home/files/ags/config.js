@@ -1,4 +1,4 @@
-import { Bar } from "./simpleBar/bar.ts";
+import { Bar } from "./Bar/bar.ts";
 const hyprland = await Service.import("hyprland");
 
 import App from "resource:///com/github/Aylur/ags/app.js";
@@ -69,9 +69,5 @@ hyprland.connect("monitor-added", () => handleMonitorAdd());
 hyprland.connect("monitor-removed", () => handleMonitorRemove());
 
 App.config({
-  style: "./simpleBar/style.css",
-  // windows: [
-  //   Bar(0),
-  //   Bar(1),
-  // ]
+  style: "./style.css"
 });

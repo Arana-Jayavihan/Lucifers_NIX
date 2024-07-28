@@ -1,6 +1,7 @@
 window.bar {
     background-color: transparent;
     color: @theme_fg_color;
+    transition: all 0.5s ease-out;
 }
 
 button {
@@ -71,6 +72,19 @@ label {
   margin-top: 0.2px;
 }
 
+.revealerButton {
+  border: 0;
+  padding: 0;
+  color: @theme_fg_color;
+  background-color: transparent;
+  margin-top: 0.2px;
+}
+
+.revealerButton:hover {
+  color: @theme_selected_bg_color;
+  opacity: 0.9;
+}
+
 .clock {
   background-color: @theme_bg_color;
   color: @theme_selected_bg_color;
@@ -136,7 +150,7 @@ label {
   background-color: @theme_bg_color;
   opacity: 0.9;
   padding: 0px 20px;
-  border-radius: 15px 15px 40px 40px;
+  border-radius: 15px;
   margin-top: 0.2px;
 }
 

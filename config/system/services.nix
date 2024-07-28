@@ -23,6 +23,7 @@
   services.gvfs.enable = true;
   services.tumbler.enable = true;
   services.upower.enable = true;
+  services.thermald.enable = false;
   services.hypridle.enable = true;
   services.power-profiles-daemon.enable = true;
   services.gnome.gnome-keyring.enable = true;
