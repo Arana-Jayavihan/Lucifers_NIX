@@ -49,6 +49,7 @@ lib.mkIf (theShell == "bash") {
       config="cd ~/Lucifers_NIX/";	
       lock="swaylock --config ~/.config/swaylock/config"; 
       try="nix-shell -p ";
+      glone="git clone";
     };
   };
 }

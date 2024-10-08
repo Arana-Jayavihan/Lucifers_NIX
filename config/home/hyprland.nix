@@ -142,6 +142,7 @@ in with lib; {
       exec-once = swaync
       exec-once = ags
       exec-once = amixer -c 0 set PCM 100% unmute
+      exec-once = amixer -c 1 set PCM 100% unmute
       exec-once = swww img "${curWallPaper}"
       exec-once = notify-send "Hi ${username} 🍃" "Welcome Back  ʕっ•ᴥ•ʔっ"
       ${if autoWallChange == true then ''
