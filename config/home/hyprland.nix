@@ -152,7 +152,7 @@ in with lib; {
       exec-once = nm-applet --indicator
 
       # Custom Startup Apps
-      exec-once = hyprctl dispatch exec "[workspace 9 silent;]" -- kitty /home/lucifer/Projects/TCP-Over-SSL-Tunnel/start.sh
+      # exec-once = hyprctl dispatch exec "[workspace 9 silent;]" -- kitty /home/lucifer/Projects/TCP-Over-SSL-Tunnel/start.sh
       exec-once = hyprctl dispatch exec "[workspace 9 silent;]" -- pulseeffects
       exec-once = hyprctl dispatch exec "[workspace 9 silent;]" -- kitty alsamixer
       exec-once = hyprctl dispatch exec "[workspace 8 silent;]" -- spotify
