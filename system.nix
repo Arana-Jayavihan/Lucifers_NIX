@@ -120,7 +120,8 @@ in {
         cava
         dbeaver-bin
         android-studio
-	zed-editor
+        zed-editor
+        p7zip
 	#USER_PKG
       ])
 
