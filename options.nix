@@ -15,7 +15,7 @@ in {
   gitEmail = "aranajayavihan@gmail.com";
   theme = "3024";
   borderAnim = true;
-  browser = "firefox-nightly";
+  browser = "firefox";
   autoWallChange = false;
   wallpaperGit = "https://github.com/Arana-Jayavihan/nix-wallpapers.git";
   # ^ (use as is or replace with your own repo - removing will break the wallsetter script) 
@@ -41,8 +41,8 @@ in {
   sdl-videodriver = "x11"; # Either x11 or wayland ONLY. Games might require x11 set here
   # For Hybrid Systems intel-nvidia
   # Should Be Used As gpuType
-  cpuType = "intel";
-  gpuType = "intel";
+  cpuType = "amd";
+  gpuType = "amd";
 
   #Proxy Settings
   useProxy = proxy;
@@ -72,7 +72,7 @@ in {
   printer = true;
 
   # Enable Flatpak & Larger Programs
-  distrobox = true;
+  distrobox = false;
   flatpak = true;
   kdenlive = true;
 

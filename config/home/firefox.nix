@@ -1,4 +1,4 @@
-{ pkgs, firefox, ... }:
+{ pkgs, ... }:
 let
   inherit (import ../../options.nix) username;
   userChrome = ''
@@ -341,7 +341,7 @@ body,html{overflow-y: auto}
 in {
   programs.firefox = {
     enable = true;
-    package = firefox.packages.${pkgs.system}.firefox-nightly-bin;
+    package = pkgs.firefox;
     policies = {
       HttpsOnlyMode = "enabled";
       SSLVersionMin = "tls1.2";

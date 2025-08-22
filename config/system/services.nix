@@ -36,7 +36,7 @@
   services.power-profiles-daemon.enable = true;
   services.gnome.gnome-keyring.enable = true;
   services.gnome.gnome-remote-desktop.enable = true;
-  services.blueman.enable = true;
+  services.blueman.enable = true; 
   services.pipewire = {
     enable = true;
     alsa.enable = true;
@@ -77,7 +77,9 @@
   services.cloudflare-warp = {
     enable = true;
   };
-  
+
+  services.hardware.openrgb.enable = false;
+
   hardware.enableAllFirmware = true;
   hardware.bluetooth.enable = true; # enables support for Bluetooth
   hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
