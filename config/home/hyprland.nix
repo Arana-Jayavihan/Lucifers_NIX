@@ -163,15 +163,16 @@ in with lib; {
       '' else ''
       ''}    
       exec-once = nm-applet --indicator
+      exec-once = blueman-applet
+
 
       # Custom Startup Apps
       exec-once = hyprctl dispatch exec "[workspace 10 silent;]" -- kitty /home/lucifer/Projects/TCP-Over-SSL-Tunnel/start.sh
-      exec-once = hyprctl dispatch exec "[workspace 10 silent;]" -- kitty /home/lucifer/Projects/AndroControl/Backend-GO/AndroControl
+      exec-once = hyprctl dispatch exec "[workspace 10 silent;]" -- kitty AndroControl
       exec-once = hyprctl dispatch exec "[workspace 10 silent;]" -- pulseeffects
       exec-once = hyprctl dispatch exec "[workspace 9 silent;]" -- spotify
       exec-once = hyprctl dispatch exec "[workspace 9 silent;]" -- kitty cava
-
-      exec-once = pulseeffects -l Lucifer
+      exec-once = ${pkgs.power-profiles-daemon}/bin/powerprofilesctl set power-saver
       
       dwindle {
         pseudotile = true
