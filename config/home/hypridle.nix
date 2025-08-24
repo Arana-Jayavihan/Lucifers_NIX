@@ -9,15 +9,9 @@ general {
 }
 
 listener {
-  timeout = 60
-  on-timeout = ${pkgs.brightnessctl}/bin/brightnessctl -sd asus::kbd_backlight set 0
-  on-resume = ${pkgs.brightnessctl}/bin/brightnessctl -sd asus::kbd_backlight set 1
-}
-
-listener {
   timeout = 600                            # 10min
   on-timeout = ${pkgs.swaylock-effects}/bin/swaylock
-  on-resume = ${pkgs.libnotify}/bin/notify-send "Hi ${username} 🍃" "Welcome Back  ʕっ•ᴥ•ʔっ"  && ${pkgs.brightnessctl}/bin/brightnessctl -sd asus::kbd_backlight set 1
+  on-resume = ${pkgs.libnotify}/bin/notify-send "Hi ${username} 🍃" "Welcome Back  ʕっ•ᴥ•ʔっ"
 }
 
 listener {
