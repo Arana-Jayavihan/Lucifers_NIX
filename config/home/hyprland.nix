@@ -4,7 +4,7 @@ let
   theme = config.colorScheme.palette;
   hyprplugins = inputs.hyprland-plugins.packages.${pkgs.system};
   inherit (import ../../options.nix) 
-    browser cpuType gpuType
+    browser cpuType gpuType userHome
     wallpaperDir borderAnim username
     theKBDLayout terminal curWallPaper
     theSecondKBDLayout gitUsername
@@ -165,7 +165,7 @@ in with lib; {
       exec-once = nm-applet --indicator
 
       # Custom Startup Apps
-      exec-once = hyprctl dispatch exec "[workspace 10 silent;]" -- kitty /home/lucifer/Projects/TCP-Over-SSL-Tunnel/start.sh
+      exec-once = hyprctl dispatch exec "[workspace 10 silent;]" -- kitty python ${userHome}/Projects/TCP-Over-SSL-Tunnel/main.py 
       exec-once = hyprctl dispatch exec "[workspace 10 silent;]" -- kitty AndroControl
       exec-once = hyprctl dispatch exec "[workspace 10 silent;]" -- blueman-manager
       exec-once = hyprctl dispatch exec "[workspace 9 silent;]" -- spotify
