@@ -9,7 +9,7 @@ general {
 }
 
 listener {
-  timeout = 600                            # 10min
+  timeout = 60                            # 10min
   on-timeout = ${pkgs.swaylock-effects}/bin/swaylock
   on-resume = ${pkgs.libnotify}/bin/notify-send "Hi ${username} 🍃" "Welcome Back  ʕっ•ᴥ•ʔっ"
 }

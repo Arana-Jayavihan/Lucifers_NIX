@@ -215,8 +215,8 @@ in {
         fastfetch
         libcec
         zoxide
-	gparted
-        #STABLE_SYSTEM 
+	gparted 
+	#STABLE_SYSTEM 
       ])
     
       ++

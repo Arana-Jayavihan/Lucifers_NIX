@@ -152,7 +152,7 @@ in with lib; {
       exec-once = systemctl --user import-environment QT_QPA_PLATFORMTHEME WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
       exec-once = swww init
       exec-once = swww img "${curWallPaper}"
-      exec-once = hypridle
+      #exec-once = hypridle
       exec-once = swaync
       exec-once = ags
       exec-once = amixer -c 0 set PCM 100% unmute
