@@ -73,7 +73,7 @@ lib.mkIf (theShell == "zsh") {
       hell="ssh lucifer@165.22.52.204 -i /home/lucifer/Projects/cloudNix/sshPrivKey.pem";
       neofetch="neofetch --ascii ~/.config/ascii-neofetch";
       fastfetch="fastfetch -c ~/.config/fastfetch/config.jsonc";
-      tunnel="python /home/lucifer/Projects/TCP-Over-SSL-Tunnel/main.py";
+      tunnel="cd /home/lucifer/Projects/TCP-Over-SSL-Tunnel && python /home/lucifer/Projects/TCP-Over-SSL-Tunnel/main.py";
       pyserver="python -m http.server";
       fuff="./usr/share/ffuf/ffuf";
       burp="cd /home/lucifer/Projects/burpsuite_pro_v2022.9; java -jar burploader.jar";

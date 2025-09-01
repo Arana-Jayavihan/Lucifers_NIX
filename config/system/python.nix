@@ -8,6 +8,7 @@ let
     requests
     pip
     pproxy
+    paramiko
   ];
 in lib.mkIf (python == true) {
   environment.systemPackages = with pkgs; [

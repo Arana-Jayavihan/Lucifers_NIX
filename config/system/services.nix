@@ -46,6 +46,19 @@
     socketActivation = true;
     jack.enable = true;
     wireplumber.enable = true;
+    extraConfig.pipewire = {
+      "10-clock-rate" = {
+        "context.properties" = {
+          "default.clock.rate" = 44100;
+          "default.clock.allowed-rates" = [ 24000 48000 96000 ];
+          "default.clock.min-quantum" = 32;
+          "default.clock.max-quantum" = 8192;
+          "default.clock.quantum" = 1024;
+          "default.clock.quantum-limit" = 8192;
+          "default.clock.quantum-floor" = 32;
+        };
+      };
+    };
   };
   #services.pulseaudio = {
   #  enable = false;
