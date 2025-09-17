@@ -114,6 +114,8 @@ in {
 	zed-editor
         deno
         gdk
+	aircrack-ng
+	burpsuite
 	#STABLE_USER
       ])
 
