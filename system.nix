@@ -1,4 +1,4 @@
-{ config, pkgs, username, hostname, pkgs-unstable, ... }:
+{ config, pkgs, username, hostname, pkgs-unstable, burpsuitepro, ... }:
 
 let 
   inherit (import ./options.nix) 
@@ -70,7 +70,7 @@ in {
       homeMode = "755";
       isNormalUser = true;
       description = "${gitUsername}";
-      extraGroups = [ "networkmanager" "wheel" "libvirtd" "docker" "audio" "pulse-access" "qemu-libvirtd" "kvm" "wireshark" ];
+      extraGroups = [ "networkmanager" "wheel" "libvirtd" "docker" "audio" "pulse-access" "qemu-libvirtd" "kvm" "wireshark" "i2c" ];
       shell = pkgs.${theShell};
       ignoreShellProgramCheck = true;
       packages = (with pkgs; [ 
@@ -106,7 +106,8 @@ in {
 	wine64
 	wineWowPackages.waylandFull
 	winetricks
-	wineWowPackages.stable
+        wineWowPackages.stable
+        vulkan-tools
 	tcptraceroute
 	hyprpicker
         dbgate
@@ -115,7 +116,6 @@ in {
         deno
         gdk
 	aircrack-ng
-	burpsuite
 	#STABLE_USER
       ])
 
@@ -172,7 +172,8 @@ in {
   };
 
   environment.systemPackages = (with pkgs; [
-       curl
+        burpsuitepro.packages.${system}.default
+        curl
         git
         pciutils
         wget

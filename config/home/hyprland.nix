@@ -21,6 +21,7 @@ in with lib; {
       modifier = "SUPER";
     in concatStrings [ ''
       monitor=DP-1,1920x1080@144,0x0,1
+      monitor=DP-4,1920x1080@144,0x0,1
       monitor=HDMI-A-1,1920x1080@144,auto,1
       monitor=,preferred,auto,1
 
@@ -50,11 +51,11 @@ in with lib; {
       workspace = 8, monitor:HDMI-A-1
       workspace = 10, monitor:HDMI-A-1
 
-      workspace = 1, monitor:DP-1
-      workspace = 3, monitor:DP-1
-      workspace = 5, monitor:DP-1
-      workspace = 7, monitor:DP-1
-      workspace = 9, monitor:DP-1
+      workspace = 1, monitor:DP-4
+      workspace = 3, monitor:DP-4
+      workspace = 5, monitor:DP-4
+      workspace = 7, monitor:DP-4
+      workspace = 9, monitor:DP-4
 
       general {
         gaps_in = 4

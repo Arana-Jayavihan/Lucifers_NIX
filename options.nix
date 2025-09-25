@@ -37,12 +37,12 @@ in {
   theLCVariables = "en_US.UTF-8";
   theTimezone = "Asia/Colombo";
   theShell = "zsh"; # Possible options: bash, zsh
-  theKernel = "zen"; # Possible options: default, latest, lqx, xanmod, zen
+  theKernel = "latest"; # Possible options: default, latest, lqx, xanmod, zen
   sdl-videodriver = "x11"; # Either x11 or wayland ONLY. Games might require x11 set here
   # For Hybrid Systems intel-nvidia
   # Should Be Used As gpuType
   cpuType = "amd";
-  gpuType = "amd";
+  gpuType = "nvidia";
 
   #Proxy Settings
   useProxy = proxy;
@@ -57,7 +57,8 @@ in {
   # ONLY NEEDED FOR HYBRID
   # SYSTEMS! 
   # intel-bus-id = "PCI:0:2:0";
-  # nvidia-bus-id = "PCI:14:0:0";
+  nvidia-bus-id = "PCI:1:0:0";
+  amd-bus-id = "PCI:14:0:0";
 
   # Enable / Setup NFS
   nfs = false;

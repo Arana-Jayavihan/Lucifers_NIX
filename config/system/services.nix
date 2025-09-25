@@ -1,4 +1,4 @@
-{ pkgs, config, lib, ... }:
+{ pkgs, config, lib, pkgs-unstable, ... }:
 
 {
   xdg.portal = {
@@ -82,6 +82,7 @@
     enable = true;
     extraRules = ''
       ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="0495", ATTR{idProduct}=="3042", RUN+="/bin/sh -c '/etc/profiles/per-user/lucifer/bin/usbDAC'"
+      SUBSYSTEMS=="usb|hidraw", ATTRS{idVendor}=="0db0", ATTRS{idProduct}=="0076", TAG+="uaccess", TAG+="MSI MYSTIC LIGHT"
     '';
   };
 
@@ -94,10 +95,11 @@
   services.hardware.openrgb = {
     enable = true;
     motherboard = "amd";
-    package = pkgs.openrgb-with-all-plugins;
+    package = pkgs-unstable.openrgb-with-all-plugins;
   };
 
   hardware.enableAllFirmware = true;
+  hardware.i2c.enable = true;
   hardware.bluetooth.enable = true; # enables support for Bluetooth
   hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
   hardware.bluetooth.input = {

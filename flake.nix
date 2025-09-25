@@ -30,6 +30,12 @@
       #rev = "834c8f9bb8a7b63ba242f9ce0db81708c620f2bc";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    burpsuitepro = {
+      type = "github";
+      owner = "xiv3r";
+      repo = "Burpsuite-Professional";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     #firefox = {
     #  type = "git";
     #  url = "https://github.com/nix-community/flake-firefox-nightly.git";
@@ -45,7 +51,8 @@
     home-manager, 
     impermanence, 
     nix-colors, 
-    spicetify-nix, 
+    spicetify-nix,
+    burpsuitepro,
     #firefox, 
     ... }:
   let
@@ -78,6 +85,7 @@
           inherit hostname;
           inherit pkgs-unstable;
           inherit nixColorsContrib;
+          inherit burpsuitepro;
           #inherit firefox;
         };
 	modules = [ 
