@@ -110,7 +110,10 @@ in {
     })
     (import ./../scripts/usbDAC.nix {
       inherit pkgs;
-    }) 
+    })
+    (import ./../scripts/idle-inhibitor.nix {
+      inherit pkgs;
+    })
   ];
 
   programs.gh.enable = true;

@@ -201,6 +201,7 @@ in with lib; {
       bind = ${modifier},P,pseudo,                        #Pseudo Tiling
       bind = ${modifier},F,fullscreen,                    #Toggle Fullscreen
       bind = ${modifier},Q,killactive,                    #Kill Active Window
+      bind = ${modifier},I,exec,idle-inhibitor            #Toggle Idle Inhibitor
       bind = ${modifier}SHIFT,R,exec,reloadShell          #Reload Shell
       bind = ${modifier}SHIFT,W,exec,wallSelector         #Simple Wallpaper Selector
       bind = ${modifier}SHIFT,B,exec,list-hypr-bindings   #List Hyprland Binds
