@@ -33,9 +33,8 @@
     enable = true;
     package = pkgs.twingate;
   };
-  services.power-profiles-daemon.enable = true;
-  services.gnome.gnome-keyring.enable = true;
-  services.gnome.gnome-remote-desktop.enable = true;
+  services.power-profiles-daemon.enable = true; 
+  services.gnome.gnome-remote-desktop.enable = false;
   services.blueman.enable = true; 
   services.pipewire = {
     enable = true;
@@ -106,6 +105,12 @@
     General = {
       IdleTimeout = 3600;
       ClassicBondedOnly = false;
+      ControllerMode = "bredr"; 
+      Experimental = true;
+      FastConnectable = true;
+    };
+    Policy = {
+      AutoEnable = true;
     };
   };
   

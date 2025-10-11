@@ -9,6 +9,7 @@ lib.mkIf ("${gpuType}" == "nvidia") {
     enable = true;
     enable32Bit = true;
   };
+  hardware.nvidia-container-toolkit.enable = true;
   hardware.nvidia = {
     modesetting.enable = true;
     powerManagement.enable = false;

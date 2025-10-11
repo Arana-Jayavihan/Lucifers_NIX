@@ -89,4 +89,7 @@ in {
 
   # Enable Python & PyCharm
   python = true;
+
+  # Enable Gnome Desktop and packages
+  gnome = true;
 }

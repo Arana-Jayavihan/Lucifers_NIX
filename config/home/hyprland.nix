@@ -148,7 +148,7 @@ in with lib; {
         }
       }
 
-      exec-once = $POLKIT_BIN
+      exec-once = systemctl --user start hyprpolkitagent
       exec-once = dbus-update-activation-environment --systemd --all
       exec-once = systemctl --user import-environment QT_QPA_PLATFORMTHEME WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
       exec-once = swww init
@@ -172,6 +172,7 @@ in with lib; {
       exec-once = hyprctl dispatch exec "[workspace 9 silent;]" -- spotify
       exec-once = hyprctl dispatch exec "[workspace 9 silent;]" -- kitty cava
       exec-once = ${pkgs.power-profiles-daemon}/bin/powerprofilesctl set power-saver
+      exec-once = openrgb -p ${username}
       
       dwindle {
         pseudotile = true

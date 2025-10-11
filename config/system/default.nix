@@ -4,7 +4,6 @@
   imports = [
     ./amd-gpu.nix
     ./appimages.nix
-    ./autorun.nix
     ./boot.nix
     ./displaymanager.nix
     ./distrobox.nix

@@ -168,11 +168,12 @@ in {
 
   environment.variables = {
     FLAKE = "${flakeDir}";
-    POLKIT_BIN = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+    GSK_RENDERER = "ngl";
   };
 
   environment.systemPackages = (with pkgs; [
         burpsuitepro.packages.${system}.default
+        hyprpolkitagent
         curl
         git
         pciutils
@@ -219,6 +220,7 @@ in {
         libcec
         zoxide
 	gparted 
+	uv
 	#STABLE_SYSTEM 
       ])
     
