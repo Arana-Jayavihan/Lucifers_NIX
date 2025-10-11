@@ -87,7 +87,6 @@ in {
 	metasploit
 	dex2jar
 	android-tools
-	file
 	tshark
 	sshpass
 	inetutils
@@ -143,7 +142,6 @@ in {
 	peaclock
         putty
         anydesk
-	ntfs3g
 	nixpkgs-fmt
 	csvlens
 	postman
@@ -174,6 +172,7 @@ in {
   environment.systemPackages = (with pkgs; [
         burpsuitepro.packages.${system}.default
         hyprpolkitagent
+        ntfs3g
         curl
         git
         pciutils
@@ -189,8 +188,8 @@ in {
         htop
         btop
         libvirt
-        polkit_gnome
         lm_sensors
+        p7zip
         unzip
         unrar
         libnotify
@@ -220,7 +219,6 @@ in {
         libcec
         zoxide
 	gparted 
-	uv
 	#STABLE_SYSTEM 
       ])
     
