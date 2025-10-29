@@ -32,7 +32,7 @@ let inherit (import ../../options.nix)
       wayland = {
         enable = true;
       };
-      theme = "sddm-firewatch";
+      theme = "sddm-adaptive-theme";
       autoNumlock = true;
     };
   };
@@ -43,11 +43,11 @@ let inherit (import ../../options.nix)
 let
     sugar = pkgs.callPackage ../pkgs/sddm-sugar-dark.nix {};
     tokyo-night = pkgs.libsForQt5.callPackage ../pkgs/sddm-tokyo-night.nix {};
-    firewatch-dark = pkgs.callPackage ../pkgs/sddm-firewatch.nix {};
+    sddm-adaptive-theme = pkgs.callPackage ../pkgs/sddm-theme/default.nix { inherit pkgs; };
 in [ 
     sugar.sddm-sugar-dark # Name: sugar-dark
     tokyo-night # Name: tokyo-night-sddm
-    firewatch-dark.sddm-firewatch # Name sddm-firewatch
+    sddm-adaptive-theme # Name sddm-adaptive-theme
     pkgs.libsForQt5.qt5.qtgraphicaleffects
   ];
 }

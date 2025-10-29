@@ -1,4 +1,4 @@
-{ pkgs, wallpaperDir, flakeDir, ... }:
+{ pkgs, wallpaperDir, flakeDir, username, ... }:
 
 pkgs.writeShellScriptBin "wallchange" ''
 THEME="false"
