@@ -25,5 +25,6 @@
     ./steam.nix
     ./vm.nix
     ./customPackages.nix
+    ./ollama.nix
   ];
 }

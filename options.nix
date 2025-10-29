@@ -21,7 +21,7 @@ in {
   # ^ (use as is or replace with your own repo - removing will break the wallsetter script) 
   wallpaperDir = "${userHome}/Projects/nix-wallpapers";
   useWallColors = true;
-  curWallPaper = "/home/lucifer/Projects/nix-wallpapers/wall91.jpg";
+  curWallPaper = "/home/lucifer/Projects/nix-wallpapers/wall94.jpg";
   screenshotDir = "${userHome}/Pictures/Screenshots";
   userHome = "${userHome}";
   flakeDir = "${flakeDir}";
@@ -67,7 +67,7 @@ in {
 
   # NTP & HWClock Settings
   ntp = true;
-  localHWClock = true;
+  localHWClock = false;
 
   # Enable Printer & Scanner Support
   printer = true;

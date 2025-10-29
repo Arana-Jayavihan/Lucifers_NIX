@@ -115,6 +115,7 @@ in {
         deno
         gdk
 	aircrack-ng
+	obsidian
 	#STABLE_USER
       ])
 
@@ -166,7 +167,7 @@ in {
 
   environment.variables = {
     FLAKE = "${flakeDir}";
-    GSK_RENDERER = "ngl";
+    GSK_RENDERER = "gl";
   };
 
   environment.systemPackages = (with pkgs; [
