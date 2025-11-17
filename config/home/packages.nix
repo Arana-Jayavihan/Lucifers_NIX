@@ -23,11 +23,6 @@ in {
     tree
     swaylock-effects
 
-<<<<<<< HEAD
-    # Import Scripts
-=======
-    # Import Scripts 
->>>>>>> d91af55 (themechange and btledctl fixes)
     (import ./../scripts/emopicker9000.nix { 
       inherit pkgs;
     })
