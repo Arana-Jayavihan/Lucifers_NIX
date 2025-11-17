@@ -21,7 +21,7 @@ in {
   # ^ (use as is or replace with your own repo - removing will break the wallsetter script) 
   wallpaperDir = "${userHome}/Projects/nix-wallpapers";
   useWallColors = true;
-  curWallPaper = "/home/lucifer/Projects/nix-wallpapers/wall94.jpg";
+  curWallPaper = "/home/lucifer/Projects/nix-wallpapers/wall87.jpg";
   screenshotDir = "${userHome}/Pictures/Screenshots";
   userHome = "${userHome}";
   flakeDir = "${flakeDir}";

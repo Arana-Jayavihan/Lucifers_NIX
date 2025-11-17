@@ -36,20 +36,33 @@ def adjust_brightness(color, target_brightness=200):
 
 
 def gamma_correction(r, g, b, gamma=2.2):
-    """Apply gamma correction to RGB values."""
-    r_corrected = int((r / 255.0) ** gamma * 255)
-    g_corrected = int((g / 255.0) ** gamma * 255)
-    b_corrected = int((b / 255.0) ** gamma * 255)
+    r_corrected = int((r / 255.0) ** (1 / gamma) * 255)
+    g_corrected = int((g / 255.0) ** (1 / gamma) * 255)
+    b_corrected = int((b / 255.0) ** (1 / gamma) * 255)
     return r_corrected, g_corrected, b_corrected
 
-
 def apply_calibration(r, g, b):
-    """Apply calibration to RGB values."""
     r_calibrated = min(255, int(r * RED_SCALE))
     g_calibrated = min(255, int(g * GREEN_SCALE))
     b_calibrated = min(255, int(b * BLUE_SCALE))
     return r_calibrated, g_calibrated, b_calibrated
 
+def adjust_brightness(color, enable=False, target_brightness=200):
+    if not enable:
+        return color
+
+    r, g, b = color
+    current_brightness = 0.2126 * r + 0.7152 * g + 0.0722 * b
+    if current_brightness == 0:
+        return r, g, b
+
+    scale = target_brightness / current_brightness
+
+    return (
+        min(255, int(r * scale)),
+        min(255, int(g * scale)),
+        min(255, int(b * scale)),
+    )
 
 def parse_hex_color(hex_color):
     """Convert a hex color code to an RGB tuple."""
@@ -67,15 +80,33 @@ def parse_hex_color(hex_color):
 
 async def send_command(device_address, command):
     """Send a command to the BLE device."""
-    async with BleakClient(device_address) as client:
-        is_connected = client.is_connected
-        if is_connected:
-            print(f"Connected to {device_address}")
-            print(f"Sending command: {command.hex()}")
-            await client.write_gatt_char(CHARACTERISTIC_UUID, command)
-            print(f"Command sent: {command.hex()}")
-        else:
+    client = BleakClient(device_address)
+
+    try:
+        await client.connect()
+        if not client.is_connected:
             print(f"Failed to connect to {device_address}")
+            return False
+
+        print(f"Connected to {device_address}")
+        print(f"Sending command: {command.hex()}")
+
+        await client.write_gatt_char(CHARACTERISTIC_UUID, command, response=False)
+
+        print("Command sent")
+
+    except Exception as e:
+        print(f"Error during send_command: {e}")
+
+    finally:
+        try:
+            if client.is_connected:
+                await client.disconnect()
+        except Exception:
+            pass
+
+    return True
+
 
 
 async def adjust_brightness_for_group(devices, brightness):
@@ -109,10 +140,18 @@ async def control_light(device_address, action, brightness=None, color=None, dev
             await send_command(device_address, CMD_BRIGHT_FORMAT(brightness))
     elif action == "color" and color is not None:
         print(f"Original color input: {color}")
-        r, g, b = adjust_brightness(color)
+
+        # --- Step 1: calibration ---
+        r, g, b = apply_calibration(*color)
+
+        # --- Step 2: gamma correction ---
         r, g, b = gamma_correction(r, g, b)
-        r, g, b = apply_calibration(r, g, b)
+
+        # --- Step 3: optional brightness normalization ---
+        r, g, b = adjust_brightness((r, g, b), enable=False)
+
         print(f"Final color sent: R={r}, G={g}, B={b}")
+
         command = CMD_COLOR_FORMAT(r, g, b)
         await send_command(device_address, command)
     else:
@@ -163,3 +202,4 @@ if __name__ == "__main__":
     # Run the asyncio loop
     asyncio.run(control_light(args.device_address, args.action,
                 args.brightness, color_rgb, devices))
+

@@ -36,7 +36,7 @@ in
       highlight-elevated = "${palette.base00}";
       sidebar = "${palette.base00}";
       player = "${palette.base00}";
-      card = "${palette.base05}";
+      card = "${palette.base02}";
       shadow = "${palette.base00}";
       selected-row = "${palette.base0B}";
       button = "${palette.base04}";
