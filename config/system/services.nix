@@ -158,7 +158,7 @@
           --what=idle:sleep:handle-power-key:handle-suspend-key:handle-hibernate-key:handle-lid-switch \
           --mode=block \
           --why="IdleInhibitorToggle" \
-          sleep infinity
+          sleep 2147483647
       '';
       Restart = "no";
     };
