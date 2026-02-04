@@ -32,8 +32,14 @@ let inherit (import ../../options.nix)
       wayland = {
         enable = true;
       };
-      theme = "sddm-adaptive-theme";
+      #theme = "sddm-adaptive-theme";
       autoNumlock = true;
+      theme = "${pkgs.sddm-astronaut}/share/sddm/themes/sddm-astronaut-theme";
+      extraPackages = with pkgs.kdePackages; [
+        qtsvg
+        qtmultimedia
+        qtvirtualkeyboard
+      ];
     };
   };
 
