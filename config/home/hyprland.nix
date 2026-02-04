@@ -4,7 +4,7 @@ let
   theme = config.colorScheme.palette;
   hyprplugins = inputs.hyprland-plugins.packages.${pkgs.system};
   inherit (import ../../options.nix) 
-    browser cpuType gpuType userHome
+    browser cpuType gpuType
     wallpaperDir borderAnim username
     theKBDLayout terminal curWallPaper
     theSecondKBDLayout gitUsername
@@ -25,24 +25,24 @@ in with lib; {
       monitor=HDMI-A-1,1920x1080@144,auto,1
       monitor=,preferred,auto,1
 
-      windowrule = fullscreen, title:^(wlogout)$
-      windowrule = animation fade, title:^(wlogout)$
+      #windowrule = fullscreen, match:title ^(wlogout)$
+      windowrule = animation fade, match:title ^(wlogout)$
 
-      windowrulev2 = opacity 0.8 override 0.8 override,initialClass:^(.*)$
+      windowrule = opacity 0.8 override 0.8 override, match:initial_class ^(.*)$
 
-      windowrulev2 = opacity 0.75 override 0.75 override,initialClass:^(pulseeffects.*)$
-      windowrulev2 = opacity 0.75 override 0.75 override,initialClass:^(pavucontrol.*)$
-      windowrulev2 = opacity 0.75 override 0.75 override,initialClass:^(thunar.*)$
-      windowrulev2 = opacity 0.75 override 0.75 override,initialClass:^(kitty.*)$
+      windowrule = opacity 0.75 override 0.75 override, match:initial_class ^(pulseeffects.*)$
+      windowrule = opacity 0.75 override 0.75 override, match:initial_class ^(pavucontrol.*)$
+      windowrule = opacity 0.75 override 0.75 override, match:initial_class ^(thunar.*)$
+      windowrule = opacity 0.75 override 0.75 override, match:initial_class ^(kitty.*)$
 
-      windowrulev2 = opacity 1.0 override 1.0 override,title:^(.*YouTube.*)$
-      windowrulev2 = idleinhibit focus, title:^(.*YouTube.*)$
-      windowrulev2 = opacity 1.0 override 1.0 override,title:^(.*HiAnime.*)$
-      windowrulev2 = opacity 1.0 override 1.0 override,title:^(.*HollyMovieHD.*)$
-      windowrulev2 = opacity 1.0 override 1.0 override,initialClass:^(.*VirtualBox.*)$ 
-      windowrulev2 = opacity 1.0 override 1.0 override,initialClass:^(.*imv.*)$
-      windowrulev2 = opacity 1.0 override 1.0 override,initialClass:^(.*org.kde.kdenlive.*)$ 
-      windowrulev2 = opacity 1.0 override 1.0 override,initialClass:^(.*Waydroid.*)$ 
+      windowrule = opacity 1.0 override 1.0 override, match:title ^(.*YouTube.*)$
+      windowrule = idle_inhibit focus, match:title ^(.*YouTube.*)$
+      windowrule = opacity 1.0 override 1.0 override, match:title ^(.*HiAnime.*)$
+      windowrule = opacity 1.0 override 1.0 override, match:title ^(.*HollyMovieHD.*)$
+      windowrule = opacity 1.0 override 1.0 override, match:initial_class ^(.*VirtualBox.*)$ 
+      windowrule = opacity 1.0 override 1.0 override, match:initial_class ^(.*imv.*)$
+      windowrule = opacity 1.0 override 1.0 override, match:initial_class ^(.*org.kde.kdenlive.*)$ 
+      windowrule = opacity 1.0 override 1.0 override, match:initial_class ^(.*Waydroid.*)$ 
 
       # Workspace Rules
       workspace = 2, monitor:HDMI-A-1
@@ -51,11 +51,11 @@ in with lib; {
       workspace = 8, monitor:HDMI-A-1
       workspace = 10, monitor:HDMI-A-1
 
-      workspace = 1, monitor:DP-4
-      workspace = 3, monitor:DP-4
-      workspace = 5, monitor:DP-4
-      workspace = 7, monitor:DP-4
-      workspace = 9, monitor:DP-4
+      workspace = 1, monitor:eDP-1
+      workspace = 3, monitor:eDP-1
+      workspace = 5, monitor:eDP-1
+      workspace = 7, monitor:eDP-1
+      workspace = 9, monitor:eDP-1
 
       general {
         gaps_in = 4
@@ -99,7 +99,7 @@ in with lib; {
         env = WLR_NO_HARDWARE_CURSORS,1
       '' else ''
       ''}
-
+        
       gesture = 3, horizontal, workspace
 
       misc {
@@ -107,6 +107,7 @@ in with lib; {
         key_press_enables_dpms = false
         vfr = true
       }
+
       animations {
         enabled = yes
         bezier = wind, 0.05, 0.9, 0.1, 1.05
@@ -147,12 +148,12 @@ in with lib; {
         }
       }
 
-      exec-once = systemctl --user start hyprpolkitagent
+      exec-once = $POLKIT_BIN
       exec-once = dbus-update-activation-environment --systemd --all
       exec-once = systemctl --user import-environment QT_QPA_PLATFORMTHEME WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
-      exec-once = swww init
-      exec-once = swww img "${curWallPaper}"
-      #exec-once = hypridle
+      exec-once = swww-daemon -q
+      #exec-once = swww img "${curWallPaper}"
+      exec-once = hypridle
       exec-once = swaync
       exec-once = ags
       exec-once = amixer -c 0 set PCM 100% unmute
@@ -165,13 +166,12 @@ in with lib; {
       exec-once = nm-applet --indicator
 
       # Custom Startup Apps
-      exec-once = hyprctl dispatch exec "[workspace 10 silent;]" -- kitty python ${userHome}/Projects/TCP-Over-SSL-Tunnel/main.py 
+      exec-once = hyprctl dispatch exec "[workspace 10 silent;]" -- kitty python /home/lucifer/Projects/TCP-Over-SSL-Tunnel/main.py
       exec-once = hyprctl dispatch exec "[workspace 10 silent;]" -- kitty AndroControl
       exec-once = hyprctl dispatch exec "[workspace 10 silent;]" -- blueman-manager
       exec-once = hyprctl dispatch exec "[workspace 9 silent;]" -- spotify
       exec-once = hyprctl dispatch exec "[workspace 9 silent;]" -- kitty cava
-      exec-once = ${pkgs.power-profiles-daemon}/bin/powerprofilesctl set power-saver
-      exec-once = openrgb -p ${username}
+      exec-once = ${pkgs.power-profiles-daemon}/bin/powerprofilesctl set performance
       
       dwindle {
         pseudotile = true
