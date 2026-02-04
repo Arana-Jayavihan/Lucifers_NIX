@@ -1,30 +1,25 @@
-{ pkgs, lib, config, ... }:
+{ pkgs, config, ... }:
 
-let inherit (import ../../options.nix) 
-  theKBDVariant 
-  theKBDLayout 
-  theSecondKBDLayout
-  gnome
-  ; in
+let inherit (import ../../options.nix) theKBDVariant
+theKBDLayout theSecondKBDLayout; in
 {
-  services.xserver = lib.mkMerge [
-    {
-      enable = true;
-      xkb = {
-        variant = "${theKBDVariant}";
-        layout = "${theKBDLayout}, ${theSecondKBDLayout}";
-      };
-    }
-    
-    (lib.mkIf gnome {
-      desktopManager.gnome.enable = true;
-      desktopManager.gnome.extraGSettingsOverrides = ''
-      [org.gnome.mutter]
-      check-alive-timeout=60000
-      '';
-    })
-  ];
-  services.gnome.gnome-keyring.enable = gnome;
+  services.xserver = {
+    enable = true;
+    xkb = {
+      variant = "${theKBDVariant}";
+      layout = "${theKBDLayout}, ${theSecondKBDLayout}";
+    };
+
+    #displayManager.sddm = {
+    #  enable = true;
+    #  autoNumlock = true;
+    #  wayland.enable = true;
+    #  theme = "sddm-firewatch";
+    #};
+  };
+
+  services.desktopManager.gnome.enable = true;    
+
   services.displayManager = {
     enable = true;
     sddm = {

@@ -149,7 +149,6 @@ in {
 	marktext
 	cava	
 	jadx
-	qutebrowser-qt5
 	libguestfs
 	wev
 	postgresql_17
@@ -233,7 +232,7 @@ in {
   fonts = {
     enableDefaultPackages = true;
     packages = with pkgs; [
-      ubuntu_font_family
+      ubuntu-classic
       nerd-fonts.jetbrains-mono
       font-awesome
       noto-fonts-color-emoji

@@ -4,6 +4,8 @@ pkgs.python313Packages.buildPythonPackage rec {
   name = "autosubtitle";
   version = "1.0";
   src = ./.;
+  pyproject = true;
+  build-system = [ pkgs.python313Packages.setuptools ];
 
   propagatedBuildInputs = [ 
     pkgs.python313Packages.setuptools

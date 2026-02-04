@@ -6,7 +6,7 @@ let
 in {
   programs.nixvim = {
     enable = true;
-
+    version.enableNixpkgsReleaseCheck = false;
     globals.mapleader = " "; # Sets the leader key to space
     
     opts = {
@@ -65,8 +65,10 @@ in {
         enable = true;
       };
       startup = { 
-	enable = true;
-	theme = "dashboard";
+        enable = true;
+        settings = {
+          theme = "dashboard";
+        };
       };
       lsp = {
 	enable = true;

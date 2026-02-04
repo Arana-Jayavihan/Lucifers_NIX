@@ -14,7 +14,7 @@ in {
     grim
     slurp
     swaynotificationcenter 
-    rofi-wayland 
+    rofi
     imv 
     mpv
     obs-studio
