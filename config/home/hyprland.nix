@@ -4,7 +4,7 @@ let
   theme = config.colorScheme.palette;
   hyprplugins = inputs.hyprland-plugins.packages.${pkgs.system};
   inherit (import ../../options.nix) 
-    browser cpuType gpuType
+    browser cpuType gpuType userHome
     wallpaperDir borderAnim username
     theKBDLayout terminal curWallPaper
     theSecondKBDLayout gitUsername
@@ -51,11 +51,11 @@ in with lib; {
       workspace = 8, monitor:HDMI-A-1
       workspace = 10, monitor:HDMI-A-1
 
-      workspace = 1, monitor:eDP-1
-      workspace = 3, monitor:eDP-1
-      workspace = 5, monitor:eDP-1
-      workspace = 7, monitor:eDP-1
-      workspace = 9, monitor:eDP-1
+      workspace = 1, monitor:DP-4
+      workspace = 3, monitor:DP-4
+      workspace = 5, monitor:DP-4
+      workspace = 7, monitor:DP-4
+      workspace = 9, monitor:DP-4 
 
       general {
         gaps_in = 4
@@ -148,7 +148,7 @@ in with lib; {
         }
       }
 
-      exec-once = $POLKIT_BIN
+      exec-once = systemctl --user start hyprpolkitagent
       exec-once = dbus-update-activation-environment --systemd --all
       exec-once = systemctl --user import-environment QT_QPA_PLATFORMTHEME WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
       exec-once = swww-daemon -q
@@ -166,12 +166,13 @@ in with lib; {
       exec-once = nm-applet --indicator
 
       # Custom Startup Apps
-      exec-once = hyprctl dispatch exec "[workspace 10 silent;]" -- kitty python /home/lucifer/Projects/TCP-Over-SSL-Tunnel/main.py
+      exec-once = hyprctl dispatch exec "[workspace 10 silent;]" -- kitty python ${userHome}/Projects/TCP-Over-SSL-Tunnel/main.py
       exec-once = hyprctl dispatch exec "[workspace 10 silent;]" -- kitty AndroControl
       exec-once = hyprctl dispatch exec "[workspace 10 silent;]" -- blueman-manager
       exec-once = hyprctl dispatch exec "[workspace 9 silent;]" -- spotify
       exec-once = hyprctl dispatch exec "[workspace 9 silent;]" -- kitty cava
-      exec-once = ${pkgs.power-profiles-daemon}/bin/powerprofilesctl set performance
+      exec-once = ${pkgs.power-profiles-daemon}/bin/powerprofilesctl set power-saver
+      exec-once = openrgb -p ${username}
       
       dwindle {
         pseudotile = true
