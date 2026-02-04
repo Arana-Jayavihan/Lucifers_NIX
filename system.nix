@@ -40,7 +40,7 @@ in {
   '';
 
   #Firewall
-  networking.firewall.enable = false;
+  networking.firewall.enable = useFirewall;
   networking.firewall.allowedTCPPorts = if useFirewall == true 
   then firewallPorts
   else [];
@@ -150,7 +150,6 @@ in {
 	cava	
 	jadx
 	qutebrowser-qt5
-	openshot-qt
 	libguestfs
 	wev
 	postgresql_17
