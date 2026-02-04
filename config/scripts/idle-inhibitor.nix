@@ -1,13 +1,14 @@
 { pkgs, ... }:
 
 pkgs.writeShellScriptBin "idle-inhibitor" ''
-SERVICE="idle-inhibit.service"
+HYPRIDLE_BIN="hypridle"
+NOTIFY="${pkgs.libnotify}/bin/notify-send"
 
-if systemctl --user is-active --quiet "$SERVICE"; then
-  ${pkgs.libnotify}/bin/notify-send "Idle Control 🍃" "Turning off idle blocker 😴"
-  systemctl --user stop "$SERVICE"
+if pgrep -x "$HYPRIDLE_BIN" >/dev/null; then
+  $NOTIFY "Idle Control 🍃" "Turning off hypridle 😴"
+  pkill -x "$HYPRIDLE_BIN"
 else
-  ${pkgs.libnotify}/bin/notify-send "Idle Control 🍃" "Turning on idle blocker ☕"
-  systemctl --user start "$SERVICE"
+  $NOTIFY "Idle Control 🍃" "Turning on hypridle ☕"
+  nohup "$HYPRIDLE_BIN" >/dev/null 2>&1 &
 fi
 ''

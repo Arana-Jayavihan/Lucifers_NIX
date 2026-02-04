@@ -26,7 +26,7 @@
   services.thermald.enable = false;
   services.hypridle.enable = true;
   services.mysql = {
-    enable = false;
+    enable = true;
     package = pkgs.mysql84;
   };
   services.twingate = {
@@ -143,26 +143,5 @@
       User = "lucifer";
     };
   };
-
-  # Idle Inhibitor Service
-  systemd.user.services.idle-inhibit = {
-    enable = true;
-    unitConfig = {
-      Description = "Idle Inhibitor (prevents suspend, idle, lid switch etc)";
-    };
-
-    serviceConfig = {
-      Type = "simple";
-      ExecStart = ''
-        ${pkgs.systemd}/bin/systemd-inhibit \
-          --what=idle:sleep:handle-power-key:handle-suspend-key:handle-hibernate-key:handle-lid-switch \
-          --mode=block \
-          --why="IdleInhibitorToggle" \
-          sleep infinity
-      '';
-      Restart = "no";
-    };
-
-    wantedBy = [ "default.target" ];
-  };
 }
+
