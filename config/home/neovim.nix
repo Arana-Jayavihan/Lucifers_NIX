@@ -3,7 +3,8 @@
 let
   plugins = pkgs.vimPlugins;
   theme = config.colorScheme.palette;
-in {
+in
+{
   programs.nixvim = {
     enable = true;
     # Use the same nixpkgs as the system (matches the flake `follows`);
@@ -11,12 +12,12 @@ in {
     nixpkgs.source = pkgs.path;
     version.enableNixpkgsReleaseCheck = false;
     globals.mapleader = " "; # Sets the leader key to space
-    
+
     opts = {
-      clipboard="unnamedplus";
-      number = true;         # Show line numbers
+      clipboard = "unnamedplus";
+      number = true; # Show line numbers
       relativenumber = false; # Show relative line numbers
-      shiftwidth = 2;        # Tab width should be 2
+      shiftwidth = 2; # Tab width should be 2
       softtabstop = 2;
       smartindent = true;
       wrap = false;
@@ -48,16 +49,16 @@ in {
       base0E = "#${theme.base0E}";
       base0F = "#${theme.base0F}";
     };
-    
+
     plugins = {
       barbecue.enable = true;
       gitsigns.enable = true;
       telescope = {
-	enable = true;
-	keymaps = {
-	  "<leader>ff" = "find_files";
-	  "<leader>lg" = "live_grep";
-	};
+        enable = true;
+        keymaps = {
+          "<leader>ff" = "find_files";
+          "<leader>lg" = "live_grep";
+        };
       };
       indent-blankline.enable = true;
       colorizer.enable = true;
@@ -67,56 +68,40 @@ in {
       lualine = {
         enable = true;
       };
-      startup = { 
+      startup = {
         enable = true;
         settings = {
-          theme = "dashboard";	
-        }; 
+          theme = "dashboard";
+        };
       };
       lsp = {
-	enable = true;
-	servers = {
-	  ts_ls.enable = true;
-	  lua_ls.enable = true;
+        enable = true;
+        servers = {
+          ts_ls.enable = true;
+          lua_ls.enable = true;
           bashls.enable = true;
-	  rust_analyzer = {
-	    enable = true;
-	    installRustc = true;
-	    installCargo = true;
-	  };
-	  nixd.enable = true;
-	  html.enable = true;
-	  ccls.enable = true;
-	  cmake.enable = true;
-	  csharp_ls.enable = true;
-	  cssls.enable = true;
-	  gopls.enable = true;
-	  jsonls.enable = true;
-	  pyright.enable = true;
-	  tailwindcss.enable = true;
-	};
+          rust_analyzer = {
+            enable = true;
+            installRustc = true;
+            installCargo = true;
+          };
+          nixd.enable = true;
+          html.enable = true;
+          ccls.enable = true;
+          cmake.enable = true;
+          csharp_ls.enable = true;
+          cssls.enable = true;
+          gopls.enable = true;
+          jsonls.enable = true;
+          pyright.enable = true;
+          tailwindcss.enable = true;
+        };
       };
       lsp-lines.enable = true;
       treesitter = {
-	enable = true;
-	nixGrammars = true;
+        enable = true;
+        nixGrammars = true;
       };
-      #cmp = {
-#	enable = true;
-#	autoEnableSources = true;
-#	settings.sources = [
-#	  { name = "nvim_lsp"; }
-#	  { name = "path"; }
-#	  { name = "buffer"; }
-#	];
-#	settings.mapping = {
-#	  "<CR>" = "cmp.mapping.confirm({ select = true })";
-#	  "<Tab>" = {
-#	    action = ''cmp.mapping.select_next_item()'';
-#	    modes = [ "i" "s" ];
-#	  };
-#	};
-#      };
       web-devicons.enable = true;
     };
 
@@ -212,4 +197,4 @@ in {
 
 
   };
- } 
+} 

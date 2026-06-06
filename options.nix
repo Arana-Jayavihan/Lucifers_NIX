@@ -6,7 +6,8 @@ let
   proxy = true;
   socks = "1080";
   http = "1090";
-in {
+in
+{
   # NOTE: Host-specific options (hostname, cpuType, gpuType, bus-ids, theKernel,
   # gnome, ollama, browser, localHWClock) live in hosts/<host>/options.nix and
   # are merged on top of these shared defaults by the flake (delivered as `opt`).

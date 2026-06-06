@@ -13,9 +13,9 @@ lib.mkIf (printer == true) {
   };
   hardware.sane = {
     enable = true;
-    extraBackends = [pkgs.sane-airscan];
-    disabledDefaultBackends = ["escl"];
+    extraBackends = [ pkgs.sane-airscan ];
+    disabledDefaultBackends = [ "escl" ];
   };
   programs.system-config-printer.enable = true;
-  users.users.${username}.extraGroups = ["scanner" "lp"];
+  users.users.${username}.extraGroups = [ "scanner" "lp" ];
 }

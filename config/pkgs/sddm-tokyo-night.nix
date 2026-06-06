@@ -1,4 +1,6 @@
-{ lib, qtbase, qtsvg
+{ lib
+, qtbase
+, qtsvg
 , qtgraphicaleffects
 , qtquickcontrols2
 , wrapQtAppsHook

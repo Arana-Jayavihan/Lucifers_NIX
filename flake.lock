@@ -90,26 +90,6 @@
         "type": "github"
       }
     },
-    "burpsuitepro": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1779958076,
-        "narHash": "sha256-P6SuIRPJqPqbo7rKpLVo4Z0FUZWLwSVtrUDsFtHe9aY=",
-        "owner": "xiv3r",
-        "repo": "Burpsuite-Professional",
-        "rev": "6487071f846f62f51d70a3cf565bfcb4082b1f1b",
-        "type": "github"
-      },
-      "original": {
-        "owner": "xiv3r",
-        "repo": "Burpsuite-Professional",
-        "type": "github"
-      }
-    },
     "firefox": {
       "inputs": {
         "flake-compat": "flake-compat",
@@ -816,7 +796,6 @@
       "inputs": {
         "ags": "ags",
         "androcontrol": "androcontrol",
-        "burpsuitepro": "burpsuitepro",
         "firefox": "firefox",
         "home-manager": "home-manager",
         "hyprland": "hyprland",

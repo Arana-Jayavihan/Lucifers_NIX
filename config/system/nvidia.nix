@@ -17,14 +17,5 @@ lib.mkIf (opt.gpuType == "nvidia") {
     nvidiaSettings = true;
     forceFullCompositionPipeline = false;
     package = pkgs-unstable.linuxPackages_latest.nvidiaPackages.latest;
-
-    #prime = {
-    #  offload.enable = false;
-    #  sync.enable = true;
-    #
-    #  # Make sure to use the correct Bus ID values for your system!
-    #  amdgpuBusId = "${opt.amd-bus-id}";
-    #  nvidiaBusId = "${opt.nvidia-bus-id}";
-    #};
   };
 }

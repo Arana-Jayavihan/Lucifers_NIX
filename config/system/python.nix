@@ -10,7 +10,8 @@ let
     pproxy
     paramiko
   ];
-in lib.mkIf (python == true) {
+in
+lib.mkIf (python == true) {
   environment.systemPackages = with pkgs; [
     (pkgs.python313.withPackages my-python-packages)
   ];

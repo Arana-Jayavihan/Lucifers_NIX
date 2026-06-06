@@ -4,16 +4,18 @@ let
     gitUsername gitEmail theme useWallColors;
 
   inherit (import ./config/home/files/autopalette/custom.nix) customPalette;
-in {
+in
+{
   #wayland.windowManager.hyprland.systemd.variables = ["--all"];
   # Home Manager Settings
   home.username = "${username}";
   home.homeDirectory = "/home/${username}";
   home.stateVersion = "23.11";
 
-  colorScheme = if useWallColors == false 
-  then inputs.nix-colors.colorSchemes."${theme}"
-  else customPalette;
+  colorScheme =
+    if useWallColors == false
+    then inputs.nix-colors.colorSchemes."${theme}"
+    else customPalette;
 
   # Import Program Configurations
   imports = [
@@ -53,28 +55,28 @@ in {
   };
   # Create XDG Dirs
   xdg = {
-  #  mime.enable = true;
-  #  mimeApps = {
-  #    enable = true;
-  #    defaultApplications = {
-  #      "text/html" = "firefox.desktop";
-  #      "x-scheme-handler/http" = "firefox.desktop";
-  #      "x-scheme-handler/https" = "firefox.desktop";
-  #      "x-scheme-handler/about" = "firefox.desktop";
-  #      "x-scheme-handler/unknown" = "firefox.desktop";
-  #    };
-  #  };
+    mimeApps = {
+      enable = true;
+      defaultApplications = {
+        "text/html" = "firefox-nightly.desktop";
+        "application/xhtml+xml" = "firefox-nightly.desktop";
+        "x-scheme-handler/http" = "firefox-nightly.desktop";
+        "x-scheme-handler/https" = "firefox-nightly.desktop";
+        "x-scheme-handler/about" = "firefox-nightly.desktop";
+        "x-scheme-handler/unknown" = "firefox-nightly.desktop";
+      };
+    };
     userDirs = {
-        enable = true;
-        createDirectories = true;
-        setSessionVariables = false;
+      enable = true;
+      createDirectories = true;
+      setSessionVariables = false;
     };
   };
 
   dconf.settings = {
     "org/virt-manager/virt-manager/connections" = {
-      autoconnect = ["qemu:///system"];
-      uris = ["qemu:///system"];
+      autoconnect = [ "qemu:///system" ];
+      uris = [ "qemu:///system" ];
     };
   };
 

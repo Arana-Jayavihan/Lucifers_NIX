@@ -8,7 +8,7 @@
   programs = {
     steam.gamescopeSession.enable = true;
     dconf.enable = true;
-    seahorse.enable=true;
+    seahorse.enable = true;
     hyprland = {
       enable = true;
       package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
@@ -39,10 +39,5 @@
 
   virtualisation.libvirtd = {
     enable = true;
-    #qemu = {
-    #  package = pkgs.qemu_kvm;
-    #  runAsRoot = true;
-    #  swtpm.enable = true; 
-    #};
   };
 }

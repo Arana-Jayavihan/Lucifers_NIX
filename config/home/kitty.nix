@@ -3,8 +3,11 @@
 let
   palette = config.colorScheme.palette;
   inherit (opt) alacritty wezterm kitty;
-in lib.mkIf (wezterm == false && alacritty == false
-	     || kitty == true) {
+in
+lib.mkIf
+  (wezterm == false && alacritty == false
+    || kitty == true)
+{
   # Configure Kitty
   programs.kitty = {
     enable = true;

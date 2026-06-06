@@ -34,12 +34,6 @@
       #rev = "d20be2e9c1b201e4253e79a200f0a2ed7fc27441";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    burpsuitepro = {
-      type = "github";
-      owner = "xiv3r";
-      repo = "Burpsuite-Professional";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     nix-claude-code.url = "github:ryoppippi/nix-claude-code";
     androcontrol = {
       url = "github:Arana-Jayavihan/AndroControl";
@@ -51,67 +45,68 @@
     };
   };
 
-  outputs = inputs@{ nixpkgs-unstable, nixpkgs, home-manager, nix-colors, firefox, nix-claude-code, burpsuitepro, ... }:
-  let
+  outputs = inputs@{ nixpkgs-unstable, nixpkgs, home-manager, nix-colors, firefox, nix-claude-code, ... }:
+    let
 
-    system = "x86_64-linux";
+      system = "x86_64-linux";
 
-    inherit (import ./options.nix) username;
+      inherit (import ./options.nix) username;
 
-    # Separate (intentional) nixpkgs evaluation for packages we want from unstable.
-    pkgs-unstable = import nixpkgs-unstable {
-      inherit system;
-      config.allowUnfree = true;
-    };
-
-    # Overlays applied to the system nixpkgs (single evaluation, shared by both hosts).
-    overlays = [
-      # nix-colors' gtk-theme contrib still references the removed
-      # `nodePackages.sass`; alias it to the modern dart-sass.
-      (final: prev: { nodePackages = { sass = final.dart-sass; }; })
-      nix-claude-code.overlays.default
-    ];
-
-    # Build a host configuration by name. Shared options come from ./options.nix;
-    # per-host overrides come from ./hosts/<host>/options.nix. The merged set is
-    # passed to all modules as `opt` (and the hardware module is injected here).
-    mkHost = host:
-      let
-        opt = (import ./options.nix) // (import ./hosts/${host}/options.nix);
-      in
-      nixpkgs.lib.nixosSystem {
+      # Separate (intentional) nixpkgs evaluation for packages we want from unstable.
+      pkgs-unstable = import nixpkgs-unstable {
         inherit system;
-        specialArgs = {
-          inherit inputs username opt pkgs-unstable firefox;
-          hostname = opt.hostname;
-        };
-        modules = [
-          ./hosts/${host}/hardware.nix
-          ./system.nix
-          ({ pkgs, ... }: {
-            nixpkgs.overlays = overlays;
-            environment.systemPackages = [
-              pkgs.claude-code
-              #burpsuitepro.packages.${system}.default
-            ];
-          })
-          home-manager.nixosModules.home-manager {
-            home-manager.extraSpecialArgs = {
-              inherit username inputs opt pkgs-unstable firefox;
-              hostname = opt.hostname;
-            };
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.backupFileExtension = "backup";
-            home-manager.users.${username} = import ./home.nix;
-          }
-        ];
+        config.allowUnfree = true;
       };
 
-  in {
-    nixosConfigurations = {
-      shire = mkHost "shire";
-      gondor = mkHost "gondor";
+      # Overlays applied to the system nixpkgs (single evaluation, shared by both hosts).
+      overlays = [
+        # nix-colors' gtk-theme contrib still references the removed
+        # `nodePackages.sass`; alias it to the modern dart-sass.
+        (final: prev: { nodePackages = { sass = final.dart-sass; }; })
+        nix-claude-code.overlays.default
+      ];
+
+      # Build a host configuration by name. Shared options come from ./options.nix;
+      # per-host overrides come from ./hosts/<host>/options.nix. The merged set is
+      # passed to all modules as `opt` (and the hardware module is injected here).
+      mkHost = host:
+        let
+          opt = (import ./options.nix) // (import ./hosts/${host}/options.nix);
+        in
+        nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = {
+            inherit inputs username opt pkgs-unstable firefox;
+            hostname = opt.hostname;
+          };
+          modules = [
+            ./hosts/${host}/hardware.nix
+            ./system.nix
+            ({ pkgs, ... }: {
+              nixpkgs.overlays = overlays;
+              environment.systemPackages = [
+                pkgs.claude-code
+              ];
+            })
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.extraSpecialArgs = {
+                inherit username inputs opt pkgs-unstable firefox;
+                hostname = opt.hostname;
+              };
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.backupFileExtension = "backup";
+              home-manager.users.${username} = import ./home.nix;
+            }
+          ];
+        };
+
+    in
+    {
+      nixosConfigurations = {
+        shire = mkHost "shire";
+        gondor = mkHost "gondor";
+      };
     };
-  };
 }

@@ -23,7 +23,7 @@ in
     };
     theme = {
       name = "${config.colorScheme.slug}";
-      package = nixColorsContrib.gtkThemeFromScheme {scheme = config.colorScheme;};
+      package = nixColorsContrib.gtkThemeFromScheme { scheme = config.colorScheme; };
     };
     # Keep applying the generated theme to GTK4 apps (legacy default;
     # silences the gtk.gtk4.theme deprecation warning on stateVersion < 26.05).
@@ -33,10 +33,10 @@ in
       package = pkgs.dracula-icon-theme;
     };
     gtk3.extraConfig = {
-      gtk-application-prefer-dark-theme=1;
+      gtk-application-prefer-dark-theme = 1;
     };
     gtk4.extraConfig = {
-      gtk-application-prefer-dark-theme=1;
+      gtk-application-prefer-dark-theme = 1;
     };
   };
 
@@ -45,8 +45,8 @@ in
     enable = true;
     platformTheme.name = "gtk";
     style = {
-        name = "adwaita-dark";
-        package = pkgs.adwaita-qt6;
+      name = "adwaita-dark";
+      package = pkgs.adwaita-qt6;
     };
   };
 }

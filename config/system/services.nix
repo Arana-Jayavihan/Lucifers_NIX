@@ -4,19 +4,19 @@ let inherit (opt) laptop; in
 {
   xdg.portal = {
     enable = true;
-    extraPortals = [ 
+    extraPortals = [
       #pkgs.xdg-desktop-portal-gtk
       pkgs.xdg-desktop-portal
-      pkgs.xdg-desktop-portal-wlr 
+      pkgs.xdg-desktop-portal-wlr
     ];
-    configPackages = [ 
-      pkgs.xdg-desktop-portal-wlr 
+    configPackages = [
+      pkgs.xdg-desktop-portal-wlr
       #pkgs.xdg-desktop-portal-gtk
       pkgs.xdg-desktop-portal-hyprland
       pkgs.xdg-desktop-portal
     ];
   };
- 
+
   # List services that you want to enable:
   services.logind.settings.Login.HandleLidSwitchExternalPower = lib.mkIf laptop "ignore";
   services.openssh.enable = true;
@@ -71,7 +71,7 @@ let inherit (opt) laptop; in
   services.cloudflare-warp = {
     enable = true;
   };
-  
+
   hardware.enableAllFirmware = true;
   hardware.bluetooth.enable = true; # enables support for Bluetooth
   hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
@@ -81,10 +81,10 @@ let inherit (opt) laptop; in
       ClassicBondedOnly = false;
     };
   };
-  
+
   security.rtkit.enable = true;
-  security.pam.services.hyprlock = {};
-  security.pam.services.swaylock = {};
+  security.pam.services.hyprlock = { };
+  security.pam.services.swaylock = { };
 
   # Systemd Timers (laptop-only: battery monitoring)
   systemd.timers."batteryNotify" = lib.mkIf laptop {

@@ -39,54 +39,40 @@ lib.mkIf (theShell == "zsh") {
       #eval "$(starship init zsh)"
     '';
 
-    sessionVariables = {
-
-    };
-    #plugins = [
-    #  {
-    #    name = "zsh-nix-shell";
-    #    file = "nix-shell.plugin.zsh";
-    #    src = pkgs.fetchFromGitHub {
-    #      owner = "chisui";
-    #      repo = "zsh-nix-shell";
-    #      rev = "v0.8.0";
-    #      sha256 = "1lzrn0n4fxfcgg65v0qhnj7wnybybqzs4adz7xsrkgmcsr0ii8b7";
-    #    };
-    #  }
-    #];
+    sessionVariables = { };
     oh-my-zsh = {
       enable = true;
       plugins = [ "extract" "systemd" "starship" "kitty" "copybuffer" "zoxide" ];
       #theme = "robbyrussell";
     };
     shellAliases = {
-      sv="sudo nvim";
-      flake-rebuild="nh os switch --nom --hostname ${hostname}";
-      flake-update="nh os switch --nom --hostname ${hostname} --update";
-      gcCleanup="nix-collect-garbage --delete-old && sudo nix-collect-garbage -d && sudo /run/current-system/bin/switch-to-configuration boot";
-      v="nvim";
-      ls="lsd";
-      ll="lsd -l";
-      la="lsd -a";
-      lal="lsd -al";
-      ".."="cd ..";
-      hell="ssh lucifer@165.22.52.204 -i ~/Projects/cloudNix/sshPrivKey.pem";
-      neofetch="neofetch --ascii ~/.config/ascii-neofetch";
-      fastfetch="fastfetch -c ~/.config/fastfetch/config.jsonc";
-      tunnel="python ~/Projects/TCP-Over-SSL-Tunnel/main.py -c ~/Projects/TCP-Over-SSL-Tunnel/settings.ini";
-      pyserver="python -m http.server";
-      fuff="./usr/share/ffuf/ffuf";
-      burp="cd ~/Projects/burpsuite_pro_v2022.9; java -jar burploader.jar";
-      jdgui="java -jar /usr/share/jdgui/jd-gui-1.6.6.jar";	
-      ciao="killall5 -9 && shutdown -h now";
-      wshow="waydroid show-full-ui";
-      mitvpn="sudo openfortivpn --config /etc/openfortivpn/config";
-      code="flatpak run com.visualstudio.code";
-      reboot="killall5 -9 && shutdown -r now";
-      config="cd ~/Lucifers_NIX/";	
-      nixsearch="brave https://search.nixos.org/";
-      lock="swaylock --config ~/.config/swaylock/config";
-      try="nix-shell -p ";
+      sv = "sudo nvim";
+      flake-rebuild = "nh os switch --nom --hostname ${hostname}";
+      flake-update = "nh os switch --nom --hostname ${hostname} --update";
+      gcCleanup = "nix-collect-garbage --delete-old && sudo nix-collect-garbage -d && sudo /run/current-system/bin/switch-to-configuration boot";
+      v = "nvim";
+      ls = "lsd";
+      ll = "lsd -l";
+      la = "lsd -a";
+      lal = "lsd -al";
+      ".." = "cd ..";
+      hell = "ssh lucifer@165.22.52.204 -i ~/Projects/cloudNix/sshPrivKey.pem";
+      neofetch = "neofetch --ascii ~/.config/ascii-neofetch";
+      fastfetch = "fastfetch -c ~/.config/fastfetch/config.jsonc";
+      tunnel = "python ~/Projects/TCP-Over-SSL-Tunnel/main.py -c ~/Projects/TCP-Over-SSL-Tunnel/settings.ini";
+      pyserver = "python -m http.server";
+      fuff = "./usr/share/ffuf/ffuf";
+      burp = "cd ~/Projects/burpsuite_pro_v2022.9; java -jar burploader.jar";
+      jdgui = "java -jar /usr/share/jdgui/jd-gui-1.6.6.jar";
+      ciao = "killall5 -9 && shutdown -h now";
+      wshow = "waydroid show-full-ui";
+      mitvpn = "sudo openfortivpn --config /etc/openfortivpn/config";
+      code = "flatpak run com.visualstudio.code";
+      reboot = "killall5 -9 && shutdown -r now";
+      config = "cd ~/Lucifers_NIX/";
+      nixsearch = "brave https://search.nixos.org/";
+      lock = "swaylock --config ~/.config/swaylock/config";
+      try = "nix-shell -p ";
     };
   };
 }

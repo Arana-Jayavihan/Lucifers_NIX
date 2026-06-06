@@ -1,5 +1,5 @@
 { pkgs, fetchgit, ... }:
-let 
+let
   libvirt = pkgs.libvirt;
   libxml2 = pkgs.libxml2;
 in
@@ -9,7 +9,7 @@ in
     version = "2";
     vendorHash = null;
     env.CGO_ENABLED = 1;
-     
+
     src = fetchgit {
       url = "https://github.com/Arana-Jayavihan/schemer2";
       hash = "sha256-Zo/bjBTHYAsGtJAi20ywwCYdqTPzBQ6ypK4w3uV00aE=";
@@ -17,6 +17,6 @@ in
     buildInputs = [
       libvirt
       libxml2
-    ]; 
+    ];
   };
 }

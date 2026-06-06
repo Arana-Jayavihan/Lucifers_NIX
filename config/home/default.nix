@@ -6,7 +6,7 @@
     ./alacritty.nix
     ./bash.nix
     ./gtk-qt.nix
-    ./hyprland.nix   
+    ./hyprland.nix
     ./kitty.nix
     ./neofetch.nix
     ./neovim.nix

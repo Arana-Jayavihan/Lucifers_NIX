@@ -2,8 +2,8 @@
 let
   inherit (import ../../home/files/autopalette/custom.nix) customPalette;
   inherit (opt) username curWallPaper;
-  palette = customPalette.palette; 
-in  
+  palette = customPalette.palette;
+in
 pkgs.stdenv.mkDerivation {
   pname = "sddm-adaptive-theme";
   version = "V1";

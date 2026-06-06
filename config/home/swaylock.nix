@@ -3,7 +3,8 @@
 let
   palette = config.colorScheme.palette;
   inherit (opt) curWallPaper;
-in {
+in
+{
   home.file.".config/swaylock/config".text = ''
     daemonize
     clock
