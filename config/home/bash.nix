@@ -1,6 +1,6 @@
 { config, lib, pkgs, opt, ... }:
 
-let inherit (opt) flakeDir flakePrev
+let inherit (opt) flakePrev
   hostname flakeBackup theShell;
 in
 lib.mkIf (theShell == "bash") {

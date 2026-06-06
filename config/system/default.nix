@@ -24,6 +24,7 @@
     ./python.nix
     ./printer.nix
     ./services.nix
+    ./sops.nix
     ./steam.nix
     ./vm.nix
     ./customPackages.nix

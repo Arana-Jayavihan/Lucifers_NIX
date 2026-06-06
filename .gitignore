@@ -1,5 +1,4 @@
-system.nix.bak
-flake.lock.bak
+*.bak
 result
 result-*
 *.html

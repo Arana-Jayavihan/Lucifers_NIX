@@ -2,13 +2,10 @@
 
 let
   theme = config.colorScheme.palette;
-  hyprplugins = inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system};
   inherit (opt)
-    browser cpuType gpuType
-    wallpaperDir borderAnim username userHome
+    browser cpuType gpuType borderAnim username userHome
     theKBDLayout terminal curWallPaper
-    theSecondKBDLayout gitUsername
-    theKBDVariant sdl-videodriver autoWallChange;
+    theSecondKBDLayout gitUsername sdl-videodriver autoWallChange;
 in
 with lib; {
   wayland.windowManager.hyprland = {

@@ -1,0 +1,10 @@
+keys:
+  - &shire age1jugsqhadur067aexzpk27rathjpcmdz409p3kmtdl9frz8xeqyuqcwgyc5
+  # TODO gondor: on gondor run `cat /etc/ssh/ssh_host_ed25519_key.pub | ssh-to-age`,
+  #              add the resulting `age1...` key below as `&gondor ...`, add it to the
+  #              age list in creation_rules, then `sops updatekeys secrets/secrets.yaml`.
+creation_rules:
+  - path_regex: secrets/[^/]+\.yaml$
+    key_groups:
+      - age:
+          - *shire

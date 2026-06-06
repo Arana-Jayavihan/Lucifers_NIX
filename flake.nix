@@ -1,6 +1,17 @@
 {
   description = "Lucifer's NIX";
 
+  nixConfig = {
+    extra-substituters = [
+      "https://hyprland.cachix.org"
+      "https://nix-community.cachix.org"
+    ];
+    extra-trusted-public-keys = [
+      "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+    ];
+  };
+
   inputs = {
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
@@ -17,10 +28,6 @@
       submodules = true;
       rev = "39d7e209c79d451efab1b21151d5938289da838d";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-    hyprland-plugins = {
-      url = "github:hyprwm/hyprland-plugins";
-      inputs.hyprland.follows = "hyprland";
     };
     nixvim = {
       type = "git";
@@ -43,6 +50,10 @@
       url = "github:Gerg-L/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs@{ nixpkgs-unstable, nixpkgs, home-manager, nix-colors, firefox, nix-claude-code, ... }:
@@ -62,7 +73,7 @@
       overlays = [
         # nix-colors' gtk-theme contrib still references the removed
         # `nodePackages.sass`; alias it to the modern dart-sass.
-        (final: prev: { nodePackages = { sass = final.dart-sass; }; })
+        (final: _prev: { nodePackages = { sass = final.dart-sass; }; })
         nix-claude-code.overlays.default
       ];
 
@@ -82,6 +93,7 @@
           modules = [
             ./hosts/${host}/hardware.nix
             ./system.nix
+            inputs.sops-nix.nixosModules.sops
             ({ pkgs, ... }: {
               nixpkgs.overlays = overlays;
               environment.systemPackages = [
@@ -107,6 +119,17 @@
       nixosConfigurations = {
         shire = mkHost "shire";
         gondor = mkHost "gondor";
+      };
+
+      formatter.${system} = nixpkgs.legacyPackages.${system}.nixpkgs-fmt;
+
+      devShells.${system}.default = nixpkgs.legacyPackages.${system}.mkShell {
+        packages = with nixpkgs.legacyPackages.${system}; [
+          nixpkgs-fmt
+          deadnix
+          statix
+          nil
+        ];
       };
     };
 }

@@ -1,8 +1,7 @@
 { pkgs, config, username, pkgs-unstable, opt, ... }:
 
 let
-  inherit (opt)
-    browser wallpaperDir wallpaperGit flakeDir useWallColors curWallPaper userHome;
+  inherit (opt) wallpaperDir wallpaperGit flakeDir userHome;
 in
 {
   # Install Packages For The User
