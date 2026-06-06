@@ -1,7 +1,12 @@
 { pkgs, ... }:
 
 pkgs.writeShellScriptBin "usbDAC" ''
-  sleep 1;
-  ${pkgs.alsa-utils}/bin/amixer -c 0 set PCM 100% unmute -q;
-  ${pkgs.alsa-utils}/bin/amixer -c 1 set PCM 100% unmute -q;
+  # Unmute and max the PCM volume on USB DAC cards once they settle.
+  # Tolerant of missing cards (set -e intentionally omitted).
+  set -uo pipefail
+
+  sleep 1
+  for card in 0 1; do
+    ${pkgs.alsa-utils}/bin/amixer -c "$card" set PCM 100% unmute -q 2>/dev/null || true
+  done
 ''

@@ -1,6 +1,5 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, opt, ... }:
 
-let inherit (import ../../../options.nix) theKernel; in
-lib.mkIf (theKernel == "default") {
+lib.mkIf (opt.theKernel == "default") {
   boot.kernelPackages = pkgs.linuxPackages;
 }

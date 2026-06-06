@@ -1,6 +1,6 @@
-{ pkgs, firefox, ... }:
+{ pkgs, firefox, opt, ... }:
 let
-  inherit (import ../../options.nix) username;
+  inherit (opt) username;
   userChrome = ''
   /*
 * penguinFox
@@ -341,7 +341,9 @@ body,html{overflow-y: auto}
 in {
   programs.firefox = {
     enable = true;
-    package = firefox.packages.${pkgs.system}.firefox-nightly-bin;
+    # Keep the pre-26.05 profile location (silences the configPath default-change warning).
+    configPath = ".mozilla/firefox";
+    package = firefox.packages.${pkgs.stdenv.hostPlatform.system}.firefox-nightly-bin;
     policies = {
       HttpsOnlyMode = "enabled";
       SSLVersionMin = "tls1.2";

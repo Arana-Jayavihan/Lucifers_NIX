@@ -1,5 +1,9 @@
-{ pkgs, config, nixColorsContrib, ... }:
+{ pkgs, config, inputs, ... }:
 
+let
+  # Built from the system pkgs (which carries the dart-sass overlay).
+  nixColorsContrib = inputs.nix-colors.lib.contrib { inherit pkgs; };
+in
 {
   # Configure Cursor Theme
   home.pointerCursor = {
@@ -21,6 +25,9 @@
       name = "${config.colorScheme.slug}";
       package = nixColorsContrib.gtkThemeFromScheme {scheme = config.colorScheme;};
     };
+    # Keep applying the generated theme to GTK4 apps (legacy default;
+    # silences the gtk.gtk4.theme deprecation warning on stateVersion < 26.05).
+    gtk4.theme = config.gtk.theme;
     iconTheme = {
       name = "Dracula";
       package = pkgs.dracula-icon-theme;

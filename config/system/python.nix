@@ -1,7 +1,7 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, opt, ... }:
 
 let
-  inherit (import ../../options.nix) python;
+  inherit (opt) python;
   my-python-packages = ps: with ps; [
     pandas
     numpy

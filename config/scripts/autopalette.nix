@@ -1,17 +1,23 @@
 { pkgs, flakeDir, ... }:
 
 pkgs.writeShellScriptBin "autopalette" ''
+set -uo pipefail
+
 # NIX Inherited Variables
-flakeDir=${flakeDir}
+flakeDir="${flakeDir}"
 
 # Local BASH Variables
-colorsPath=$flakeDir/config/home/files/autopalette/colors.txt
-palettePath=$flakeDir/config/home/files/autopalette/custom.nix
-colorPalette=$flakeDir/config/home/files/autopalette/palette.html
+colorsPath="$flakeDir/config/home/files/autopalette/colors.txt"
+palettePath="$flakeDir/config/home/files/autopalette/custom.nix"
+colorPalette="$flakeDir/config/home/files/autopalette/palette.html"
 
-curWallPaper=$(cat $flakeDir/options.nix | grep curWallPaper | cut -d '=' -f2 | cut -d ';' -f1 | xargs)
-imageWidth=$(exiftool $curWallPaper | grep "^Image Width" | cut -d ':' -f2 | xargs)
-imageHeight=$(exiftool $curWallPaper | grep "^Image Height" | cut -d ':' -f2 | xargs)
+curWallPaper=$(${pkgs.gnugrep}/bin/grep curWallPaper "$flakeDir/options.nix" | ${pkgs.coreutils}/bin/cut -d '=' -f2 | ${pkgs.coreutils}/bin/cut -d ';' -f1 | ${pkgs.findutils}/bin/xargs)
+if [ -z "$curWallPaper" ] || [ ! -f "$curWallPaper" ]; then
+  echo "autopalette: wallpaper not found: $curWallPaper" >&2
+  exit 1
+fi
+imageWidth=$(${pkgs.exiftool}/bin/exiftool "$curWallPaper" | ${pkgs.gnugrep}/bin/grep "^Image Width" | ${pkgs.coreutils}/bin/cut -d ':' -f2 | ${pkgs.findutils}/bin/xargs)
+imageHeight=$(${pkgs.exiftool}/bin/exiftool "$curWallPaper" | ${pkgs.gnugrep}/bin/grep "^Image Height" | ${pkgs.coreutils}/bin/cut -d ':' -f2 | ${pkgs.findutils}/bin/xargs)
 
 # Colors Extraction
 schemer2 -width $imageWidth -height $imageHeight -format img::colors -in $curWallPaper -out $colorsPath -threshold 70

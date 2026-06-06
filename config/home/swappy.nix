@@ -1,7 +1,7 @@
-{ pkgs, config, ... }:
+{ pkgs, config, opt, ... }:
 
 let
-  inherit (import ../../options.nix) screenshotDir;
+  inherit (opt) screenshotDir;
 in {
     home.file.".config/swappy/config".text = ''
       [Default]

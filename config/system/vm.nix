@@ -1,7 +1,6 @@
-{ pkgs, config, lib, ... }:
+{ pkgs, config, lib, opt, ... }:
 
-let inherit (import ../../options.nix) cpuType; in
-lib.mkIf ("${cpuType}" == "vm") {
+lib.mkIf (opt.cpuType == "vm") {
   services.qemuGuest.enable = true;
   services.spice-vdagentd.enable = true;
   services.spice-webdavd.enable = true;

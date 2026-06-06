@@ -3,8 +3,8 @@
 {
   imports = [
     ./amd-gpu.nix
+    ./androcontrol.nix
     ./appimages.nix
-    ./autorun.nix
     ./boot.nix
     ./displaymanager.nix
     ./distrobox.nix
@@ -18,6 +18,7 @@
     ./nfs.nix
     ./ntp.nix
     ./nvidia.nix
+    ./ollama.nix
     ./packages.nix
     ./polkit.nix
     ./python.nix

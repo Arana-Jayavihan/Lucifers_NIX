@@ -70,7 +70,7 @@ in {
                     },
                     {
                         "label": "🚪",
-                        "command": "hyprctl dispatch exit"
+                        "command": "hyprctl dispatch 'hl.dsp.exit()'"
                     },
                     {
                         "label": "🗃️",

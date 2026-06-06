@@ -1,6 +1,6 @@
-{ config, lib, pkgs, username, ... }:
+{ config, lib, pkgs, username, opt, ... }:
 
-let inherit (import ../../options.nix) printer; in
+let inherit (opt) printer; in
 lib.mkIf (printer == true) {
   services = {
     printing.enable = true;

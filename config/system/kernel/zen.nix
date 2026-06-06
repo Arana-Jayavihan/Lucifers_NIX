@@ -1,6 +1,5 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, opt, ... }:
 
-let inherit (import ../../../options.nix) theKernel; in
-lib.mkIf (theKernel == "zen") {
+lib.mkIf (opt.theKernel == "zen") {
   boot.kernelPackages = pkgs.linuxPackages_zen;
 }

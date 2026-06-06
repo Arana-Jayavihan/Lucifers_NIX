@@ -1,6 +1,6 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, opt, ... }:
 
-let inherit (import ../../options.nix) theShell hostname; in
+let inherit (opt) theShell hostname; in
 lib.mkIf (theShell == "zsh") {
   programs.zsh = {
     enable = true;
@@ -32,7 +32,7 @@ lib.mkIf (theShell == "zsh") {
       bindkey '^[[1;3C' forward-word                  # Key Alt + Right
       bindkey '^[[H' beginning-of-line                # Key Home
       bindkey '^[[F' end-of-line                      # Key End
-      fastfetch
+      #fastfetch
       if [ -f $HOME/.zshrc-personal ]; then
         source $HOME/.zshrc-personal
       fi
@@ -70,13 +70,13 @@ lib.mkIf (theShell == "zsh") {
       la="lsd -a";
       lal="lsd -al";
       ".."="cd ..";
-      hell="ssh lucifer@165.22.52.204 -i /home/lucifer/Projects/cloudNix/sshPrivKey.pem";
+      hell="ssh lucifer@165.22.52.204 -i ~/Projects/cloudNix/sshPrivKey.pem";
       neofetch="neofetch --ascii ~/.config/ascii-neofetch";
       fastfetch="fastfetch -c ~/.config/fastfetch/config.jsonc";
-      tunnel="python ~/Projects/TCP-Over-SSL-Tunnel/main.py";
+      tunnel="python ~/Projects/TCP-Over-SSL-Tunnel/main.py -c ~/Projects/TCP-Over-SSL-Tunnel/settings.ini";
       pyserver="python -m http.server";
       fuff="./usr/share/ffuf/ffuf";
-      burp="cd /home/lucifer/Projects/burpsuite_pro_v2022.9; java -jar burploader.jar";
+      burp="cd ~/Projects/burpsuite_pro_v2022.9; java -jar burploader.jar";
       jdgui="java -jar /usr/share/jdgui/jd-gui-1.6.6.jar";	
       ciao="killall5 -9 && shutdown -h now";
       wshow="waydroid show-full-ui";

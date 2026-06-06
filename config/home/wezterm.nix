@@ -1,8 +1,8 @@
-{ pkgs, config, lib, ... }:
+{ pkgs, config, lib, opt, ... }:
 
 let
   palette = config.colorScheme.palette;
-  inherit (import ../../options.nix) wezterm;
+  inherit (opt) wezterm;
 in lib.mkIf (wezterm == true) {
   home.packages = with pkgs; [
     pkgs.wezterm

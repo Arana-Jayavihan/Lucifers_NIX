@@ -1,6 +1,6 @@
-{ inputs, username, pkgs, ... }:
-let 
-  inherit (import ./options.nix)
+{ inputs, username, pkgs, opt, ... }:
+let
+  inherit (opt)
     gitUsername gitEmail theme useWallColors;
 
   inherit (import ./config/home/files/autopalette/custom.nix) customPalette;
@@ -21,7 +21,7 @@ in {
     inputs.nix-colors.homeManagerModules.default
     inputs.nixvim.homeModules.nixvim
     inputs.hyprland.homeManagerModules.default
-    inputs.spicetify-nix.homeManagerModules.default
+    inputs.spicetify-nix.homeManagerModules.spicetify
     ./config/home
   ];
 
@@ -67,6 +67,7 @@ in {
     userDirs = {
         enable = true;
         createDirectories = true;
+        setSessionVariables = false;
     };
   };
 

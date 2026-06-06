@@ -1,10 +1,11 @@
 { pkgs, pkgs-unstable, ... }:
 
 pkgs.writeShellScriptBin "np-claude" ''
-export all_proxy= &&
-export http_proxy= &&
-export https_proxy= &&
-export rsync_proxy= &&
-export ftp_proxy= &&
-${pkgs-unstable.claude-code}/bin/claude
+  set -euo pipefail
+
+  # Run Claude Code with proxies disabled (forwards all arguments).
+  unset all_proxy http_proxy https_proxy rsync_proxy ftp_proxy \
+        ALL_PROXY HTTP_PROXY HTTPS_PROXY RSYNC_PROXY FTP_PROXY
+
+  exec ${pkgs-unstable.claude-code}/bin/claude "$@"
 ''

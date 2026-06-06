@@ -1,7 +1,6 @@
-{ pkgs, config, lib, ... }:
+{ pkgs, config, lib, opt, ... }:
 
-let inherit (import ../../options.nix) gpuType; in
-lib.mkIf ("${gpuType}" == "intel") {  
+lib.mkIf (opt.gpuType == "intel") {
   # OpenGL
   hardware.graphics = {
     extraPackages = with pkgs; [

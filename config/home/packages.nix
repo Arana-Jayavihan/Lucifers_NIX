@@ -1,7 +1,7 @@
-{ pkgs, config, username, pkgs-unstable, ... }:
+{ pkgs, config, username, pkgs-unstable, opt, ... }:
 
-let 
-  inherit (import ../../options.nix) 
+let
+  inherit (opt)
     browser wallpaperDir wallpaperGit flakeDir useWallColors curWallPaper userHome;
 in {
   # Install Packages For The User
@@ -10,7 +10,7 @@ in {
     brave
     vesktop
     libvirt
-    swww
+    awww
     grim
     slurp
     swaynotificationcenter 
@@ -84,7 +84,6 @@ in {
     })
     (import ./../scripts/list-hypr-bindings.nix {
       inherit pkgs;
-      inherit flakeDir;
     })
     (import ./../scripts/refreshRateChange.nix {
       inherit pkgs;
@@ -117,6 +116,9 @@ in {
     (import ./../scripts/claude.nix {
       inherit pkgs;
       inherit pkgs-unstable;
+    })
+    (import ./../scripts/androcontrol-qr.nix {
+      inherit pkgs;
     })
 
   ];

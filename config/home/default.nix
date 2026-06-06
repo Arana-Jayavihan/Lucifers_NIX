@@ -20,11 +20,11 @@
     ./wezterm.nix
     ./zsh.nix
     ./fastfetch.nix
-    ./spicetify.nix
     ./files.nix
     ./cava.nix
     ./vesktop.nix
     ./hypridle.nix
     ./firefox.nix
+    ./spicetify.nix
   ];
 }

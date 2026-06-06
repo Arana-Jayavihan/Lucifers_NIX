@@ -1,7 +1,7 @@
-{ pkgs, ... }:
+{ pkgs, opt, ... }:
 let
   inherit (import ../../home/files/autopalette/custom.nix) customPalette;
-  inherit (import ../../../options.nix) username curWallPaper;
+  inherit (opt) username curWallPaper;
   palette = customPalette.palette; 
 in  
 pkgs.stdenv.mkDerivation {

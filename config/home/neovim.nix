@@ -6,6 +6,9 @@ let
 in {
   programs.nixvim = {
     enable = true;
+    # Use the same nixpkgs as the system (matches the flake `follows`);
+    # silences the nixpkgs.source default-affected-by-follows warning.
+    nixpkgs.source = pkgs.path;
     version.enableNixpkgsReleaseCheck = false;
     globals.mapleader = " "; # Sets the leader key to space
     

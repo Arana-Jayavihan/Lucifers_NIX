@@ -1,7 +1,7 @@
-{ pkgs, spicetify-nix, config, ... }:
+{ pkgs, inputs, config, ... }:
 
 let
-  spicePkgs = spicetify-nix.legacyPackages.${pkgs.stdenv.system};
+  spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.stdenv.system};
   palette = config.colorScheme.palette;
 in
 {
@@ -12,32 +12,39 @@ in
       historyShortcut
       adblock
       hidePodcasts
-      shuffle 
+      shuffle
       fullAppDisplay
       volumePercentage
       history
     ];
-    
+
     enabledCustomApps = with spicePkgs.apps; [
       newReleases
       lyricsPlus
       ncsVisualizer
     ];
 
-    theme = spicePkgs.themes.catppuccin;
+    theme = spicePkgs.themes.catppuccin // {
+      extraPkgs = [ pkgs.nerd-fonts.jetbrains-mono ];
+      additionalCss = ''
+        *:not([class*="icon"]):not([class*="Icon"]):not(.Svg):not(svg) {
+          font-family: "JetBrainsMono Nerd Font", sans-serif !important;
+        }
+      '';
+    };
     colorScheme = "custom";
     customColorScheme = {
-      text = "${palette.base0B}";
+      text = "${palette.base0D}";
       subtext = "${palette.base0B}";
       main = "${palette.base00}";
       main-elevated = "${palette.base00}";
-      main-transition = "${palette.base00}";
+      main-transition = "${palette.base01}";
       highlight = "${palette.base01}";
       highlight-elevated = "${palette.base00}";
       sidebar = "${palette.base00}";
       player = "${palette.base00}";
       card = "${palette.base02}";
-      shadow = "${palette.base00}";
+      shadow = "${palette.base01}";
       selected-row = "${palette.base0B}";
       button = "${palette.base04}";
       button-active = "${palette.base07}";

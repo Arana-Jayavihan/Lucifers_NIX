@@ -1,7 +1,9 @@
 { pkgs }:
 
 pkgs.writeShellScriptBin "task-waybar" ''
-    sleep 0.1
-    ${pkgs.swaynotificationcenter}/bin/swaync-client -t &
-''
+  set -euo pipefail
 
+  # Briefly wait, then toggle the notification center panel.
+  sleep 0.1
+  ${pkgs.swaynotificationcenter}/bin/swaync-client -t &
+''

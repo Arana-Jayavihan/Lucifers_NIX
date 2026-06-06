@@ -1,8 +1,8 @@
-{ pkgs, config, ... }:
+{ pkgs, config, opt, ... }:
 
 let
   palette = config.colorScheme.palette;
-  inherit (import ../../options.nix) curWallPaper;
+  inherit (opt) curWallPaper;
 in {
   home.file.".config/swaylock/config".text = ''
     daemonize

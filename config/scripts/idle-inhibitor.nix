@@ -1,14 +1,17 @@
 { pkgs, ... }:
 
 pkgs.writeShellScriptBin "idle-inhibitor" ''
-HYPRIDLE_BIN="hypridle"
-NOTIFY="${pkgs.libnotify}/bin/notify-send"
+  set -euo pipefail
 
-if pgrep -x "$HYPRIDLE_BIN" >/dev/null; then
-  $NOTIFY "Idle Control 🍃" "Turning off hypridle 😴"
-  pkill -x "$HYPRIDLE_BIN"
-else
-  $NOTIFY "Idle Control 🍃" "Turning on hypridle ☕"
-  nohup "$HYPRIDLE_BIN" >/dev/null 2>&1 &
-fi
+  # Toggle hypridle on/off.
+  NOTIFY="${pkgs.libnotify}/bin/notify-send"
+
+  if ${pkgs.procps}/bin/pgrep -x hypridle >/dev/null; then
+    "$NOTIFY" "Idle Control 🍃" "Turning off hypridle 😴" || true
+    ${pkgs.procps}/bin/pkill -x hypridle
+  else
+    "$NOTIFY" "Idle Control 🍃" "Turning on hypridle ☕" || true
+    ${pkgs.coreutils}/bin/nohup ${pkgs.hypridle}/bin/hypridle >/dev/null 2>&1 &
+    disown
+  fi
 ''

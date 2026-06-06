@@ -1,4 +1,7 @@
 system.nix.bak
 flake.lock.bak
+result
+result-*
 *.html
 *.txt
+*.zip

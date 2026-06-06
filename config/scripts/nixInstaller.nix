@@ -1,86 +1,92 @@
 { pkgs, flakeDir }:
 
 pkgs.writeShellScriptBin "nixInstall" ''
-rm /home/lucifer/.mozilla/firefox/lucifer/search.json.mozlz4.backup
-rm  /home/lucifer/.mozilla/firefox/Guest/search.json.mozlz4.backup
-rm  /home/lucifer/.mozilla/firefox/lucifer-work/search.json.mozlz4.backup
+  set -euo pipefail
 
-printHelp () {
-  printf "
-This is a simple package installer script for my NixOS flake.
-Since I'm lazy to edit the system.nix file every time, I created
-this simple script to automate the package installation.
+  flakeDir="${flakeDir}"
 
-Please make sure that the package name is correct by searching it in the NixOS Search.
-
-****IMPORTANT****
-Restore option can only restore to the previous version, 
-so if you ended up installing multiple faulty packages,
-you might want to manually edit the system.nix to remove 
-the faulty packages and rebuild the system manually.
+  printHelp () {
+    cat <<'EOF'
+nixInstall - add packages to the NixOS flake and rebuild.
 
 Usage:
-[+] Install Packages\t\tnixInstaller system||user||system-stable||user-stable <package1> <package2>
-[+] Restore to previous\tnixInstaller restore
-"
-}
+  nixInstall <mode> <package> [package...]   Install one or more packages
+  nixInstall restore                         Restore system.nix from the last backup
+  nixInstall -h | --help                     Show this help
 
-addPkgs () {
-  if [ "$2" != "user" ] && [ "$2" != "system" ] && [ "$2" != "system-stable" ] && [ "$2" != "user-stable" ];
-  then
-    sed -i "s/$1/$2\\n\\t$1/" "${flakeDir}/system.nix"
-  else
-    return 1
-  fi
-}
+Modes:
+  user           ->  #USER_PKG       (home, unstable)
+  system         ->  #SYSTEM_PKG     (system, unstable)
+  user-stable    ->  #STABLE_USER    (home, stable)
+  system-stable  ->  #STABLE_SYSTEM  (system, stable)
 
-if [ "$#" -eq 0 ]; then
-  echo "Please specify the package installation mode and packages."
-  printHelp
-  exit 1
-elif [ "$1" == "restore" ]; then
-  cp "${flakeDir}/system.nix.bak" "${flakeDir}/system.nix"
-  sudo nixos-rebuild switch --flake "${flakeDir}"
-  exit 0
-elif [ "$1" == "--help" ] || [ "$1" == "-h" ]; then
-  printHelp
-  exit 0
-else
-  cp "${flakeDir}/system.nix" "${flakeDir}/system.nix.bak"
-  case "$1" in
-    user)
-      mode="#USER_PKG"
-      ;;
-    system)
-      mode="#SYSTEM_PKG"
-      ;;
-    user-stable)
-      mode="#STABLE_USER"
-      ;;
-    system-stable)
-      mode="#STABLE_SYSTEM"
-      ;;
-    *)
-      echo "Invalid package installation mode."
-      printHelp
-      exit 1
-      ;;
-  esac
+Notes:
+  * Verify package names on https://search.nixos.org first.
+  * 'restore' only reverts the single most recent change.
+EOF
+  }
 
-  shift
+  # Allow only safe package-name characters (prevents sed-replacement injection).
+  valid_pkg () { [[ "$1" =~ ^[a-zA-Z0-9._-]+$ ]]; }
+
+  addPkg () {
+    # $1 = marker comment, $2 = package name
+    ${pkgs.gnused}/bin/sed -i "s/$1/$2\\n\\t$1/" "$flakeDir/system.nix"
+  }
+
+  rm -f "$HOME"/.mozilla/firefox/lucifer/search.json.mozlz4.backup 2>/dev/null || true
+  rm -f "$HOME"/.mozilla/firefox/Guest/search.json.mozlz4.backup 2>/dev/null || true
+  rm -f "$HOME"/.mozilla/firefox/lucifer-work/search.json.mozlz4.backup 2>/dev/null || true
+
   if [ "$#" -eq 0 ]; then
-    echo "No packages specified."
+    echo "Error: no mode/packages specified." >&2
     printHelp
     exit 1
-  else
-    for pkg in "$@"; do
-      addPkgs "$mode" "$pkg" || {
-        echo "Invalid package installation mode: $2"
-        printHelp
-        exit 1
-      } 
-    done 
-    sudo nixos-rebuild switch --flake "${flakeDir}";
   fi
-fi
+
+  case "$1" in
+    -h|--help)
+      printHelp; exit 0 ;;
+    restore)
+      if [ ! -f "$flakeDir/system.nix.bak" ]; then
+        echo "Error: no backup (system.nix.bak) to restore." >&2
+        exit 1
+      fi
+      cp "$flakeDir/system.nix.bak" "$flakeDir/system.nix"
+      sudo nixos-rebuild switch --flake "$flakeDir#$(< /etc/hostname)"
+      exit 0 ;;
+  esac
+
+  case "$1" in
+    user)          marker="#USER_PKG" ;;
+    system)        marker="#SYSTEM_PKG" ;;
+    user-stable)   marker="#STABLE_USER" ;;
+    system-stable) marker="#STABLE_SYSTEM" ;;
+    *)
+      echo "Error: invalid mode '$1'." >&2
+      printHelp
+      exit 1 ;;
+  esac
+  shift
+
+  if [ "$#" -eq 0 ]; then
+    echo "Error: no packages specified." >&2
+    printHelp
+    exit 1
+  fi
+
+  # Validate all package names before modifying system.nix.
+  for pkg in "$@"; do
+    if ! valid_pkg "$pkg"; then
+      echo "Error: invalid package name '$pkg'." >&2
+      exit 1
+    fi
+  done
+
+  cp "$flakeDir/system.nix" "$flakeDir/system.nix.bak"
+  for pkg in "$@"; do
+    addPkg "$marker" "$pkg"
+  done
+
+  sudo nixos-rebuild switch --flake "$flakeDir#$(< /etc/hostname)"
 ''

@@ -1,7 +1,6 @@
-{ pkgs, config, ... }:
+{ pkgs, lib, config, opt, ... }:
 
-let inherit (import ../../options.nix) theKBDVariant
-theKBDLayout theSecondKBDLayout; in
+let inherit (opt) theKBDVariant theKBDLayout theSecondKBDLayout gnome; in
 {
   services.xserver = {
     enable = true;
@@ -9,16 +8,17 @@ theKBDLayout theSecondKBDLayout; in
       variant = "${theKBDVariant}";
       layout = "${theKBDLayout}, ${theSecondKBDLayout}";
     };
-
-    #displayManager.sddm = {
-    #  enable = true;
-    #  autoNumlock = true;
-    #  wayland.enable = true;
-    #  theme = "sddm-firewatch";
-    #};
   };
 
-  services.desktopManager.gnome.enable = true;    
+  services.desktopManager.gnome = lib.mkIf gnome {
+    enable = true;
+    extraGSettingsOverrides = ''
+      [org.gnome.mutter]
+      check-alive-timeout=60000
+    '';
+  };
+
+  # NOTE: services.gnome.gnome-keyring is enabled in config/system/services.nix
 
   services.displayManager = {
     enable = true;
@@ -44,7 +44,7 @@ theKBDLayout theSecondKBDLayout; in
 let
     sugar = pkgs.callPackage ../pkgs/sddm-sugar-dark.nix {};
     tokyo-night = pkgs.libsForQt5.callPackage ../pkgs/sddm-tokyo-night.nix {};
-    sddm-adaptive-theme = pkgs.callPackage ../pkgs/sddm-theme/default.nix { inherit pkgs; };
+    sddm-adaptive-theme = pkgs.callPackage ../pkgs/sddm-theme/default.nix { inherit pkgs opt; };
 in [ 
     sugar.sddm-sugar-dark # Name: sugar-dark
     tokyo-night # Name: tokyo-night-sddm

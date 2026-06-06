@@ -1,27 +1,28 @@
 let
   # THINGS YOU NEED TO CHANGE
   username = "lucifer";
-  hostname = "nixos";
   userHome = "/home/${username}";
   flakeDir = "${userHome}/Lucifers_NIX";
   proxy = true;
   socks = "1080";
   http = "1090";
 in {
+  # NOTE: Host-specific options (hostname, cpuType, gpuType, bus-ids, theKernel,
+  # gnome, ollama, browser, localHWClock) live in hosts/<host>/options.nix and
+  # are merged on top of these shared defaults by the flake (delivered as `opt`).
+
   # User Variables
   username = username;
-  hostname = hostname;
   gitUsername = "Arana-Jayavihan";
   gitEmail = "aranajayavihan@gmail.com";
   theme = "3024";
-  borderAnim = true;
-  browser = "firefox-nightly";
+  borderAnim = false;
   autoWallChange = false;
   wallpaperGit = "https://github.com/Arana-Jayavihan/nix-wallpapers.git";
-  # ^ (use as is or replace with your own repo - removing will break the wallsetter script) 
+  # ^ (use as is or replace with your own repo - removing will break the wallsetter script)
   wallpaperDir = "${userHome}/Projects/nix-wallpapers";
   useWallColors = true;
-  curWallPaper = "/home/lucifer/Projects/nix-wallpapers/wall26.jpg";
+  curWallPaper = "/home/lucifer/Projects/nix-wallpapers/wall95.jpg";
   screenshotDir = "${userHome}/Pictures/Screenshots";
   userHome = "${userHome}";
   flakeDir = "${flakeDir}";
@@ -37,12 +38,7 @@ in {
   theLCVariables = "en_US.UTF-8";
   theTimezone = "Asia/Colombo";
   theShell = "zsh"; # Possible options: bash, zsh
-  theKernel = "zen"; # Possible options: default, latest, lqx, xanmod, zen
   sdl-videodriver = "x11"; # Either x11 or wayland ONLY. Games might require x11 set here
-  # For Hybrid Systems intel-nvidia
-  # Should Be Used As gpuType
-  cpuType = "intel";
-  gpuType = "intel";
 
   #Proxy Settings
   useProxy = proxy;
@@ -53,28 +49,23 @@ in {
   useFirewall = true;
   firewallPorts = [ 1090 5000 5050 5900 9000 ];
 
-  # Nvidia Hybrid Devices
-  # ONLY NEEDED FOR HYBRID
-  # SYSTEMS! 
-  # intel-bus-id = "PCI:0:2:0";
-  # nvidia-bus-id = "PCI:14:0:0";
-
   # Enable / Setup NFS
   nfs = false;
   nfsMountPoint = "/mnt/nas";
   nfsDevice = "nas:/volume1/nas";
 
-  # NTP & HWClock Settings
+  # NTP Settings
   ntp = true;
-  localHWClock = true;
 
   # Enable Printer & Scanner Support
   printer = true;
 
+  # Enable GNOME desktop (shared: currently enabled on both hosts)
+  gnome = true;
+
   # Enable Flatpak & Larger Programs
   distrobox = false;
   flatpak = true;
-  kdenlive = true;
 
   # Enable Support For
   # Logitech Devices

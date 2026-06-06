@@ -1,7 +1,7 @@
-{ config, pkgs, username, hostname, pkgs-unstable, ... }:
+{ config, pkgs, username, hostname, pkgs-unstable, opt, ... }:
 
-let 
-  inherit (import ./options.nix) 
+let
+  inherit (opt)
     theLocale theTimezone gitUsername
     theShell theLCVariables theKBDLayout flakeDir
     httpProxy socksProxy firewallPorts useFirewall;
@@ -11,7 +11,7 @@ let
 in {
   imports =
     [
-      ./hardware.nix
+      # Per-host hardware is injected by the flake (hosts/<host>/hardware.nix)
       ./config/system
     ];
   
@@ -70,7 +70,7 @@ in {
       homeMode = "755";
       isNormalUser = true;
       description = "${gitUsername}";
-      extraGroups = [ "networkmanager" "wheel" "libvirtd" "docker" "audio" "pulse-access" "qemu-libvirtd" "kvm" "wireshark" ];
+      extraGroups = [ "networkmanager" "wheel" "libvirtd" "docker" "audio" "pulse-access" "qemu-libvirtd" "kvm" "wireshark" "video" ];
       shell = pkgs.${theShell};
       ignoreShellProgramCheck = true;
       packages = (with pkgs; [ 
@@ -88,7 +88,6 @@ in {
 	dex2jar
 	android-tools
 	tshark
-	sshpass
 	inetutils
 	netdiscover
 	exiftool
@@ -103,17 +102,18 @@ in {
 	lutris
 	protonup-qt
 	wine64
-	wineWowPackages.waylandFull
+	wineWow64Packages.waylandFull
 	winetricks
-	wineWowPackages.stable
+	wineWow64Packages.stable
 	tcptraceroute
 	hyprpicker
         dbgate
         android-studio
 	zed-editor
-        deno
         gdk
-        burpsuite
+        litemdview
+	burpsuite
+	awscli
 	#STABLE_USER
       ])
 
@@ -154,8 +154,7 @@ in {
 	jq
 	tmux
         ungoogled-chromium
-        claude-code
-	ngrok
+        ngrok
 	#USER_PKG	
       ]);
     };
@@ -199,7 +198,7 @@ in {
         gnumake
         ninja
         go
-        nodejs 
+        nodejs_latest
         brightnessctl
         toybox
         virt-viewer

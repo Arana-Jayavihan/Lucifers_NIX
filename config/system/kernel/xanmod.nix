@@ -1,6 +1,5 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, opt, ... }:
 
-let inherit (import ../../../options.nix) theKernel; in
-lib.mkIf (theKernel == "xanmod") {
+lib.mkIf (opt.theKernel == "xanmod") {
   boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
 }

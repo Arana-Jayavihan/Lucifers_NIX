@@ -1,6 +1,6 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, opt, ... }:
 
-let inherit (import ../../options.nix) flakeDir flakePrev 
+let inherit (opt) flakeDir flakePrev
 	     hostname flakeBackup theShell; in
 lib.mkIf (theShell == "bash") {
   # Configure Bash
@@ -33,13 +33,13 @@ lib.mkIf (theShell == "bash") {
       la="lsd -a";
       lal="lsd -al";
       ".."="cd ..";
-      hell="ssh lucifer@165.22.52.204 -i /home/lucifer/Projects/cloudNix/sshPrivKey.pem";
+      hell="ssh lucifer@165.22.52.204 -i ~/Projects/cloudNix/sshPrivKey.pem";
       tunnel="~/Projects/TCP-Over-SSL-Tunnel/start.sh";
       pyserver="python -m http.server";
       neofetch="neofetch --ascii ~/.config/ascii-neofetch";
       fastfetch="fastfetch -c ~/.config/fastfetch/config.jsonc";
       fuff="./usr/share/ffuf/ffuf";
-      burp="cd /home/lucifer/Projects/burpsuite_pro_v2022.9; java -jar burploader.jar";
+      burp="cd ~/Projects/burpsuite_pro_v2022.9; java -jar burploader.jar";
       jdgui="java -jar /usr/share/jdgui/jd-gui-1.6.6.jar";	
       ciao="killall5 -9 && shutdown -h now";
       wshow="waydroid show-full-ui";

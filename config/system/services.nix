@@ -1,5 +1,6 @@
-{ pkgs, config, lib, ... }:
+{ pkgs, config, lib, username, opt, ... }:
 
+let inherit (opt) laptop; in
 {
   xdg.portal = {
     enable = true;
@@ -17,7 +18,7 @@
   };
  
   # List services that you want to enable:
-  services.logind.settings.Login.HandleLidSwitchExternalPower = "ignore";
+  services.logind.settings.Login.HandleLidSwitchExternalPower = lib.mkIf laptop "ignore";
   services.openssh.enable = true;
   services.fstrim.enable = true;
   services.vnstat.enable = true;
@@ -27,11 +28,11 @@
   services.thermald.enable = false;
   services.hypridle.enable = true;
   services.mysql = {
-    enable = true;
+    enable = false;
     package = pkgs.mysql84;
   };
   services.twingate = {
-    enable = true;
+    enable = false;
     package = pkgs.twingate;
   };
   services.power-profiles-daemon.enable = true;
@@ -48,28 +49,20 @@
     jack.enable = true;
     wireplumber.enable = true;
   };
-  #services.pulseaudio = {
-  #  enable = false;
-  #  support32Bit = true;
-  #  package = pkgs.pulseaudioFull;
-  #  tcp = {
-  #    enable = true;
-  #  };
-  #};
   services.resolved = {
     enable = false;
-    dnssec = "true";
-    dnsovertls = "true";
-    fallbackDns = [ "165.22.52.204" ];
-    extraConfig = ''
-      Domains=~.
-      DNS=1.1.1.1
-    '';
+    settings.Resolve = {
+      Domains = [ "~." ];
+      DNS = "1.1.1.1";
+      DNSSEC = "true";
+      DNSOverTLS = "true";
+      FallbackDNS = [ "165.22.52.204" ];
+    };
   };
   services.udev = {
     enable = true;
     extraRules = ''
-      ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="0495", ATTR{idProduct}=="3042", RUN+="/bin/sh -c '/etc/profiles/per-user/lucifer/bin/usbDAC'"
+      ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="0495", ATTR{idProduct}=="3042", RUN+="/bin/sh -c '/etc/profiles/per-user/${username}/bin/usbDAC'"
     '';
   };
 
@@ -91,15 +84,11 @@
   
   security.rtkit.enable = true;
   security.pam.services.hyprlock = {};
-  security.pam.services.swaylock = {
-    text = ''
-      auth include login
-    '';
-  };
+  security.pam.services.swaylock = {};
 
-  # Systemd Timers
-  systemd.timers."batteryNotify" = {
-  wantedBy = [ "timers.target" ];
+  # Systemd Timers (laptop-only: battery monitoring)
+  systemd.timers."batteryNotify" = lib.mkIf laptop {
+    wantedBy = [ "timers.target" ];
     timerConfig = {
       OnBootSec = "3m";
       OnUnitActiveSec = "3m";
@@ -107,15 +96,15 @@
     };
   };
 
-  # Battery Notify Service
-  systemd.services."batteryNotify" = {
+  # Battery Notify Service (laptop-only)
+  systemd.services."batteryNotify" = lib.mkIf laptop {
     script = ''
       set -eu
-      /etc/profiles/per-user/lucifer/bin/batteryNotify     
-    '';   
+      /etc/profiles/per-user/${username}/bin/batteryNotify
+    '';
     serviceConfig = {
       Type = "oneshot";
-      User = "lucifer";
+      User = username;
     };
   };
 

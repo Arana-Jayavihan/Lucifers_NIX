@@ -1,6 +1,6 @@
-{ pkgs, config, lib, ... }:
+{ pkgs, config, lib, opt, ... }:
 
-let inherit (import ../../options.nix) logitech; in
+let inherit (opt) logitech; in
 lib.mkIf (logitech == true) {
   hardware.logitech.wireless.enable = true;
   hardware.logitech.wireless.enableGraphical = true;

@@ -3,18 +3,19 @@
 
   inputs = {
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
     nix-colors.url = "github:misterio77/nix-colors";
     ags.url = "github:/Aylur/ags/v1";
+
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.11";
+      url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     hyprland = {
       type = "git";
       url = "https://github.com/hyprwm/Hyprland";
       submodules = true;
-      rev = "c38bb1a700f6003ce9ff36ff8143bd1f4ccaa879";
+      rev = "39d7e209c79d451efab1b21151d5938289da838d";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     hyprland-plugins = {
@@ -27,74 +28,90 @@
       #rev = "0e8b4ccf0a4e4e90f9ca39295e807628a6e575e6";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    spicetify-nix = {
-      type = "git";
-      url = "https://github.com/Arana-Jayavihan/spicetify-nix.git";
-      #rev = "834c8f9bb8a7b63ba242f9ce0db81708c620f2bc";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     firefox = {
       type = "git";
       url = "https://github.com/nix-community/flake-firefox-nightly.git";
       #rev = "d20be2e9c1b201e4253e79a200f0a2ed7fc27441";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    impermanence.url = "github:nix-community/impermanence";
+    burpsuitepro = {
+      type = "github";
+      owner = "xiv3r";
+      repo = "Burpsuite-Professional";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nix-claude-code.url = "github:ryoppippi/nix-claude-code";
+    androcontrol = {
+      url = "github:Arana-Jayavihan/AndroControl";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    spicetify-nix = {
+      url = "github:Gerg-L/spicetify-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = inputs@{ nixpkgs-unstable, nixpkgs, home-manager, impermanence, nix-colors, spicetify-nix, firefox, ... }:
+  outputs = inputs@{ nixpkgs-unstable, nixpkgs, home-manager, nix-colors, firefox, nix-claude-code, burpsuitepro, ... }:
   let
+
     system = "x86_64-linux";
 
-    inherit (import ./options.nix) username hostname;
+    inherit (import ./options.nix) username;
 
-    pkgs = import nixpkgs {
-      inherit system;
-      config = {
-	    allowUnfree = true;
-      };
-    };
-
+    # Separate (intentional) nixpkgs evaluation for packages we want from unstable.
     pkgs-unstable = import nixpkgs-unstable {
       inherit system;
-      config = {
-	    allowUnfree = true;
-      };
+      config.allowUnfree = true;
     };
 
-    nixColorsContrib = nix-colors.lib.contrib { inherit pkgs; };
+    # Overlays applied to the system nixpkgs (single evaluation, shared by both hosts).
+    overlays = [
+      # nix-colors' gtk-theme contrib still references the removed
+      # `nodePackages.sass`; alias it to the modern dart-sass.
+      (final: prev: { nodePackages = { sass = final.dart-sass; }; })
+      nix-claude-code.overlays.default
+    ];
+
+    # Build a host configuration by name. Shared options come from ./options.nix;
+    # per-host overrides come from ./hosts/<host>/options.nix. The merged set is
+    # passed to all modules as `opt` (and the hardware module is injected here).
+    mkHost = host:
+      let
+        opt = (import ./options.nix) // (import ./hosts/${host}/options.nix);
+      in
+      nixpkgs.lib.nixosSystem {
+        inherit system;
+        specialArgs = {
+          inherit inputs username opt pkgs-unstable firefox;
+          hostname = opt.hostname;
+        };
+        modules = [
+          ./hosts/${host}/hardware.nix
+          ./system.nix
+          ({ pkgs, ... }: {
+            nixpkgs.overlays = overlays;
+            environment.systemPackages = [
+              pkgs.claude-code
+              #burpsuitepro.packages.${system}.default
+            ];
+          })
+          home-manager.nixosModules.home-manager {
+            home-manager.extraSpecialArgs = {
+              inherit username inputs opt pkgs-unstable firefox;
+              hostname = opt.hostname;
+            };
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.backupFileExtension = "backup";
+            home-manager.users.${username} = import ./home.nix;
+          }
+        ];
+      };
 
   in {
     nixosConfigurations = {
-      "${hostname}" = nixpkgs.lib.nixosSystem {
-        inherit system;
-        specialArgs = {
-          inherit inputs; 
-          inherit username; 
-          inherit hostname;
-          inherit pkgs-unstable;
-          inherit nixColorsContrib;
-          inherit firefox;
-        };
-	modules = [ 
-          ./system.nix
-	  impermanence.nixosModules.impermanence
-          home-manager.nixosModules.home-manager {
-	    home-manager.extraSpecialArgs = {
-              inherit username; 
-              inherit inputs;
-              inherit pkgs-unstable;
-              inherit nixColorsContrib;
-              inherit spicetify-nix;
-              inherit firefox;
-            };
-	    home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.backupFileExtension = "backup";
-	    home-manager.users.${username} = import ./home.nix;
-	  }
-	];
-      };
+      shire = mkHost "shire";
+      gondor = mkHost "gondor";
     };
   };
 }

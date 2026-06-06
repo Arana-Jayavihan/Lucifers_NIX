@@ -1,18 +1,32 @@
 { pkgs }:
 
 pkgs.writeShellScriptBin "emopicker9000" ''
-    # Get user selection via wofi from emoji file.
-    chosen=$(cat $HOME/.emoji | ${pkgs.rofi}/bin/rofi -dmenu | awk '{print $1}')
+  set -euo pipefail
 
-    # Exit if none chosen.
-    [ -z "$chosen" ] && exit
+  # Pick an emoji from ~/.emoji via rofi.
+  #   emopicker9000           copy the emoji to the clipboard
+  #   emopicker9000 --type    type the emoji into the focused window
+  case "''${1:-}" in
+    -h|--help)
+      echo "Usage: emopicker9000 [--type]"
+      echo "  (no args)  copy the chosen emoji to the clipboard"
+      echo "  --type     type the chosen emoji via ydotool"
+      exit 0 ;;
+  esac
 
-    # If you run this command with an argument, it will automatically insert the
-    # character. Otherwise, show a message that the emoji has been copied.
-    if [ -n "$1" ]; then
-	    ${pkgs.ydotool}/bin/ydotool type "$chosen"
-    else
-        printf "$chosen" | ${pkgs.wl-clipboard}/bin/wl-copy
-	    ${pkgs.libnotify}/bin/notify-send "'$chosen' copied to clipboard." &
-    fi
+  emoji_file="$HOME/.emoji"
+  if [ ! -f "$emoji_file" ]; then
+    ${pkgs.libnotify}/bin/notify-send "emopicker9000" "Emoji file not found: $emoji_file" || true
+    exit 1
+  fi
+
+  chosen=$(${pkgs.rofi}/bin/rofi -dmenu < "$emoji_file" | ${pkgs.gawk}/bin/awk '{print $1}') || true
+  [ -n "$chosen" ] || exit 0
+
+  if [ "$#" -ge 1 ]; then
+    ${pkgs.ydotool}/bin/ydotool type "$chosen"
+  else
+    printf '%s' "$chosen" | ${pkgs.wl-clipboard}/bin/wl-copy
+    ${pkgs.libnotify}/bin/notify-send "'$chosen' copied to clipboard." &
+  fi
 ''

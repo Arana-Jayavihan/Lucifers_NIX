@@ -1,6 +1,6 @@
-{ pkgs, config, lib, ... }:
+{ pkgs, config, lib, opt, ... }:
 
-let inherit (import ../../options.nix) flatpak; in
+let inherit (opt) flatpak; in
 lib.mkIf (flatpak == true) {
   services.flatpak.enable = true;
 
