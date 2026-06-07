@@ -102,6 +102,10 @@ in
       inherit flakeDir;
       inherit userHome;
     })
+    (import ./../scripts/mordor.nix {
+      inherit pkgs;
+      inherit flakeDir;
+    })
     (import ./../scripts/gameMode.nix {
       inherit pkgs;
     })

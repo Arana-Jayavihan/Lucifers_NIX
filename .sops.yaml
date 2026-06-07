@@ -1,9 +1,21 @@
 keys:
   - &shire age1jugsqhadur067aexzpk27rathjpcmdz409p3kmtdl9frz8xeqyuqcwgyc5
+  # mordor: DigitalOcean droplet host key, derived via
+  #   ssh-keyscan -p 5322 -t ed25519 165.22.52.204 | ssh-to-age
+  - &mordor age1w6m2z604jrfc4ncglanhp89ngf8x4zjfkfrsdkzzz7jtdwrg8d5spwzpuz
   # TODO gondor: on gondor run `cat /etc/ssh/ssh_host_ed25519_key.pub | ssh-to-age`,
   #              add the resulting `age1...` key below as `&gondor ...`, add it to the
   #              age list in creation_rules, then `sops updatekeys secrets/secrets.yaml`.
 creation_rules:
+  # mordor's own secrets (e.g. nginx basic-auth): encrypted to mordor (so the
+  # droplet can decrypt at activation) and shire (so they can be edited from
+  # this laptop). Kept separate from secrets.yaml so editing it needs no
+  # access to the shire-only file.
+  - path_regex: secrets/mordor\.yaml$
+    key_groups:
+      - age:
+          - *shire
+          - *mordor
   - path_regex: secrets/[^/]+\.yaml$
     key_groups:
       - age:

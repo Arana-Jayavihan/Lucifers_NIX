@@ -114,11 +114,28 @@
           ];
         };
 
+      # Build a headless server host. Deliberately minimal: no ./system.nix,
+      # no home-manager, no overlays — nothing shared with the desktop hosts.
+      # morph-only options (deployment.*) are added by ./morph/network.nix, not
+      # here, so this stays a valid plain nixosConfiguration.
+      mkServer = host:
+        nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit inputs username; };
+          modules = [
+            ./hosts/${host}/hardware.nix
+            ./hosts/${host}/default.nix
+            inputs.sops-nix.nixosModules.sops
+            ./hosts/${host}/sops.nix
+          ];
+        };
+
     in
     {
       nixosConfigurations = {
         shire = mkHost "shire";
         gondor = mkHost "gondor";
+        mordor = mkServer "mordor";
       };
 
       formatter.${system} = nixpkgs.legacyPackages.${system}.nixpkgs-fmt;

@@ -108,7 +108,8 @@ in
         litemdview
         burpsuite
         awscli
-        #STABLE_USER
+        morph
+	#STABLE_USER
       ])
 
       ++
