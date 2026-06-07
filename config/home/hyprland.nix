@@ -6,6 +6,33 @@ let
     browser cpuType gpuType borderAnim username userHome
     theKBDLayout terminal curWallPaper
     theSecondKBDLayout gitUsername sdl-videodriver autoWallChange;
+
+  # Monitor + workspace layout are defined per host in hosts/<host>/options.nix
+  # so this file stays host-agnostic. We turn those attrsets into Lua calls here.
+  monitors = opt.monitors or [ ];
+  workspaceMonitors = opt.workspaceMonitors or { };
+
+  renderLuaVal = v:
+    if builtins.isString v then ''"${v}"''
+    else if builtins.isBool v then (if v then "true" else "false")
+    else toString v;
+
+  mkMonitor = m:
+    let
+      pairs = lib.mapAttrsToList (k: v: "${k} = ${renderLuaVal v}")
+        (lib.filterAttrs (_: v: v != null) m);
+    in
+    "hl.monitor({ ${lib.concatStringsSep ", " pairs} })";
+
+  monitorLines = lib.concatMapStringsSep "\n" mkMonitor monitors;
+
+  mkWorkspaceRules = monitor: ids:
+    lib.concatMapStringsSep "\n"
+      (id: ''hl.workspace_rule({ workspace = "${toString id}", monitor = "${monitor}" })'')
+      ids;
+
+  workspaceLines =
+    lib.concatStringsSep "\n" (lib.mapAttrsToList mkWorkspaceRules workspaceMonitors);
 in
 with lib; {
   wayland.windowManager.hyprland = {
@@ -28,9 +55,7 @@ with lib; {
           ------------------
           ---- MONITORS ----
           ------------------
-          hl.monitor({ output = "eDP-1", mode = "1920x1080", position = "0x0", scale = 1, cm = "hdr" })
-          hl.monitor({ output = "HDMI-A-1", mode = "1920x1080@144", position = "auto", scale = 1 })
-          hl.monitor({ output = "", mode = "preferred", position = "auto", scale = 1 })
+          ${monitorLines}
 
           ----------------------
           ---- WINDOW RULES ----
@@ -57,17 +82,7 @@ with lib; {
           -------------------------
           ---- WORKSPACE RULES ----
           -------------------------
-          hl.workspace_rule({ workspace = "2", monitor = "HDMI-A-1" })
-          hl.workspace_rule({ workspace = "4", monitor = "HDMI-A-1" })
-          hl.workspace_rule({ workspace = "6", monitor = "HDMI-A-1" })
-          hl.workspace_rule({ workspace = "8", monitor = "HDMI-A-1" })
-          hl.workspace_rule({ workspace = "10", monitor = "HDMI-A-1" })
-
-          hl.workspace_rule({ workspace = "1", monitor = "eDP-1" })
-          hl.workspace_rule({ workspace = "3", monitor = "eDP-1" })
-          hl.workspace_rule({ workspace = "5", monitor = "eDP-1" })
-          hl.workspace_rule({ workspace = "7", monitor = "eDP-1" })
-          hl.workspace_rule({ workspace = "9", monitor = "eDP-1" })
+          ${workspaceLines}
 
           -----------------------
           ---- LOOK AND FEEL ----

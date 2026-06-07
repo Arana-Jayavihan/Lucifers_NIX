@@ -9,8 +9,9 @@ let
 in
 {
   # NOTE: Host-specific options (hostname, cpuType, gpuType, bus-ids, theKernel,
-  # gnome, ollama, browser, localHWClock) live in hosts/<host>/options.nix and
-  # are merged on top of these shared defaults by the flake (delivered as `opt`).
+  # gnome, ollama, browser, localHWClock, monitors, workspaceMonitors,
+  # systemPackages, userPackages) live in hosts/<host>/options.nix and are
+  # merged on top of these shared defaults by the flake (delivered as `opt`).
 
   # User Variables
   username = username;

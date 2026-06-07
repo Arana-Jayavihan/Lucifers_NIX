@@ -1,7 +1,9 @@
-{ pkgs, config, username, pkgs-unstable, opt, ... }:
+{ pkgs, config, username, pkgs-unstable, opt, lib, ... }:
 
 let
   inherit (opt) wallpaperDir wallpaperGit flakeDir userHome;
+  # Resolve a (possibly dotted) nixpkgs attribute path to a package.
+  resolvePkg = name: lib.getAttrFromPath (lib.splitString "." name) pkgs;
 in
 {
   # Install Packages For The User
@@ -126,7 +128,9 @@ in
       inherit pkgs;
     })
 
-  ];
+  ]
+  # Host-specific user packages from hosts/<host>/options.nix.
+  ++ map resolvePkg (opt.userPackages or [ ]);
 
   programs.gh.enable = true;
 }
