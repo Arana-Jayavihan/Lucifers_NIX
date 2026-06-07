@@ -219,7 +219,6 @@ with lib; {
             hl.exec_cmd("dbus-update-activation-environment --systemd --all")
             hl.exec_cmd("systemctl --user import-environment QT_QPA_PLATFORMTHEME WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
             hl.exec_cmd("awww-daemon -q")
-            --hl.exec_cmd('awww img "${curWallPaper}"')
             hl.exec_cmd("hypridle")
             hl.exec_cmd("swaync")
             hl.exec_cmd("ags")
@@ -227,8 +226,13 @@ with lib; {
             hl.exec_cmd("amixer -c 1 set PCM 100% unmute")
             hl.exec_cmd('notify-send "Hi ${username} 🍃" "Welcome Back  ʕっ•ᴥ•ʔっ"')
           ${if laptop == false then ''
-            hl.exec_cmd("openrgb -p lucifer")  
-          '' else ''''}
+            hl.exec_cmd("openrgb -p lucifer")
+            hl.exec_cmd("spotify", { workspace = "8 silent" })
+            hl.exec_cmd("kitty cava", { workspace = "8 silent" })
+            hl.exec_cmd("${pkgs.power-profiles-daemon}/bin/powerprofilesctl set power-saver")
+          '' else ''
+            hl.exec_cmd("${pkgs.power-profiles-daemon}/bin/powerprofilesctl set performance")
+          ''}
           ${if autoWallChange == true then ''
             hl.exec_cmd("wallsetter")
           '' else ''''}
@@ -236,10 +240,7 @@ with lib; {
 
             -- Custom Startup Apps
             hl.exec_cmd("kitty python ${userHome}/Projects/TCP-Over-SSL-Tunnel/main.py -c ${userHome}/Projects/TCP-Over-SSL-Tunnel/settings.ini", { workspace = "9 silent" })
-            hl.exec_cmd("blueman-manager", { workspace = "9 silent" })
-            --hl.exec_cmd("spotify", { workspace = "9 silent" })
-            --hl.exec_cmd("kitty cava", { workspace = "9 silent" })
-            hl.exec_cmd("${pkgs.power-profiles-daemon}/bin/powerprofilesctl set performance")
+            hl.exec_cmd("blueman-manager", { workspace = "9 silent" })    
           end)
 
           ---------------------
