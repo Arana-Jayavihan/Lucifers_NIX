@@ -4,7 +4,7 @@ let
   theme = config.colorScheme.palette;
   inherit (opt)
     browser cpuType gpuType borderAnim username userHome
-    theKBDLayout terminal curWallPaper
+    theKBDLayout terminal curWallPaper laptop
     theSecondKBDLayout gitUsername sdl-videodriver autoWallChange;
 
   # Monitor + workspace layout are defined per host in hosts/<host>/options.nix
@@ -226,10 +226,12 @@ with lib; {
             hl.exec_cmd("amixer -c 0 set PCM 100% unmute")
             hl.exec_cmd("amixer -c 1 set PCM 100% unmute")
             hl.exec_cmd('notify-send "Hi ${username} 🍃" "Welcome Back  ʕっ•ᴥ•ʔっ"')
+          ${if laptop == false then ''
+            hl.exec_cmd("openrgb -p lucifer")  
+          '' else ''''}
           ${if autoWallChange == true then ''
             hl.exec_cmd("wallsetter")
-          '' else ''
-          ''}
+          '' else ''''}
             hl.exec_cmd("nm-applet --indicator")
 
             -- Custom Startup Apps

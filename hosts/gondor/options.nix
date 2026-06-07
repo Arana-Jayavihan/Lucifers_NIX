@@ -39,5 +39,5 @@
 
   # Host-specific modules to enable: dotted NixOS option paths, each gets
   # `.enable = true` (e.g. "services.tailscale", "programs.steam").
-  enableModules = [ ];
+  enableModules = [ "services.hardware.openrgb" ];
 }
