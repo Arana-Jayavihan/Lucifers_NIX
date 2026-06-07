@@ -28,5 +28,6 @@
     ./steam.nix
     ./vm.nix
     ./customPackages.nix
+    ./hostServices.nix
   ];
 }

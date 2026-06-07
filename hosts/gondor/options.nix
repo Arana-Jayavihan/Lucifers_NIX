@@ -36,4 +36,8 @@
   # as "jetbrains.idea-community" are allowed). Resolved against the system pkgs.
   systemPackages = [ ];
   userPackages = [ ];
+
+  # Host-specific modules to enable: dotted NixOS option paths, each gets
+  # `.enable = true` (e.g. "services.tailscale", "programs.steam").
+  enableModules = [ ];
 }
