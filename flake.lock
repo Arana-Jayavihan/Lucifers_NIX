@@ -90,6 +90,23 @@
         "type": "github"
       }
     },
+    "btledctl": {
+      "inputs": {
+        "nixpkgs-unstable": [
+          "nixpkgs-unstable"
+        ]
+      },
+      "locked": {
+        "lastModified": 1781014804,
+        "narHash": "sha256-Ka3ATRR7GDKc4oKAZ+zeRA3wbABpsReP56/P3CJHoHs=",
+        "path": "/home/lucifer/Projects/BTLEDController",
+        "type": "path"
+      },
+      "original": {
+        "path": "/home/lucifer/Projects/BTLEDController",
+        "type": "path"
+      }
+    },
     "firefox": {
       "inputs": {
         "flake-compat": "flake-compat",
@@ -766,6 +783,7 @@
       "inputs": {
         "ags": "ags",
         "androcontrol": "androcontrol",
+        "btledctl": "btledctl",
         "firefox": "firefox",
         "home-manager": "home-manager",
         "hyprland": "hyprland",
