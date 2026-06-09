@@ -109,6 +109,7 @@ in
         burpsuite
         awscli
         morph
+	ssm-session-manager-plugin
 	#STABLE_USER
       ])
 

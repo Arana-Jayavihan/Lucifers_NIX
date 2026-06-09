@@ -46,6 +46,10 @@
       url = "github:Arana-Jayavihan/AndroControl";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    btledctl = {
+      url = "path:/home/lucifer/Projects/BTLEDController";
+      inputs.nixpkgs-unstable.follows = "nixpkgs-unstable";
+    };
     spicetify-nix = {
       url = "github:Gerg-L/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -75,6 +79,7 @@
         # `nodePackages.sass`; alias it to the modern dart-sass.
         (final: _prev: { nodePackages = { sass = final.dart-sass; }; })
         nix-claude-code.overlays.default
+        inputs.btledctl.overlays.default
       ];
 
       # Build a host configuration by name. Shared options come from ./options.nix;
