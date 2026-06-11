@@ -74,6 +74,27 @@
         "type": "github"
       }
     },
+    "autopalette": {
+      "inputs": {
+        "flake-utils": "flake-utils_2",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1781200632,
+        "narHash": "sha256-NEYdmglC6PfRYEV2LArT9Ktcgcpbhlrqb4SOvkmm2F0=",
+        "owner": "Arana-Jayavihan",
+        "repo": "AutoPalette",
+        "rev": "4e92877fba949238f9b6e22e140097f6d427dd14",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Arana-Jayavihan",
+        "repo": "AutoPalette",
+        "type": "github"
+      }
+    },
     "base16-schemes": {
       "flake": false,
       "locked": {
@@ -97,14 +118,17 @@
         ]
       },
       "locked": {
-        "lastModified": 1781014804,
-        "narHash": "sha256-Ka3ATRR7GDKc4oKAZ+zeRA3wbABpsReP56/P3CJHoHs=",
-        "path": "/home/lucifer/Projects/BTLEDController",
-        "type": "path"
+        "lastModified": 1781014789,
+        "narHash": "sha256-xoRFEVNVoxKhD7npPgGa3jbSqkK002HReJvFJfEcK2s=",
+        "owner": "Arana-Jayavihan",
+        "repo": "BTLEDController",
+        "rev": "e2012fd3bb45ece5e93834b08e19d1e610ad75ea",
+        "type": "github"
       },
       "original": {
-        "path": "/home/lucifer/Projects/BTLEDController",
-        "type": "path"
+        "owner": "Arana-Jayavihan",
+        "repo": "BTLEDController",
+        "type": "github"
       }
     },
     "firefox": {
@@ -202,6 +226,24 @@
     "flake-utils_2": {
       "inputs": {
         "systems": "systems_3"
+      },
+      "locked": {
+        "lastModified": 1731533236,
+        "narHash": "sha256-l0KFg5HjrsfsO/JpG+r7fRrqm12kzFHyUHqHCVpMMbI=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "11707dc2f618dd54ca8739b309ec4fc024de578b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "flake-utils_3": {
+      "inputs": {
+        "systems": "systems_4"
       },
       "locked": {
         "lastModified": 1731533236,
@@ -333,7 +375,7 @@
           "nixpkgs"
         ],
         "pre-commit-hooks": "pre-commit-hooks",
-        "systems": "systems_4",
+        "systems": "systems_5",
         "xdph": "xdph"
       },
       "locked": {
@@ -586,7 +628,7 @@
     },
     "lib-aggregate": {
       "inputs": {
-        "flake-utils": "flake-utils_2",
+        "flake-utils": "flake-utils_3",
         "nixpkgs-lib": "nixpkgs-lib"
       },
       "locked": {
@@ -608,11 +650,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1780468458,
-        "narHash": "sha256-HjI9NxPou56YqQgFV9W3v9urlzRNfR2VlN2iCm4xcAs=",
+        "lastModified": 1781026631,
+        "narHash": "sha256-qyce0vA13NM6TL7Nm3binmGCx/AQw2Ms7ZnXf/hFkww=",
         "owner": "ryoppippi",
         "repo": "nix-claude-code",
-        "rev": "05dc80c9ec9f08a849029bbe8610b3fd1d0bda11",
+        "rev": "6b680cfac93a57860ee25e5ea5a70e58c6bb6724",
         "type": "github"
       },
       "original": {
@@ -740,7 +782,7 @@
         "nixpkgs": [
           "nixpkgs"
         ],
-        "systems": "systems_5"
+        "systems": "systems_6"
       },
       "locked": {
         "lastModified": 1780421606,
@@ -783,6 +825,7 @@
       "inputs": {
         "ags": "ags",
         "androcontrol": "androcontrol",
+        "autopalette": "autopalette",
         "btledctl": "btledctl",
         "firefox": "firefox",
         "home-manager": "home-manager",
@@ -821,7 +864,7 @@
         "nixpkgs": [
           "nixpkgs"
         ],
-        "systems": "systems_6"
+        "systems": "systems_7"
       },
       "locked": {
         "lastModified": 1780422259,
@@ -884,6 +927,21 @@
     },
     "systems_4": {
       "locked": {
+        "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default",
+        "type": "github"
+      }
+    },
+    "systems_5": {
+      "locked": {
         "lastModified": 1689347949,
         "narHash": "sha256-12tWmuL2zgBgZkdoB6qXZsgJEH9LR3oUgpaQq2RbI80=",
         "owner": "nix-systems",
@@ -897,7 +955,7 @@
         "type": "github"
       }
     },
-    "systems_5": {
+    "systems_6": {
       "locked": {
         "lastModified": 1774449309,
         "narHash": "sha256-brhZ8DmuGtzkCYHJg4HEd602amKm89Y9ytsFZ5uWD1w=",
@@ -913,7 +971,7 @@
         "type": "github"
       }
     },
-    "systems_6": {
+    "systems_7": {
       "locked": {
         "lastModified": 1681028828,
         "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",

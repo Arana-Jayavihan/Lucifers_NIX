@@ -1,7 +1,7 @@
 { pkgs, config, username, pkgs-unstable, opt, lib, ... }:
 
 let
-  inherit (opt) wallpaperDir wallpaperGit flakeDir userHome;
+  inherit (opt) wallpaperDir wallpaperGit flakeDir userHome terminal;
   # Resolve a (possibly dotted) nixpkgs attribute path to a package.
   resolvePkg = name: lib.getAttrFromPath (lib.splitString "." name) pkgs;
 in
@@ -74,25 +74,18 @@ in
     (import ./../scripts/batteryNotify.nix {
       inherit pkgs;
     })
-    (import ./../scripts/wall-selector.nix {
-      inherit pkgs;
-      inherit wallpaperDir;
-    })
     (import ./../scripts/wallChangeEnhanced.nix {
       inherit pkgs;
       inherit wallpaperDir;
       inherit flakeDir;
       inherit wallpaperGit;
       inherit username;
+      inherit terminal;
     })
     (import ./../scripts/list-hypr-bindings.nix {
       inherit pkgs;
     })
     (import ./../scripts/refreshRateChange.nix {
-      inherit pkgs;
-      inherit flakeDir;
-    })
-    (import ./../scripts/autopalette.nix {
       inherit pkgs;
       inherit flakeDir;
     })

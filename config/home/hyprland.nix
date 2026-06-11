@@ -269,7 +269,7 @@ with lib; {
           hl.bind(mod .. " + Q", hl.dsp.window.close())                        -- Kill Active Window
           hl.bind(mod .. " + I", hl.dsp.exec_cmd("idle-inhibitor"))            -- Toggle Idle Inhibitor
           hl.bind(mod .. " + SHIFT + R", hl.dsp.exec_cmd("reloadShell"))       -- Reload Shell
-          hl.bind(mod .. " + SHIFT + W", hl.dsp.exec_cmd("wallSelector"))      -- Simple Wallpaper Selector
+          hl.bind(mod .. " + SHIFT + W", hl.dsp.exec_cmd("wallchange"))        -- Wallpaper Selector + Theme
           hl.bind(mod .. " + SHIFT + B", hl.dsp.exec_cmd("list-hypr-bindings")) -- List Hyprland Binds
           hl.bind(mod .. " + SHIFT + Return", hl.dsp.exec_cmd("rofi-launcher")) -- Rofi App Launcher
           hl.bind(mod .. " + SHIFT + K", hl.dsp.exec_cmd("scrcpy -m720 -b2M")) -- Launch scrcpy cast

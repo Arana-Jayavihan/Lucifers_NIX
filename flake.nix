@@ -46,8 +46,12 @@
       url = "github:Arana-Jayavihan/AndroControl";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    autopalette = {
+      url = "github:Arana-Jayavihan/AutoPalette";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     btledctl = {
-      url = "path:/home/lucifer/Projects/BTLEDController";
+      url = "github:Arana-Jayavihan/BTLEDController";
       inputs.nixpkgs-unstable.follows = "nixpkgs-unstable";
     };
     spicetify-nix = {

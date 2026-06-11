@@ -24,8 +24,18 @@ in
     inputs.nixvim.homeModules.nixvim
     inputs.hyprland.homeManagerModules.default
     inputs.spicetify-nix.homeManagerModules.spicetify
+    inputs.autopalette.homeManagerModules.default
     ./config/home
   ];
+
+  programs.autopalette = {
+    enable = true;
+    wallpaper = opt.curWallPaper;
+    outputFile = "${opt.flakeDir}/config/home/files/autopalette/custom.nix";
+    author = "Lucifer 🍃";
+    mode = "auto"; # dark|light|auto - auto picks from wallpaper luminance
+    extractor = "schemer2"; # schemer2 binary is provided on PATH by customPackages.nix
+  };
 
   # Define Settings For Xresources
   xresources.properties = {
