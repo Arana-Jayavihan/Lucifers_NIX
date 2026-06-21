@@ -28,11 +28,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1773084797,
-        "narHash": "sha256-nKZatIQb2kwYzt5gkPfGA3Mzw0KGg2aTKaFqFN4zutw=",
+        "lastModified": 1782073151,
+        "narHash": "sha256-K2cuMq5bEls77z1xTSeUCMAGjFzp2DXSPuAf9ELkH70=",
         "owner": "Arana-Jayavihan",
         "repo": "AndroControl",
-        "rev": "ca3579325a528cc39af010a69ae973703f539f59",
+        "rev": "0fa23b4fed8d80a6cc624bbda6a9ca226ead2639",
         "type": "github"
       },
       "original": {
@@ -140,11 +140,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1780451160,
-        "narHash": "sha256-4E4EnIJv28X79S1eljOyjWcBor3NW07IIBfye6UhVWo=",
+        "lastModified": 1781181867,
+        "narHash": "sha256-3ise1Ne1ecGEb/CPyu7gUWWgoTyntHCV02/YEBN7rHI=",
         "ref": "refs/heads/master",
-        "rev": "b37bedace3bf81ffb05ac003a5b88a7352ad2cf1",
-        "revCount": 9722,
+        "rev": "7dba020f81fb8c6f14669c5645870e2eb8d296c4",
+        "revCount": 9762,
         "type": "git",
         "url": "https://github.com/nix-community/flake-firefox-nightly.git"
       },
@@ -632,11 +632,11 @@
         "nixpkgs-lib": "nixpkgs-lib"
       },
       "locked": {
-        "lastModified": 1780235539,
-        "narHash": "sha256-neW/f0B00Tv19lRtK98zu74qSLIZWIz9C4z686s6LFo=",
+        "lastModified": 1780840879,
+        "narHash": "sha256-+126sfdFUn847ls0GLRxqt+RTS6ONQCMKte4ur26Apc=",
         "owner": "nix-community",
         "repo": "lib-aggregate",
-        "rev": "577c8f9b06c4d3990ceb4554445cfb37a9c3b8e1",
+        "rev": "9fd2f05f8b1063ff8896748d8ca138c118578227",
         "type": "github"
       },
       "original": {
@@ -700,11 +700,11 @@
     },
     "nixpkgs-lib": {
       "locked": {
-        "lastModified": 1780195591,
-        "narHash": "sha256-/LAL+E75c0ioCHxyVFGwzXorfuHzToKgqPUCRq4RTIY=",
+        "lastModified": 1780800655,
+        "narHash": "sha256-eVQuIiDIy24NIAW+yEirKosWHFYAml6dghmevWgruBE=",
         "owner": "nix-community",
         "repo": "nixpkgs.lib",
-        "rev": "49d924421d7c3175edc499fdc738bd70d69d97d5",
+        "rev": "78afa8e310f34cba09443a5ef2fb47bfd21d294f",
         "type": "github"
       },
       "original": {
