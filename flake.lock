@@ -28,11 +28,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1782073151,
-        "narHash": "sha256-K2cuMq5bEls77z1xTSeUCMAGjFzp2DXSPuAf9ELkH70=",
+        "lastModified": 1782125325,
+        "narHash": "sha256-HFTRZODp/m5Mco5qhFheQb/o42alLiYnGohL8xicop4=",
         "owner": "Arana-Jayavihan",
         "repo": "AndroControl",
-        "rev": "0fa23b4fed8d80a6cc624bbda6a9ca226ead2639",
+        "rev": "4b627800a3be3258c5a44e40002cf1d1dfeb612c",
         "type": "github"
       },
       "original": {

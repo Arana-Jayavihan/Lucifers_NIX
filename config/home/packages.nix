@@ -117,9 +117,6 @@ in
       inherit pkgs;
       inherit pkgs-unstable;
     })
-    (import ./../scripts/androcontrol-qr.nix {
-      inherit pkgs;
-    })
 
   ]
   # Host-specific user packages from hosts/<host>/options.nix.
