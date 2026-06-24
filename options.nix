@@ -49,7 +49,7 @@ in
 
   #Firewall Allowed TCP Ports
   useFirewall = true;
-  firewallPorts = [ 1090 5000 5050 5900 9000 ];
+  firewallPorts = [ 1090 5000 5050 5051 5052 5900 9000 ];
 
   # Enable / Setup NFS
   nfs = false;
