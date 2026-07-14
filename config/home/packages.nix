@@ -117,7 +117,9 @@ in
       inherit pkgs;
       inherit pkgs-unstable;
     })
-
+    (import ./../scripts/launchptenv.nix {
+      inherit pkgs;
+    })
   ]
   # Host-specific user packages from hosts/<host>/options.nix.
   ++ map resolvePkg (opt.userPackages or [ ]);
