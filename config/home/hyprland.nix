@@ -282,6 +282,7 @@ with lib; {
           hl.bind(mod .. " + SHIFT + T", hl.dsp.exec_cmd("thunar"))            -- Launch Thunar File Manager
           hl.bind(mod .. " + SHIFT + G", hl.dsp.exec_cmd("${browser} https://github.com/${gitUsername}/")) -- Open GitHub
           hl.bind(mod .. " + SHIFT + S", hl.dsp.exec_cmd("com.github.rajsolai.textsnatcher")) -- Launch OCR Clipboard
+          hl.bind(mod .. " + SHIFT + H", hl.dsp.exec_cmd("ptenv")) -- Launch Pentest Env (Firefox Nightly + Burp)
           hl.bind(mod .. " + SHIFT + P", hl.dsp.exec_cmd("btledctl 01:33:FF:FF:FF:FF wheel")) -- Launch LED Wheel
           hl.bind(mod .. " + SHIFT + Q", hl.dsp.exec_cmd([[kill -9 $(ps -eaf | grep firefox-nightly | head -1 | cut -d "r" -f 2 | xargs | cut -d " " -f 1 | xargs)]])) -- Kill Firefox
           hl.bind(mod .. " + SHIFT + I", hl.dsp.layout("togglesplit"))         -- Toggle Split Direction

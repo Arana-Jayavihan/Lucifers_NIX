@@ -31,6 +31,7 @@ in
   networking.extraHosts = ''
     165.22.52.204  simple-web.me
   '';
+  environment.etc.hosts.mode = "0644";
 
   #Firewall
   networking.firewall.enable = useFirewall;

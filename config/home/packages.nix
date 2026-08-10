@@ -115,7 +115,6 @@ in
     })
     (import ./../scripts/claude.nix {
       inherit pkgs;
-      inherit pkgs-unstable;
     })
     (import ./../scripts/launchptenv.nix {
       inherit pkgs;
