@@ -116,16 +116,12 @@ in
     (import ./../scripts/claude.nix {
       inherit pkgs;
     })
-<<<<<<< Updated upstream
     (import ./../scripts/launchptenv.nix {
       inherit pkgs;
     })
-=======
     (import ./../scripts/webshare.nix {
       inherit pkgs;
     })
-
->>>>>>> Stashed changes
   ]
   # Host-specific user packages from hosts/<host>/options.nix.
   ++ map resolvePkg (opt.userPackages or [ ]);
