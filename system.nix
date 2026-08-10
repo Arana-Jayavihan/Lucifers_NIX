@@ -111,6 +111,7 @@ in
         awscli
         morph
 	ssm-session-manager-plugin
+	caido-desktop
 	#STABLE_USER
       ])
 
@@ -150,8 +151,7 @@ in
         screen
         jq
         tmux
-        ungoogled-chromium
-        ngrok
+        ungoogled-chromium 
         #USER_PKG	
       ]);
     };
@@ -240,7 +240,7 @@ in
   environment.etc."ppp/options".text = "ipcp-accept-remote";
 
   virtualisation.docker.enable = true;
-  virtualisation.virtualbox.host.enable = true;
+  virtualisation.virtualbox.host.enable = false;
   virtualisation.vmware.host.enable = false;
   virtualisation.waydroid = {
     enable = true;

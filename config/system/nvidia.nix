@@ -1,4 +1,4 @@
-{ lib, pkgs-unstable, opt, ... }:
+{ lib, config, opt, ... }:
 
 lib.mkIf (opt.gpuType == "nvidia") {
   boot.kernelModules = [ "nvidia_uvm" "nvidia_modeset" "nvidia_drm" "nvidia" ];
@@ -11,11 +11,14 @@ lib.mkIf (opt.gpuType == "nvidia") {
   hardware.nvidia-container-toolkit.enable = true;
   hardware.nvidia = {
     modesetting.enable = true;
-    powerManagement.enable = false;
+    # Installs nvidia-suspend/hibernate/resume services that save & restore VRAM
+    # across sleep. Required or the GUI (Hyprland/swaylock) comes back corrupted
+    # after hibernate. finegrained is Optimus-only, leave off on this desktop.
+    powerManagement.enable = true;
     powerManagement.finegrained = false;
     open = true;
     nvidiaSettings = true;
     forceFullCompositionPipeline = false;
-    package = pkgs-unstable.linuxPackages_latest.nvidiaPackages.latest;
+    package = config.boot.kernelPackages.nvidiaPackages.latest;
   };
 }
