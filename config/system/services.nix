@@ -35,6 +35,10 @@ let inherit (opt) laptop; in
     enable = false;
     package = pkgs.twingate;
   };
+  services.tailscale = {
+    enable = true;
+    openFirewall = true;
+  };
   services.power-profiles-daemon.enable = true;
   services.gnome.gnome-keyring.enable = true;
   services.gnome.gnome-remote-desktop.enable = true;
@@ -109,4 +113,3 @@ let inherit (opt) laptop; in
   };
 
 }
-

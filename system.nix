@@ -35,6 +35,7 @@ in
 
   #Firewall
   networking.firewall.enable = useFirewall;
+  networking.firewall.trustedInterfaces = [ "tailscale0" ];
   networking.firewall.allowedTCPPorts =
     if useFirewall == true
     then firewallPorts
@@ -110,9 +111,9 @@ in
         burpsuite
         awscli
         morph
-	ssm-session-manager-plugin
-	caido-desktop
-	#STABLE_USER
+        ssm-session-manager-plugin
+        caido-desktop
+        #STABLE_USER
       ])
 
       ++
@@ -151,7 +152,7 @@ in
         screen
         jq
         tmux
-        ungoogled-chromium 
+        ungoogled-chromium
         #USER_PKG	
       ]);
     };

@@ -27,6 +27,7 @@
     ./sops.nix
     ./steam.nix
     ./vm.nix
+    ./waydroid.nix
     ./customPackages.nix
     ./hostServices.nix
   ];
