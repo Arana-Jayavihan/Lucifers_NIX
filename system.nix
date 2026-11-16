@@ -113,7 +113,8 @@ in
         morph
         ssm-session-manager-plugin
         caido-desktop
-        #STABLE_USER
+        google-chrome
+	#STABLE_USER
       ])
 
       ++
@@ -137,7 +138,6 @@ in
         spice-gtk
         cbonsai
         peaclock
-        anydesk
         nixpkgs-fmt
         csvlens
         postman

@@ -75,6 +75,16 @@
       pkgs-unstable = import nixpkgs-unstable {
         inherit system;
         config.allowUnfree = true;
+        overlays = [
+          # pwninit 3.3.3 pulled in zstd-sys, whose build script probes for
+          # libzstd via pkg-config, but the nixpkgs derivation still only lists
+          # openssl + xz in buildInputs. Drop this once nixpkgs adds zstd.
+          (final: prev: {
+            pwninit = prev.pwninit.overrideAttrs (o: {
+              buildInputs = o.buildInputs ++ [ final.zstd ];
+            });
+          })
+        ];
       };
 
       # Overlays applied to the system nixpkgs (single evaluation, shared by both hosts).

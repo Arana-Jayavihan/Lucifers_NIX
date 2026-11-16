@@ -11,8 +11,10 @@
   nvidia-bus-id = "PCI:1:0:0";
   amd-bus-id = "PCI:14:0:0";
 
-  # Kernel: default, latest, lqx, xanmod, zen
-  theKernel = "latest";
+  # Kernel: default, latest, lqx, unstable, xanmod, zen
+  # `latest` (7.3.x on 26.05) can't be used while the channel ships nvidia-open
+  # 595.71.05 -- see config/system/kernel/unstable.nix.
+  theKernel = "unstable";
 
   # Per-host feature flags
   laptop = false;

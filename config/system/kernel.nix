@@ -5,6 +5,7 @@
     ./kernel/default.nix
     ./kernel/latest.nix
     ./kernel/lqx.nix
+    ./kernel/unstable.nix
     ./kernel/xanmod.nix
     ./kernel/zen.nix
 

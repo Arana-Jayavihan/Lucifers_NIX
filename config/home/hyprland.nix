@@ -60,6 +60,19 @@ with lib; {
           ----------------------
           ---- WINDOW RULES ----
           ----------------------
+          -- Ignore maximize requests from apps. Most toolkits ask to start
+          -- maximized; Hyprland honours that by default, so a new window opens
+          -- in fullscreen mode 1 covering the correctly-tiled ones instead of
+          -- taking its dwindle slot. Hyprland ships this exact rule in its own
+          -- example config ("Ignore maximize requests from all apps. You'll
+          -- probably like this."). See the suppress_event docs:
+          -- https://wiki.hypr.land/configuring/core/rules/window-rules/
+          hl.window_rule({
+            name = "suppress-maximize-events",
+            match = { class = ".*" },
+            suppress_event = "maximize",
+          })
+
           hl.window_rule({ match = { title = "^(wlogout)$" }, fullscreen = true })
           hl.window_rule({ match = { title = "^(wlogout)$" }, animation = "fade" })
 
@@ -202,7 +215,46 @@ with lib; {
           ------------------
           ---- LAYOUTS ----
           ------------------
-          hl.config({ dwindle = { preserve_split = true } })
+          -- Dwindle, with every documented option set explicitly so the
+          -- layout's behaviour lives here instead of in upstream defaults.
+          -- https://wiki.hypr.land/configuring/layouts/dwindle-layout/
+          hl.config({
+            dwindle = {
+              -- 0 = split follows the mouse, 1 = new window always left/top,
+              -- 2 = new window always right/bottom.
+              force_split = 0,
+              -- Keep a container's split (side/top) fixed once chosen, instead
+              -- of re-deriving it from the parent's W/H ratio. Required for
+              -- the togglesplit bind to do anything.
+              preserve_split = true,
+              -- Choose the split from which of the window's four triangles the
+              -- cursor sits in. Forces preserve_split on when enabled.
+              smart_split = false,
+              -- Resize towards the corner nearest the mouse rather than by the
+              -- window's tiling position. Pairs with general.resize_on_border.
+              smart_resizing = true,
+              -- Make a preselect direction persist instead of applying only to
+              -- the next window opened.
+              permanent_direction_override = false,
+              -- Scale of windows on the special workspace (mod + SPACE).
+              special_scale_factor = 1.0,
+              -- Auto-split width multiplier. Worth raising above 1 only on
+              -- ultrawides, where W > H survives several splits; both hosts
+              -- are 16:9, so leave it neutral.
+              split_width_multiplier = 1.0,
+              -- Prefer the active window over the mouse position for splits.
+              use_active_for_splits = true,
+              -- Ratio a new window opens at; 1.0 is an even 50/50.
+              default_split_ratio = 1.0,
+              -- Which window receives the split ratio: 0 = the top/left one,
+              -- 1 = the current one.
+              split_bias = 0,
+              -- Drop windows dragged with mod + LMB at the exact mouse
+              -- position rather than the coarse tiling target.
+              precise_mouse_move = true,
+            },
+          })
+
           hl.config({ master = { new_status = "master" } })
 
           -----------------
@@ -287,6 +339,24 @@ with lib; {
           hl.bind(mod .. " + SHIFT + Q", hl.dsp.exec_cmd([[kill -9 $(ps -eaf | grep firefox-nightly | head -1 | cut -d "r" -f 2 | xargs | cut -d " " -f 1 | xargs)]])) -- Kill Firefox
           hl.bind(mod .. " + SHIFT + I", hl.dsp.layout("togglesplit"))         -- Toggle Split Direction
           hl.bind(mod .. " + SHIFT + F", hl.dsp.window.float({ action = "toggle" })) -- Toggle Floating Window
+
+          -- Dwindle layout messages. mod + P (pseudo) and mod + SHIFT + I
+          -- (togglesplit) above are dwindle dispatchers too.
+          hl.bind(mod .. " + CONTROL + S", hl.dsp.layout("swapsplit"))         -- Swap The Two Halves Of The Split
+          hl.bind(mod .. " + CONTROL + R", hl.dsp.layout("rotatesplit"))       -- Rotate Split 90 Clockwise
+          hl.bind(mod .. " + CONTROL + SHIFT + R", hl.dsp.layout("rotatesplit -90")) -- Rotate Split 90 Counter-Clockwise
+          hl.bind(mod .. " + CONTROL + Return", hl.dsp.layout("movetoroot"))   -- Move Window To Workspace Root
+          hl.bind(mod .. " + CONTROL + SHIFT + Return", hl.dsp.layout("movetoroot active unstable")) -- Move To Root And Swap Sides
+          hl.bind(mod .. " + equal", hl.dsp.layout("splitratio +0.05"))        -- Grow Split Ratio
+          hl.bind(mod .. " + minus", hl.dsp.layout("splitratio -0.05"))        -- Shrink Split Ratio
+          hl.bind(mod .. " + CONTROL + BackSpace", hl.dsp.layout("splitratio 1.0 exact")) -- Reset Split Ratio To 50/50
+
+          -- One-shot override of where the next window opens.
+          hl.bind(mod .. " + CONTROL + H", hl.dsp.layout("preselect l"))       -- Preselect Next Window Left
+          hl.bind(mod .. " + CONTROL + J", hl.dsp.layout("preselect d"))       -- Preselect Next Window Down
+          hl.bind(mod .. " + CONTROL + K", hl.dsp.layout("preselect u"))       -- Preselect Next Window Up
+          hl.bind(mod .. " + CONTROL + L", hl.dsp.layout("preselect r"))       -- Preselect Next Window Right
+          hl.bind(mod .. " + CONTROL + P", hl.dsp.layout("preselect none"))    -- Clear Preselect Direction
 
           hl.bind(mod .. " + SHIFT + left", hl.dsp.window.move({ direction = "l" }))  -- Move Window Left
           hl.bind(mod .. " + SHIFT + right", hl.dsp.window.move({ direction = "r" })) -- Move Window Right

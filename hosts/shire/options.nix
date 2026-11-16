@@ -7,7 +7,7 @@
   cpuType = "intel";
   gpuType = "intel";
 
-  # Kernel: default, latest, lqx, xanmod, zen
+  # Kernel: default, latest, lqx, unstable, xanmod, zen
   theKernel = "zen";
 
   # Per-host feature flags

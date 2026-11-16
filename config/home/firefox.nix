@@ -429,6 +429,10 @@ in
         name = "${username}";
         isDefault = true;
         search = {
+          # Firefox rewrites search.json.mozlz4 on launch, so without `force`
+          # home-manager tries to back the changed file up on every activation
+          # and fails as soon as a previous .backup is already there.
+          force = true;
           default = "Brave";
           privateDefault = "Brave";
           engines = searchEngines;
@@ -439,6 +443,10 @@ in
         id = 1;
         name = "${username}-work";
         search = {
+          # Firefox rewrites search.json.mozlz4 on launch, so without `force`
+          # home-manager tries to back the changed file up on every activation
+          # and fails as soon as a previous .backup is already there.
+          force = true;
           default = "Brave";
           privateDefault = "Brave";
           engines = searchEngines;
@@ -449,6 +457,10 @@ in
         id = 2;
         name = "Guest";
         search = {
+          # Firefox rewrites search.json.mozlz4 on launch, so without `force`
+          # home-manager tries to back the changed file up on every activation
+          # and fails as soon as a previous .backup is already there.
+          force = true;
           default = "Brave";
           privateDefault = "Brave";
           engines = searchEngines;
